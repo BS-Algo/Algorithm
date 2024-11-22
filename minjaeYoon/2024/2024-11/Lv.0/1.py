@@ -62,4 +62,70 @@ for i in str:
 # 감탄한 풀이
 print('\n'.join(input()))
 
-# 코딩 기초 트레이닝
+# 10. 코딩 기초 트레이닝 홀짝
+a = int(input())
+
+if a%2 == 0:
+    print(f'{a} is even')
+else:
+    print(f'{a} is odd')
+
+# 11. 코딩 기초 트레이닝 문자열 겹쳐쓰기
+
+# 내 풀이
+def solution(my_string, overwrite_string, s):
+    answer = ''
+    sentence = my_string[:s], overwrite_string, my_string[s+len(overwrite_string):]
+    return answer.join(sentence)
+
+my_string, overwrite_string, s = input().strip().split(' ')
+s = int(s)
+
+print(solution(my_string, overwrite_string, s))
+
+# -> 없어도 그만 + 제일 많이 본 답변도 같은 구조
+
+# 12. 코딩 기초 트레이닝 문자열 섞기
+
+# 내 풀이
+def solution(str1, str2):
+    answer = []
+    for i in range(len(str1)):
+        answer.append(str1[i])
+        answer.append(str2[i])
+    return (''.join(answer))
+
+print(solution('aaaaa', 'bbbbb'))
+
+# 타인 풀이
+def solution(str1, str2):
+    answer = ''.join([str1[i] + str2[i] for i in range(len(str1))])
+    return answer
+
+# 13. 코딩 기초 트레이닝 문자 리스트를 문자열로 표현하기
+def solution(arr):
+    answer = ''.join([arr[i] for i in range(len(arr))])
+    return answer
+
+# 14. 코딩 기초 트레이닝 문자열 곱하기
+def solution(my_string, k):
+    answer = ''.join([my_string for i in range(k)])
+    return answer
+
+# 15. 코딩 기초 트레이닝 더 크게 합치기
+
+def solution(a, b):
+    answer = 0
+    answer1 = '' + str(a) + str(b)
+    answer2 = '' + str(b) + str(a)
+    if int(answer1) > int(answer2):
+        answer += int(answer1)
+    else:
+        answer += int(answer2)
+    return answer
+
+def solution(a, b):
+    return int(max(f"{a}{b}", f"{b}{a}"))
+
+
+# 16. 코딩 기초 트레이닝 두 수 연산값 비교

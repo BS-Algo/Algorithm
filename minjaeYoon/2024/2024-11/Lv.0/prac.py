@@ -1,7 +1,5 @@
-str = input()
-
-for i in str:
-    if i.isalpha():
-        pass
-    else:
-        print(''.join(i))
+def solution(a, b):
+    if int(f'{a}{b}'==f'{2*a*b}'):
+        return int(f'{a}{b}')
+    return int(max(f'{a}{b}', f'{2*a*b}'))
+print(solution(2, 91))
