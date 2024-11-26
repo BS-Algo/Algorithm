@@ -10,7 +10,6 @@ MEMBERS = {
     "heongyuKim": "khg6436@naver.com",
     "sanggoncha": "yg9618@naver.com",
     "jaeyeongPark": "pjy980526@naver.com",
-    "minjaeYun": "subway9852@gmail.com",
     "eunseopKim": "subway9852@gmail.com",
 }
 
