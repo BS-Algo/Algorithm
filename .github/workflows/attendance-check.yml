@@ -1,8 +1,9 @@
 name: Update Attendance
 
 on:
-  schedule:
-    - cron: "*/2 * * * *" # 매 2분마다 실행
+  push:
+    branches:
+      - main # 메인 브랜치에 푸쉬가 발생할 때만 실행
   workflow_dispatch: # 수동 실행도 가능
 
 jobs:

@@ -1,5 +1,5 @@
 <!-- Attendance Section -->
-# Attendance Check
+# 📅Attendance Check
 
 최근 2주 출석 현황:
 
