@@ -1,0 +1,37 @@
+name: Update Attendance
+
+on:
+  schedule:
+    - cron: "*/2 * * * *" # 매 2분마다 실행
+  workflow_dispatch: # 수동 실행도 가능
+
+jobs:
+  fetch-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Fetch commit history
+        run: |
+          curl https://api.github.com/repos/BS-BOJ/Algorithm/commits > commit_history.json
+
+      - name: Update README with attendance
+        run: |
+          python3 scripts/update_readme.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          git commit -m "chore: Update attendance in README"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

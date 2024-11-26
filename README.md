@@ -1,3 +1,20 @@
+<!-- Attendance Section -->
+# Attendance Check
+
+**jinsongLee**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**scripts**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**junWhang**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**minjaeYoon**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**heongyuKim**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**sanggoncha**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**jaeyeongPark**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**.idea**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**.github**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**minjaeYun**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**.git**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**eunseopKim**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+
+<!-- Rules Section -->
 # Algorithm Study
 1. 평일에는 하루 1솔 이상하고 커밋하기 / 주말에는 자유
 2. 커밋 메세지: 이모지(깃모지를 사용) +  `2024-11-21: 1 sol`
