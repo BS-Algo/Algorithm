@@ -115,7 +115,6 @@ def update_readme(attendance):
 
     # Attendance 데이터 생성
     attendance_content = ["<!-- Attendance Section -->\n", "# Attendance Check\n\n"]
-    attendance_content.append("최근 2주 출석 현황:\n\n")
     attendance_content.append(day_row)
     attendance_content.append(separator_row)
 
