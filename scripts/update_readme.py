@@ -1,6 +1,5 @@
 import json
 from datetime import datetime, timedelta
-import re
 
 # 이메일 기반으로 멤버 정의
 MEMBERS = {
@@ -13,31 +12,10 @@ MEMBERS = {
     "sanggonCha": "yg9618@naver.com",
 }
 
-# 기존 출석 데이터 읽기
-def load_existing_attendance():
-    with open("README.md", "r", encoding="utf-8") as file:
-        lines = file.readlines()
-
-    # Attendance 섹션 찾기
-    attendance_start = None
-    for i, line in enumerate(lines):
-        if "<!-- Attendance Section -->" in line:
-            attendance_start = i + 3  # 데이터 시작 라인
-            break
-
-    # 출석 데이터 파싱
-    attendance = {}
-    if attendance_start:
-        for line in lines[attendance_start:]:
-            if line.strip() == "":  # 빈 줄 만나면 종료
-                break
-            parts = line.strip().split("|")
-            if len(parts) > 2:  # 데이터 유효성 확인
-                member = parts[1].strip()
-                days = [day.strip() for day in parts[2:-1]]
-                attendance[member] = days
-
-    return attendance
+# 출석 데이터 초기화
+def initialize_attendance():
+    # 2주 데이터 초기화
+    return {member: ["⬜" for _ in range(14)] for member in MEMBERS}
 
 # 커밋 데이터 분석 및 출석 업데이트
 def analyze_commits(commits, attendance):
@@ -113,8 +91,8 @@ def update_readme(attendance):
 
 # 메인 함수
 def main():
-    # 기존 출석 데이터를 읽기
-    attendance = load_existing_attendance()
+    # 기존 출석 데이터를 초기화
+    attendance = initialize_attendance()
 
     # 커밋 데이터 읽기
     try:
