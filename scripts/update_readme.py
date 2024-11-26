@@ -17,10 +17,16 @@ MEMBERS = {
 def initialize_attendance():
     try:
         with open("attendance.json", "r", encoding="utf-8") as file:
-            return json.load(file)
+            attendance = json.load(file)
     except FileNotFoundError:
         # 파일이 없으면 초기화
-        return {member: ["⬜" for _ in range(14)] for member in MEMBERS}
+        attendance = {member: ["⬜" for _ in range(14)] for member in MEMBERS}
+
+    # 2주 전 데이터만 유지 (최신 14일간의 데이터로 슬라이싱)
+    for member in attendance:
+        if len(attendance[member]) > 14:
+            attendance[member] = attendance[member][-14:]
+    return attendance
 
 # 출석 데이터를 저장
 def save_attendance(attendance):
