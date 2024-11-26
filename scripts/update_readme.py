@@ -101,22 +101,17 @@ def update_readme(attendance):
     # 날짜 생성 (2주치)
     today = datetime.utcnow().date()
     dates = [(today - timedelta(days=i)) for i in range(13, -1, -1)]
-    months = [date.strftime("%b") for date in dates]
     days = [date.strftime("%a") for date in dates]
 
-    # 월 표시 (중복 제거)
-    month_row = "| " + " | ".join(
-        [months[i] if i == 0 or months[i] != months[i - 1] else " " for i in range(len(months))]
-    ) + " |\n"
-
     # 요일 헤더 생성
-    day_row = "| " + " | ".join(days) + " |\n"
-    separator_row = "|" + " --- |" * len(dates) + "\n"
+    day_row = "|   | " + " | ".join(
+        [f"<span style='color:red;'>{day}</span>" if day in ["Sat", "Sun"] else day for day in days]
+    ) + " |\n"
+    separator_row = "|" + " --- |" * (len(dates) + 1) + "\n"
 
     # Attendance 내용 생성
     attendance_content = ["<!-- Attendance Section -->\n", "# Attendance Check\n\n"]
     attendance_content.append("최근 2주 출석 현황:\n\n")
-    attendance_content.append(month_row)
     attendance_content.append(day_row)
     attendance_content.append(separator_row)
 
