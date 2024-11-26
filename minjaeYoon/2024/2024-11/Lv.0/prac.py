@@ -1,6 +1,9 @@
-def solution(a, b):
-    answer = int(max(f'{a}{b}', f'{2*a*b}'))
-    if int(f'{a}{b}'==f'{2*a*b}'):
-        answer = int(f'{a}{b}')
-    return answer
-print(solution(2, 91))
+def solution(a, b, flag):
+    if bool(flag) == True:
+        return int(f'{a+b}')
+    elif bool(flag) == False:
+        return int(f'{a-b}')
+
+
+print(solution(-4, 7, True))
+print(solution(-4, 7, False))

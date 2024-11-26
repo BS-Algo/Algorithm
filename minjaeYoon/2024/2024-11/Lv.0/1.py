@@ -129,10 +129,67 @@ def solution(a, b):
 
 # 16. 코딩 기초 트레이닝 두 수 연산값 비교
 def solution(a, b):
-    answer = int(max(f'{a}{b}', f'{2*a*b}'))
-    if int(f'{a}{b}'==f'{2*a*b}'):
+    answer = 0
+    if int(f'{a}{b}') > int(f'{2*a*b}'):
         answer = int(f'{a}{b}')
+    elif int(f'{a}{b}') == int(f'{2*a*b}'):
+        answer = int(f'{a}{b}')
+    else:
+        answer = int(f'{2*a*b}')
     return answer
-print(solution(2, 91))
 
-# 17. 
+# max는 같을 때 항상 앞에 있는 값을 반환
+def solution(a, b):
+    return max(int(str(a) + str(b)), 2 * a * b)
+
+# 17. 코딩 기초 트레이닝 n의 배수
+def solution(num, n):
+    answer = 0
+    if num%n == 0:
+        answer = 1
+    return answer
+
+def solution(num, n):
+    return int(not(num % n))
+
+# 18. 코딩 기초 트레이닝 공배수
+def solution(number, n, m):
+    return int(not(number%n) and not(number%m))
+
+def solution(number, n, m):
+    return int(bool(number % n == 0) & bool(number % m == 0))
+
+# 19. 코딩 기초 트레이닝 홀짝에 따른 값 반환
+def solution(n):
+    answer = 0
+    if n%2 == 1:
+        for i in range(n//2+1):
+            answer += (i*2)+1
+    elif n%2 == 0:
+        for i in range(1, n//2+1):
+            answer += (i*2)**2
+    return answer
+
+# 확실히 한 줄로 for 문 리스트 만들기 다시 연습
+def solution(n):
+    if n%2:
+        return sum(range(1,n+1,2))
+    return sum([i*i for i in range(2,n+1,2)])
+
+# 20. 코딩 기초 트레이닝 조건 문자열
+def solution(ineq, eq, n, m):
+    if eq == '!':
+        return int(n > m if ineq == '>' else n < m)
+    elif eq == '=':
+        return int(n >= m if ineq == '>' else n <= m)
+    
+# 21. 코딩 기초 트레이닝 flag에 따른 다른 값 반환
+def solution(a, b, flag):
+    if bool(flag) == True:
+        return int(f'{a+b}')
+    elif bool(flag) == False:
+        return int(f'{a-b}')
+
+def solution(a, b, flag):
+    if flag: return a+b
+    return a-b
