@@ -1,5 +1,5 @@
 <!-- Attendance Section -->
-# 📅Attendance Check
+# Attendance Check
 
 |   | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
