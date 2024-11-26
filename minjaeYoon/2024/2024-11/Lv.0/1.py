@@ -193,3 +193,5 @@ def solution(a, b, flag):
 def solution(a, b, flag):
     if flag: return a+b
     return a-b
+
+# 22. 코딩 기초 트레이닝 코드 처리하기
