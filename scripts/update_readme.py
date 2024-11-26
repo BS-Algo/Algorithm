@@ -2,8 +2,17 @@ import json
 import os
 from datetime import datetime, timedelta
 
-# 멤버 이름을 수동으로 정의
-MEMBERS = ["jinsongLee", "junWhang", "minjaeYoon", "heongyuKim", "sanggoncha", "jaeyeongPark", "minjaeYun", "eunseopKim"]
+# 이메일 기반으로 멤버 정의
+MEMBERS = {
+    "jinsongLee": "annaring30@naver.com",
+    "junWhang": "dmg05135@gmail.com",
+    "minjaeYoon": "stylishy62@gmail.com",
+    "heongyuKim": "khg6436@naver.com",
+    "sanggoncha": "yg9618@naver.com",
+    "jaeyeongPark": "pjy980526@naver.com",
+    "minjaeYun": "subway9852@gmail.com",
+    "eunseopKim": "subway9852@gmail.com",
+}
 
 # 커밋 데이터 분석
 def analyze_commits(commits):
@@ -16,19 +25,17 @@ def analyze_commits(commits):
 
     for commit in commits:
         try:
-            # 작성자 및 날짜 정보 추출
-            author = commit['commit']['author']['name']
+            # 작성자 이메일 및 날짜 추출
+            author_email = commit['commit']['author']['email']
             date_str = commit['commit']['author']['date'][:10]  # 날짜 부분만 추출
             commit_date = datetime.strptime(date_str, "%Y-%m-%d").date()
 
-            # 파일 경로에서 멤버 폴더가 포함되어 있는지 확인
-            if "files" in commit:
-                for file in commit["files"]:
-                    for member in MEMBERS:
-                        if f"{member}/" in file['filename']:  # 파일 경로에 멤버 이름 포함 여부 확인
-                            if start_date <= commit_date <= today:
-                                index = (commit_date - start_date).days
-                                attendance[member][index] = "🟩"
+            # 출석 체크 (이메일 매칭)
+            if start_date <= commit_date <= today:
+                for member, email in MEMBERS.items():
+                    if author_email == email:
+                        index = (commit_date - start_date).days
+                        attendance[member][index] = "🟩"
         except KeyError:
             continue
 
@@ -52,24 +59,26 @@ def update_readme(attendance):
 
     # 날짜 생성 (2주치)
     today = datetime.utcnow().date()
-    dates = [(today - timedelta(days=i)).strftime("%Y-%m-%d") for i in range(13, -1, -1)]
-    months = [date.split("-")[1] for date in dates]
-    unique_months = list(set(months))
+    dates = [(today - timedelta(days=i)) for i in range(13, -1, -1)]
+    months = [date.strftime("%b") for date in dates]
+    days = [date.strftime("%a") for date in dates]
+
+    # 월 표시 (중복 제거)
+    month_row = "| " + " | ".join(
+        [months[i] if i == 0 or months[i] != months[i - 1] else " " for i in range(len(months))]
+    ) + " |\n"
+
+    # 요일 헤더 생성
+    day_row = "| " + " | ".join(days) + " |\n"
+    separator_row = "|" + " --- |" * len(dates) + "\n"
 
     # Attendance 내용 생성
     attendance_content = ["<!-- Attendance Section -->\n", "# Attendance Check\n\n"]
-    attendance_content.append(f"최근 2주 출석 현황:\n\n")
-
-    # 월 표시
-    month_row = "| " + " | ".join([unique_months[0] if m == unique_months[0] else " " for m in months]) + " |\n"
+    attendance_content.append("최근 2주 출석 현황:\n\n")
     attendance_content.append(month_row)
-
-    # 요일 헤더 생성
-    day_row = "| " + " | ".join([datetime.strptime(date, "%Y-%m-%d").strftime("%a") for date in dates]) + " |\n"
     attendance_content.append(day_row)
-    attendance_content.append("|" + " --- |" * len(dates) + "\n")
+    attendance_content.append(separator_row)
 
-    # 멤버별 출석 현황 추가
     for member, record in attendance.items():
         attendance_content.append(f"| {member} | " + " | ".join(record) + " |\n")
 
