@@ -114,7 +114,7 @@ def update_readme(attendance):
     separator_row = "|" + " --- |" * (len(dates) + 1) + "\n"
 
     # Attendance 데이터 생성
-    attendance_content = ["<!-- Attendance Section -->\n", "# Attendance Check\n\n"]
+    attendance_content = ["<!-- Attendance Section -->\n", "# 📅Attendance Check\n\n"]
     attendance_content.append(day_row)
     attendance_content.append(separator_row)
 
