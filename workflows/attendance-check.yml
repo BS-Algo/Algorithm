@@ -5,18 +5,18 @@ on:
     - cron: "*/2 * * * *" # 매 시각 정각마다 실행
   workflow_dispatch: # 수동 실행도 가능
 
-  jobs:
-    fetch-commits:
-      runs-on: ubuntu-latest
+jobs:
+  fetch-commits:
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-        - name: Fetch commit history
-          run: |
-            curl https://api.github.com/repos/BS-BOJ/Algorithm/commits > commit_history.json
+      - name: Fetch commit history
+        run: |
+          curl https://api.github.com/repos/BS-BOJ/Algorithm/commits > commit_history.json
 
-        - name: Update README with attendance
-          run: |
-            python3 scripts/update_readme.py
+      - name: Update README with attendance
+        run: |
+          python3 scripts/update_readme.py
