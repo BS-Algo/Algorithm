@@ -1,6 +1,6 @@
 import json
 from datetime import datetime, timedelta
-import re
+import os
 
 # 이메일 기반으로 멤버 정의
 MEMBERS = {
@@ -16,8 +16,12 @@ MEMBERS = {
 # 출석 데이터 초기화
 def initialize_attendance():
     try:
+        # README 파일의 상대 경로 설정
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        readme_path = os.path.join(script_dir, "../README.md")
+
         # README 파일 읽기
-        with open("../README.md", "r", encoding="utf-8") as file:
+        with open(readme_path, "r", encoding="utf-8") as file:
             lines = file.readlines()
         
         # Attendance Section 추출
@@ -34,13 +38,14 @@ def initialize_attendance():
             raise ValueError("Attendance Section을 찾을 수 없습니다.")
 
         # 기존 출석 데이터 파싱
-        attendance = {}
+        attendance = {member: ["⬜" for _ in range(14)] for member in MEMBERS}
         for line in lines[attendance_start + 4 : attendance_end]:
             if "|" in line and not line.startswith("| ---"):
                 parts = line.strip().split("|")
                 if len(parts) > 2:
                     member = parts[1].strip()
-                    attendance[member] = [cell.strip() for cell in parts[2:-1]]
+                    if member in attendance:
+                        attendance[member] = [cell.strip() for cell in parts[2:-1]]
         
         return attendance
     except FileNotFoundError:
@@ -75,8 +80,12 @@ def analyze_commits(commits, attendance):
 
 # README 파일 업데이트
 def update_readme(attendance):
+    # README 파일의 상대 경로 설정
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    readme_path = os.path.join(script_dir, "../README.md")
+
     # 기존 README 읽기
-    with open("README.md", "r", encoding="utf-8") as file:
+    with open(readme_path, "r", encoding="utf-8") as file:
         lines = file.readlines()
 
     # Attendance와 Rules 섹션 구분
@@ -122,7 +131,7 @@ def update_readme(attendance):
         + lines[rules_start:]
     )
 
-    with open("README.md", "w", encoding="utf-8") as file:
+    with open(readme_path, "w", encoding="utf-8") as file:
         file.writelines(new_lines)
 
     print("README.md 파일이 성공적으로 업데이트되었습니다.")
@@ -134,7 +143,9 @@ def main():
 
     # 커밋 데이터 읽기
     try:
-        with open("commit_history.json", "r", encoding="utf-8") as file:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        commit_path = os.path.join(script_dir, "../commit_history.json")
+        with open(commit_path, "r", encoding="utf-8") as file:
             commits = json.load(file)[:30]  # 최근 30개의 커밋만 사용
     except FileNotFoundError:
         print("Error: commit_history.json 파일을 찾을 수 없습니다.")
