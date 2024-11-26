@@ -1,5 +1,4 @@
 import json
-import os
 from datetime import datetime, timedelta
 
 # 이메일 기반으로 멤버 정의
@@ -13,25 +12,10 @@ MEMBERS = {
     "sanggonCha": "yg9618@naver.com",
 }
 
-# 출석 데이터를 초기화하거나 누적된 출석 데이터를 읽어오기
+# 출석 데이터 초기화
 def initialize_attendance():
-    try:
-        with open("attendance.json", "r", encoding="utf-8") as file:
-            attendance = json.load(file)
-    except FileNotFoundError:
-        # 파일이 없으면 초기화
-        attendance = {member: ["⬜" for _ in range(14)] for member in MEMBERS}
-
-    # 2주 전 데이터만 유지 (최신 14일간의 데이터로 슬라이싱)
-    for member in attendance:
-        if len(attendance[member]) > 14:
-            attendance[member] = attendance[member][-14:]
-    return attendance
-
-# 출석 데이터를 저장
-def save_attendance(attendance):
-    with open("attendance.json", "w", encoding="utf-8") as file:
-        json.dump(attendance, file, indent=4, ensure_ascii=False)
+    # 2주 데이터 초기화
+    return {member: ["⬜" for _ in range(14)] for member in MEMBERS}
 
 # 커밋 데이터 분석 및 출석 업데이트
 def analyze_commits(commits, attendance):
@@ -51,7 +35,7 @@ def analyze_commits(commits, attendance):
                 for member, email in MEMBERS.items():
                     if author_email == email:
                         index = (commit_date - start_date).days
-                        # 이미 출석이 기록된 경우 덮어쓰지 않음
+                        # 이미 초록색(🟩)인 경우 건너뜀
                         if attendance[member][index] == "⬜":
                             attendance[member][index] = "🟩"
         except KeyError:
@@ -107,22 +91,19 @@ def update_readme(attendance):
 
 # 메인 함수
 def main():
-    # 출석 데이터를 초기화하거나 읽어오기
+    # 기존 출석 데이터를 초기화
     attendance = initialize_attendance()
 
     # 커밋 데이터 읽기
     try:
         with open("commit_history.json", "r", encoding="utf-8") as file:
-            commits = json.load(file)
+            commits = json.load(file)[:30]  # 최근 30개의 커밋만 사용
     except FileNotFoundError:
         print("Error: commit_history.json 파일을 찾을 수 없습니다.")
         return
 
-    # 커밋 데이터 분석 및 출석 업데이트
+    # 기존 출석 데이터를 유지하며 새 커밋 데이터를 반영
     attendance = analyze_commits(commits, attendance)
-
-    # 출석 데이터 저장
-    save_attendance(attendance)
 
     # README 업데이트
     update_readme(attendance)
