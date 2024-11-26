@@ -1,21 +1,19 @@
 <!-- Attendance Section -->
 # Attendance Check
 
-**jinsongLee**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+최근 7일 출석 현황:
 
-**junWhang**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-
-**minjaeYoon**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-
-**heongyuKim**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-
-**sanggoncha**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-
-**jaeyeongPark**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-
-**minjaeYun**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-
-**eunseopKim**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+ | 2024-11-20 | 2024-11-21 | 2024-11-22 | 2024-11-23 | 2024-11-24 | 2024-11-25 | 2024-11-26 |
+ | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
+ | --- | --- | --- | --- | --- | --- | --- |
+**jinsongLee** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+**junWhang** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+**minjaeYoon** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+**heongyuKim** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+**sanggoncha** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+**jaeyeongPark** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+**minjaeYun** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+**eunseopKim** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
 <!-- Rules Section -->
 # Algorithm Study
