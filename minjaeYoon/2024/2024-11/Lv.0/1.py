@@ -127,5 +127,12 @@ def solution(a, b):
 def solution(a, b):
     return int(max(f"{a}{b}", f"{b}{a}"))
 
-
 # 16. 코딩 기초 트레이닝 두 수 연산값 비교
+def solution(a, b):
+    answer = int(max(f'{a}{b}', f'{2*a*b}'))
+    if int(f'{a}{b}'==f'{2*a*b}'):
+        answer = int(f'{a}{b}')
+    return answer
+print(solution(2, 91))
+
+# 17. 
