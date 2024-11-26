@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, timedelta
+import re
 
 # 이메일 기반으로 멤버 정의
 MEMBERS = {
@@ -14,8 +15,37 @@ MEMBERS = {
 
 # 출석 데이터 초기화
 def initialize_attendance():
-    # 2주 데이터 초기화
-    return {member: ["⬜" for _ in range(14)] for member in MEMBERS}
+    try:
+        # README 파일 읽기
+        with open("../README.md", "r", encoding="utf-8") as file:
+            lines = file.readlines()
+        
+        # Attendance Section 추출
+        attendance_start = None
+        attendance_end = None
+        for i, line in enumerate(lines):
+            if "<!-- Attendance Section -->" in line:
+                attendance_start = i
+            if "<!-- Rules Section -->" in line:
+                attendance_end = i
+                break
+
+        if attendance_start is None or attendance_end is None:
+            raise ValueError("Attendance Section을 찾을 수 없습니다.")
+
+        # 기존 출석 데이터 파싱
+        attendance = {}
+        for line in lines[attendance_start + 4 : attendance_end]:
+            if "|" in line and not line.startswith("| ---"):
+                parts = line.strip().split("|")
+                if len(parts) > 2:
+                    member = parts[1].strip()
+                    attendance[member] = [cell.strip() for cell in parts[2:-1]]
+        
+        return attendance
+    except FileNotFoundError:
+        print("README.md 파일을 찾을 수 없습니다. 초기화된 데이터를 반환합니다.")
+        return {member: ["⬜" for _ in range(14)] for member in MEMBERS}
 
 # 커밋 데이터 분석 및 출석 업데이트
 def analyze_commits(commits, attendance):
@@ -84,14 +114,22 @@ def update_readme(attendance):
     for member, record in attendance.items():
         attendance_content.append(f"| {member} | " + " | ".join(record) + " |\n")
 
-    # 새로운 README 생성
-    new_lines = attendance_content + ["\n"] + lines[rules_start:]
+    # 기존 데이터 보존 + 새로운 Attendance Section 작성
+    new_lines = (
+        lines[:attendance_start]
+        + attendance_content
+        + ["\n"]
+        + lines[rules_start:]
+    )
+
     with open("README.md", "w", encoding="utf-8") as file:
         file.writelines(new_lines)
 
+    print("README.md 파일이 성공적으로 업데이트되었습니다.")
+
 # 메인 함수
 def main():
-    # 기존 출석 데이터를 초기화
+    # 기존 출석 데이터를 README에서 읽어오기
     attendance = initialize_attendance()
 
     # 커밋 데이터 읽기
