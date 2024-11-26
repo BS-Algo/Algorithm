@@ -3,8 +3,8 @@
 
 최근 2주 출석 현황:
 
-|   | Wed | Thu | Fri | <span style='color:red;'>Sat</span> | <span style='color:red;'>Sun</span> | Mon | Tue | Wed | Thu | Fri | <span style='color:red;'>Sat</span> | <span style='color:red;'>Sun</span> | Mon | Tue |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|   | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | eunseopKim | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | heongyuKim | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 |
 | jaeyeongPark | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
