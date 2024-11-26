@@ -16,12 +16,12 @@ MEMBERS = [
 # 커밋 데이터 분석
 def analyze_commits(commits):
     today = datetime.utcnow().date()  # 오늘 날짜
-    start_date = today - timedelta(days=6)  # 최근 7일
-    dates = [start_date + timedelta(days=i) for i in range(7)]  # 최근 7일 날짜 리스트
+    start_date = today - timedelta(days=13)  # 이전 2주(14일) 시작 날짜
+    dates = [start_date + timedelta(days=i) for i in range(14)]  # 14일 날짜 리스트
     weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]  # 요일 리스트
 
     # 각 멤버별 출석 상태 초기화
-    attendance = {member: ["⬜" for _ in range(7)] for member in MEMBERS}
+    attendance = {member: ["⬜" for _ in range(14)] for member in MEMBERS}
 
     for commit in commits:
         try:
@@ -29,7 +29,7 @@ def analyze_commits(commits):
             date_str = commit["commit"]["author"]["date"][:10]  # 날짜 (YYYY-MM-DD)
             commit_date = datetime.strptime(date_str, "%Y-%m-%d").date()  # 날짜 변환
 
-            # 최근 7일 내의 커밋인지 확인
+            # 14일 범위 내 커밋인지 확인
             if start_date <= commit_date <= today and author in MEMBERS:
                 index = (commit_date - start_date).days
                 attendance[author][index] = "🟩"  # 출석 표시
@@ -40,9 +40,12 @@ def analyze_commits(commits):
 
 # README 파일 업데이트
 def update_readme(dates, weekdays, attendance):
-    # 날짜와 요일 헤더 생성
-    date_header = " | " + " | ".join([date.strftime("%Y-%m-%d") for date in dates]) + " |"
-    weekday_header = " | " + " | ".join(weekdays) + " |"
+    # 월 헤더 생성
+    months = [date.strftime("%b") for date in dates]  # 날짜에서 월만 추출 (e.g., Nov, Oct)
+    month_header = " | " + " | ".join([month if i == 0 or months[i] != months[i - 1] else "" for i, month in enumerate(months)]) + " |"
+
+    # 요일 헤더 생성
+    weekday_header = " | " + " | ".join([weekdays[date.weekday()] for date in dates]) + " |"
 
     # 구분선 생성 (GitHub 표 스타일)
     separator = " | " + " | ".join(["---" for _ in dates]) + " |"
@@ -56,8 +59,8 @@ def update_readme(dates, weekdays, attendance):
     attendance_section = [
         "<!-- Attendance Section -->\n",
         "# Attendance Check\n\n",
-        "최근 7일 출석 현황:\n\n",
-        date_header + "\n",
+        "최근 2주 출석 현황:\n\n",
+        month_header + "\n",
         weekday_header + "\n",
         separator + "\n",
     ] + [row + "\n" for row in attendance_rows]
