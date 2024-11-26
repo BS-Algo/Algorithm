@@ -1,9 +1,5 @@
-def solution(a, b, flag):
-    if bool(flag) == True:
-        return int(f'{a+b}')
-    elif bool(flag) == False:
-        return int(f'{a-b}')
+def solution(code):
+    answer = ''
+    return answer
 
-
-print(solution(-4, 7, True))
-print(solution(-4, 7, False))
+print(solution())
