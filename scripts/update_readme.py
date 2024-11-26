@@ -4,23 +4,34 @@ from datetime import datetime, timedelta
 
 # 이메일 기반으로 멤버 정의
 MEMBERS = {
+    "eunseopKim": "subway9852@gmail.com",
+    "heongyuKim": "khg6436@naver.com",
+    "jaeyeongPark": "pjy980526@naver.com",
     "jinsongLee": "annaring30@naver.com",
     "junWhang": "dmg05135@gmail.com",
     "minjaeYoon": "stylishy62@gmail.com",
-    "heongyuKim": "khg6436@naver.com",
-    "sanggoncha": "yg9618@naver.com",
-    "jaeyeongPark": "pjy980526@naver.com",
-    "eunseopKim": "subway9852@gmail.com",
+    "sanggonCha": "yg9618@naver.com",
 }
 
-# 커밋 데이터 분석
-def analyze_commits(commits):
+# 출석 데이터를 초기화하거나 누적된 출석 데이터를 읽어오기
+def initialize_attendance():
+    try:
+        with open("attendance.json", "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        # 파일이 없으면 초기화
+        return {member: ["⬜" for _ in range(14)] for member in MEMBERS}
+
+# 출석 데이터를 저장
+def save_attendance(attendance):
+    with open("attendance.json", "w", encoding="utf-8") as file:
+        json.dump(attendance, file, indent=4, ensure_ascii=False)
+
+# 커밋 데이터 분석 및 출석 업데이트
+def analyze_commits(commits, attendance):
     # 오늘 날짜와 2주 전 날짜 계산
     today = datetime.utcnow().date()
     start_date = today - timedelta(days=13)
-
-    # 출석표 초기화 (2주 동안의 출석 체크)
-    attendance = {member: ["⬜" for _ in range(14)] for member in MEMBERS}
 
     for commit in commits:
         try:
@@ -34,7 +45,9 @@ def analyze_commits(commits):
                 for member, email in MEMBERS.items():
                     if author_email == email:
                         index = (commit_date - start_date).days
-                        attendance[member][index] = "🟩"
+                        # 이미 출석이 기록된 경우 덮어쓰지 않음
+                        if attendance[member][index] == "⬜":
+                            attendance[member][index] = "🟩"
         except KeyError:
             continue
 
@@ -88,6 +101,9 @@ def update_readme(attendance):
 
 # 메인 함수
 def main():
+    # 출석 데이터를 초기화하거나 읽어오기
+    attendance = initialize_attendance()
+
     # 커밋 데이터 읽기
     try:
         with open("commit_history.json", "r", encoding="utf-8") as file:
@@ -96,8 +112,11 @@ def main():
         print("Error: commit_history.json 파일을 찾을 수 없습니다.")
         return
 
-    # 커밋 데이터 분석
-    attendance = analyze_commits(commits)
+    # 커밋 데이터 분석 및 출석 업데이트
+    attendance = analyze_commits(commits, attendance)
+
+    # 출석 데이터 저장
+    save_attendance(attendance)
 
     # README 업데이트
     update_readme(attendance)
