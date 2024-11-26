@@ -1,39 +1,67 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
-# 멤버 이름 리스트 (코드에서 직접 관리)
+# 멤버 리스트 (미리 정의)
 MEMBERS = [
     "jinsongLee",
     "junWhang",
     "minjaeYoon",
-    "minjaeYun",
     "heongyuKim",
+    "sanggoncha",
     "jaeyeongPark",
-    "sanggonCha",
-    "eunseopKim"
+    "minjaeYun",
+    "eunseopKim",
 ]
 
-# 오늘 날짜의 커밋 내역 분석
+# 커밋 데이터 분석
 def analyze_commits(commits):
-    today = datetime.utcnow().date()  # UTC 기준으로 오늘 날짜
-    attendance = {member: "⬜" for member in MEMBERS}  # 기본값은 '⬜' (결석)
+    today = datetime.utcnow().date()  # 오늘 날짜
+    start_date = today - timedelta(days=6)  # 최근 7일
+    dates = [start_date + timedelta(days=i) for i in range(7)]  # 최근 7일 날짜 리스트
+    weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]  # 요일 리스트
+
+    # 각 멤버별 출석 상태 초기화
+    attendance = {member: ["⬜" for _ in range(7)] for member in MEMBERS}
 
     for commit in commits:
         try:
             author = commit["commit"]["author"]["name"]  # 커밋 작성자
-            date_str = commit["commit"]["author"]["date"][:10]  # 날짜 (YYYY-MM-DD 형식)
-            commit_date = datetime.strptime(date_str, "%Y-%m-%d").date()  # 문자열을 날짜로 변환
+            date_str = commit["commit"]["author"]["date"][:10]  # 날짜 (YYYY-MM-DD)
+            commit_date = datetime.strptime(date_str, "%Y-%m-%d").date()  # 날짜 변환
 
-            # 오늘 날짜의 커밋인지 확인
-            if commit_date == today and author in MEMBERS:
-                attendance[author] = "🟩"  # 출석 표시
+            # 최근 7일 내의 커밋인지 확인
+            if start_date <= commit_date <= today and author in MEMBERS:
+                index = (commit_date - start_date).days
+                attendance[author][index] = "🟩"  # 출석 표시
         except KeyError:
-            continue  # 예상치 못한 데이터가 있을 경우 넘어감
+            continue  # 예상치 못한 데이터는 무시
 
-    return attendance
+    return dates, weekdays, attendance
 
 # README 파일 업데이트
-def update_readme(attendance):
+def update_readme(dates, weekdays, attendance):
+    # 날짜와 요일 헤더 생성
+    date_header = " | " + " | ".join([date.strftime("%Y-%m-%d") for date in dates]) + " |"
+    weekday_header = " | " + " | ".join(weekdays) + " |"
+
+    # 구분선 생성 (GitHub 표 스타일)
+    separator = " | " + " | ".join(["---" for _ in dates]) + " |"
+
+    # 멤버별 출석 상태 생성
+    attendance_rows = []
+    for member, record in attendance.items():
+        attendance_rows.append(f"**{member}** | " + " | ".join(record) + " |")
+
+    # README 내용 생성
+    attendance_section = [
+        "<!-- Attendance Section -->\n",
+        "# Attendance Check\n\n",
+        "최근 7일 출석 현황:\n\n",
+        date_header + "\n",
+        weekday_header + "\n",
+        separator + "\n",
+    ] + [row + "\n" for row in attendance_rows]
+
     # 기존 README 읽기
     try:
         with open("README.md", "r", encoding="utf-8") as file:
@@ -42,28 +70,15 @@ def update_readme(attendance):
         print("Error: README.md 파일을 찾을 수 없습니다.")
         return
 
-    # 기존 README에서 Attendance와 Rules 섹션 구분
-    attendance_start = None
+    # Rules Section 시작 부분 찾기
     rules_start = None
     for i, line in enumerate(lines):
-        if "<!-- Attendance Section -->" in line:
-            attendance_start = i
         if "<!-- Rules Section -->" in line:
             rules_start = i
             break
 
-    # 출석 체크 내용 생성
-    attendance_content = ["<!-- Attendance Section -->\n", "# Attendance Check\n\n"]
-    for member, status in attendance.items():
-        attendance_content.append(f"**{member}**: {status}\n")
-
     # 새로운 README 생성
-    if rules_start is not None:
-        new_lines = attendance_content + ["\n"] + lines[rules_start:]
-    else:
-        new_lines = attendance_content + lines  # Rules 섹션이 없으면 그대로 유지
-
-    # README 파일 쓰기
+    new_lines = attendance_section + ["\n"] + lines[rules_start:]
     with open("README.md", "w", encoding="utf-8") as file:
         file.writelines(new_lines)
 
@@ -74,16 +89,16 @@ def main():
     # 커밋 데이터 읽기
     try:
         with open("commit_history.json", "r", encoding="utf-8") as file:
-            commits = json.load(file)[:30]  # 최근 30개의 커밋만 사용
+            commits = json.load(file)[:30]  # 최근 30개 커밋만 사용
     except FileNotFoundError:
         print("Error: commit_history.json 파일을 찾을 수 없습니다.")
         return
 
     # 커밋 데이터 분석
-    attendance = analyze_commits(commits)
+    dates, weekdays, attendance = analyze_commits(commits)
 
     # README 업데이트
-    update_readme(attendance)
+    update_readme(dates, weekdays, attendance)
 
 if __name__ == "__main__":
     main()

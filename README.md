@@ -2,16 +2,19 @@
 # Attendance Check
 
 **jinsongLee**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**scripts**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+
 **junWhang**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+
 **minjaeYoon**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+
 **heongyuKim**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+
 **sanggoncha**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+
 **jaeyeongPark**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**.idea**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**.github**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+
 **minjaeYun**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**.git**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+
 **eunseopKim**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
 
 <!-- Rules Section -->
