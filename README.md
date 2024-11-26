@@ -1,18 +1,14 @@
 <!-- Attendance Section -->
 # Attendance Check
 
-**jinsongLee**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**scripts**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**junWhang**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**minjaeYoon**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**heongyuKim**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**sanggoncha**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**jaeyeongPark**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**.idea**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**.github**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**minjaeYun**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**.git**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
-**eunseopKim**: ⬜ ⬜ ⬜ ⬜ ⬜ ⬜ ⬜
+**jinsongLee**: ⬜
+**junWhang**: ⬜
+**minjaeYoon**: ⬜
+**minjaeYun**: ⬜
+**heongyuKim**: ⬜
+**jaeyeongPark**: ⬜
+**sanggonCha**: ⬜
+**eunseopKim**: ⬜
 
 <!-- Rules Section -->
 # Algorithm Study
