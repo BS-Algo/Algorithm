@@ -47,12 +47,12 @@ def initialize_attendance():
                     if member in attendance:
                         attendance[member] = [cell.strip() for cell in parts[2:-1]]
 
-        today = datetime.utcnow().date()
+        today = (datetime.utcnow() + timedelta(hours=9)).date()  # KST 기준
         saved_dates = [(today - timedelta(days=i)) for i in range(12, -1, -1)]
         return attendance, saved_dates
     except FileNotFoundError:
         print("README.md 파일을 찾을 수 없습니다. 초기화된 데이터를 반환합니다.")
-        today = datetime.utcnow().date()
+        today = (datetime.utcnow() + timedelta(hours=9)).date()  # KST 기준
         return (
             {member: ["⬜" for _ in range(13)] for member in MEMBERS},
             [(today - timedelta(days=i)) for i in range(12, -1, -1)],
@@ -60,7 +60,7 @@ def initialize_attendance():
 
 # 날짜 변경에 따른 출석 데이터 업데이트
 def update_attendance_dates(attendance, saved_dates):
-    today = datetime.utcnow().date()
+    today = (datetime.utcnow() + timedelta(hours=9)).date()  # KST 기준
     current_dates = [(today - timedelta(days=i)) for i in range(12, -1, -1)]  # 최근 13일 기준
 
     # 날짜가 변경된 경우 데이터 이동
@@ -80,7 +80,7 @@ def update_attendance_dates(attendance, saved_dates):
 
 # 커밋 데이터를 분석하여 출석 데이터를 업데이트하는 함수
 def analyze_commits(commits, attendance):
-    today = datetime.utcnow().date()
+    today = (datetime.utcnow() + timedelta(hours=9)).date()  # KST 기준
     start_date = today - timedelta(days=12)  # 13일만 표시
     last_committer = None
 
@@ -123,7 +123,7 @@ def update_readme(attendance, last_committer):
             break
 
     # 현재 날짜와 시간 계산
-    current_time = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
+    current_time = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")  # KST
     header_line = f"⏲ **{current_time}** 출석현황<br>"
 
     # 마지막 커밋 작성자 표시
@@ -133,7 +133,7 @@ def update_readme(attendance, last_committer):
         committer_line = "📝 마지막 커밋 작성자: 없음  "
 
     # 요일 헤더 생성
-    today = (datetime.utcnow() + timedelta(hours=9)).date()  # UTC → KST
+    today = (datetime.utcnow() + timedelta(hours=9)).date()  # KST 기준
     dates = [(today - timedelta(days=i)) for i in range(12, -1, -1)]
     days = [date.strftime("%a") for date in dates]
 
