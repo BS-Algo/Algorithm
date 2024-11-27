@@ -133,7 +133,7 @@ def update_readme(attendance, last_committer):
         committer_line = "📝 마지막 커밋 작성자: 없음  "
 
     # 요일 헤더 생성
-    today = datetime.utcnow().date()
+    today = (datetime.utcnow() + timedelta(hours=9)).date()  # UTC → KST
     dates = [(today - timedelta(days=i)) for i in range(12, -1, -1)]
     days = [date.strftime("%a") for date in dates]
 
