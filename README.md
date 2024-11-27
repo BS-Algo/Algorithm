@@ -1,12 +1,8 @@
 <!-- Attendance Section -->
 # 📅Attendance Check
 
-
-    <hr>
-    <p><strong>⏰ 출석현황</strong>: <span style="color:blue;">2024-11-27 16:08:06</span></p>
-    <p><strong>🖋️ 마지막 커밋 작성자</strong>: <span style="color:green;">GitHub Actions Bot</span></p>
-    <hr>
-    |   | Fri | **Sat** | **Sun** | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed |
+⏲ 2024-11-27 16:09:06 **출석현황**<br>📝 **마지막 커밋 작성자**: stylishy62
+|   | Fri | **Sat** | **Sun** | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | sanggonCha | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 |
 | heongyuKim | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 |
