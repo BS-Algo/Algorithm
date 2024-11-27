@@ -124,13 +124,13 @@ def update_readme(attendance, last_committer):
 
     # 현재 날짜와 시간 계산
     current_time = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
-    header_line = f"⏲ {current_time} **출석현황**<br>"
+    header_line = f"⏲ **{current_time}** 출석현황<br>"
 
     # 마지막 커밋 작성자 표시
     if last_committer:
-        committer_line = f"📝 **마지막 커밋 작성자**: {last_committer}"
+        committer_line = f"📝 마지막 커밋 작성자: **{last_committer}**"
     else:
-        committer_line = "📝 **마지막 커밋 작성자**: 없음  "
+        committer_line = "📝 마지막 커밋 작성자: 없음  "
 
     # 요일 헤더 생성
     today = datetime.utcnow().date()
