@@ -93,18 +93,23 @@ def analyze_commits(commits, attendance):
             commit_date = datetime.strptime(date_str, "%Y-%m-%d").date()
 
             # UTC -> KST 변환
-            commit_date = commit_date + timedelta(hours=9)
+            commit_date += timedelta(hours=9)
 
             # 가장 최근 커밋 작성자 추적
             last_committer = author_name
 
+            # 커밋 날짜가 출석 범위에 포함될 경우
             if start_date <= commit_date <= today:
+                print(f"✅ 커밋 반영 중: {author_name}, 날짜: {commit_date}")
                 for member, email in MEMBERS.items():
                     if author_email == email:
                         index = (commit_date - start_date).days
-                        if attendance[member][index] == "⬜":
+                        if 0 <= index < 13:  # 범위 검사
                             attendance[member][index] = "🟩"
-        except KeyError:
+                        else:
+                            print(f"⚠️ Index {index}가 범위를 초과했습니다.")
+        except KeyError as e:
+            print(f"⚠️ 커밋 데이터 오류: {e}")
             continue
 
     return attendance, last_committer
