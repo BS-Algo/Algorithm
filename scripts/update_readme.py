@@ -124,7 +124,7 @@ def update_readme(attendance, last_committer):
 
     # 현재 날짜와 시간 계산
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    header_line = f"📅 **이 시각의 출석현황**: {current_time}\n"
+    header_line = f"📅 {current_time}** 출석현황**: \n"
 
     # 마지막 커밋 작성자 표시
     if last_committer:
