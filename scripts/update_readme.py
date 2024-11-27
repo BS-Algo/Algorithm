@@ -89,11 +89,14 @@ def analyze_commits(commits, attendance):
         try:
             author_email = commit['commit']['author']['email']
             author_name = commit['commit']['author']['name']
-            date_str = commit['commit']['author']['date'][:10]  # 날짜 부분만 추출
-            commit_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            date_str = commit['commit']['author']['date']  # 전체 날짜와 시간 포함
+            commit_date = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ")
 
             # UTC -> KST 변환
             commit_date += timedelta(hours=9)
+
+            # 날짜만 추출
+            commit_date = commit_date.date()
 
             # 가장 최근 커밋 작성자 추적
             last_committer = author_name
