@@ -4,13 +4,13 @@ import os
 
 # 이메일 기반으로 멤버 정의
 MEMBERS = {
-    "eunseopKim": "subway9852@gmail.com",
+    "sanggonCha": "yg9618@naver.com",
     "heongyuKim": "khg6436@naver.com",
     "jaeyeongPark": "pjy980526@naver.com",
+    "minjaeYoon": "stylishy62@gmail.com",
+    "eunseopKim": "subway9852@gmail.com",
     "jinsongLee": "annaring30@naver.com",
     "junWhang": "dmg05135@gmail.com",
-    "minjaeYoon": "stylishy62@gmail.com",
-    "sanggonCha": "yg9618@naver.com",
 }
 
 # README 파일에서 기존 출석 데이터를 읽어오는 함수
@@ -122,18 +122,19 @@ def update_readme(attendance, last_committer):
             rules_start = i
             break
 
-    # 현재 날짜와 시간 계산
+    # 현재 날짜와 시간 계산 (한국 시간 기준)
     current_time = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
-    header_line = f"⏲ {current_time} **출석현황**<br>"
 
-    # 마지막 커밋 작성자 표시
-    if last_committer:
-        committer_line = f"📝 **마지막 커밋 작성자**: {last_committer}"
-    else:
-        committer_line = "📝 **마지막 커밋 작성자**: 없음  "
+    # 스타일 적용된 헤더
+    header_line = f"""
+    <hr>
+    <p><strong>⏰ 출석현황</strong>: <span style="color:blue;">{current_time}</span></p>
+    <p><strong>🖋️ 마지막 커밋 작성자</strong>: <span style="color:green;">{last_committer if last_committer else "없음"}</span></p>
+    <hr>
+    """
 
     # 요일 헤더 생성
-    today = datetime.utcnow().date()
+    today = (datetime.utcnow() + timedelta(hours=9)).date()  # 한국 시간 기준 날짜
     dates = [(today - timedelta(days=i)) for i in range(12, -1, -1)]
     days = [date.strftime("%a") for date in dates]
 
@@ -145,7 +146,6 @@ def update_readme(attendance, last_committer):
     # 출석 데이터 생성
     attendance_content = ["<!-- Attendance Section -->\n", "# 📅Attendance Check\n\n"]
     attendance_content.append(header_line)
-    attendance_content.append(committer_line + "\n")
     attendance_content.append(day_row)
     attendance_content.append(separator_row)
 
