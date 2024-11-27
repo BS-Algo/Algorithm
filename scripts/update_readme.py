@@ -128,7 +128,7 @@ def update_readme(attendance, last_committer):
 
     # 마지막 커밋 작성자 표시
     if last_committer:
-        committer_line = f"📝 **마지막 커밋 작성자**: {last_committer}  \n"
+        committer_line = f"📝 **마지막 커밋 작성자**: {last_committer}<br>"
     else:
         committer_line = "📝 **마지막 커밋 작성자**: 없음  "
 
