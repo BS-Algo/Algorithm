@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int range = 0;
+
+        range = Integer.parseInt(sc.nextLine());
+
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < range; i++) {
+            String input = sc.nextLine();
+            if (i == 0) {
+                result = new StringBuilder(input);
+            } else {
+                for (int e = 0; e < input.length(); e++) {
+                    if (input.charAt(e) != result.charAt(e) && result.charAt(e) != '?') {
+                        result.setCharAt(e, '?');
+                    }
+                }
+            }
+
+        }
+
+        System.out.println(result);
+
+    }
+}
