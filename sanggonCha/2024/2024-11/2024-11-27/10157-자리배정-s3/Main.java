@@ -34,7 +34,6 @@ public class Main {
         int cCopy = c;
 
 //        System.out.printf("시작 위치: %d %d\n", i, j);
-
         while (k > 0 && r - 1 > 0) { // 위로 이동
             k -= 1;
             r -= 1;
