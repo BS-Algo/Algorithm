@@ -74,6 +74,7 @@ def update_attendance_dates(attendance, saved_dates):
                     index = current_dates.index(old_date)
                     new_attendance[member][index] = record
 
+        print(f"✅ 날짜가 변경되었습니다. 새로운 날짜: {current_dates}")
         return new_attendance, current_dates
 
     return attendance, saved_dates
@@ -90,6 +91,9 @@ def analyze_commits(commits, attendance):
             author_name = commit['commit']['author']['name']
             date_str = commit['commit']['author']['date'][:10]  # 날짜 부분만 추출
             commit_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+
+            # UTC -> KST 변환
+            commit_date = commit_date + timedelta(hours=9)
 
             # 가장 최근 커밋 작성자 추적
             last_committer = author_name
@@ -177,8 +181,11 @@ def main():
         print("Error: commit_history.json 파일을 찾을 수 없습니다.")
         return
 
+    # 날짜 이동 먼저 처리
     attendance, saved_dates = update_attendance_dates(attendance, saved_dates)
+    # 커밋 반영
     attendance, last_committer = analyze_commits(commits, attendance)
+    # README 업데이트
     update_readme(attendance, last_committer)
     print("README.md 파일이 성공적으로 업데이트되었습니다.")
 
