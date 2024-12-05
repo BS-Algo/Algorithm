@@ -139,8 +139,15 @@ def main():
         print("commit_history.json 파일을 찾을 수 없습니다.")
         return
 
-    last_committer = analyze_commits(commits)
-    update_readme(last_committer)
+    # GITHUB_ACTOR를 인자로 전달받음
+    last_committer = sys.argv[1] if len(sys.argv) > 1 else None
+
+    # Analyze commits
+    analyzed_committer = analyze_commits(commits)
+
+    # last_committer 우선 사용
+    update_readme(last_committer or analyzed_committer)
+
 
 if __name__ == "__main__":
     main()
