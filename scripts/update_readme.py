@@ -13,9 +13,10 @@ MEMBERS = {
     "jinsongLee": {"email": "annaring30@naver.com", "dates": set()},
 }
 # 박재영 팀원의 출석 정보 추가
-MEMBERS["jaeyeongPark"]["dates"].update(["2024-11-25", "2024-11-26", "2024-11-28", "2024-11-29", "2024-12-02"])
+MEMBERS["sanggonCha"]["dates"].update(["2024-11-26", "2024-11-27", "2024-11-28"])
+MEMBERS["jaeyeongPark"]["dates"].update(["2024-11-22", "2024-11-25", "2024-11-26", "2024-11-28", "2024-11-29", "2024-12-02"])
 MEMBERS["heongyuKim"]["dates"].update(["2024-11-25", "2024-11-26", "2024-11-27"])
-MEMBERS["minjaeYoon"]["dates"].update(["2024-11-22", "2024-11-26", "2024-12-03", , "2024-12-04", , "2024-12-05"])
+MEMBERS["minjaeYoon"]["dates"].update(["2024-11-22", "2024-11-26", "2024-12-03", "2024-12-05", "2024-12-06"])
 
 # 최근 13일 날짜 리스트 생성
 def get_saved_dates():
