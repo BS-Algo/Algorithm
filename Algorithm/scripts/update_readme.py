@@ -24,14 +24,13 @@ def get_saved_dates():
     return [(today - timedelta(days=i)).isoformat() for i in range(12, -1, -1)]
 
 # 커밋 데이터를 분석하여 출석 정보를 갱신하는 함수
+# 최근 커밋 작성자를 반환하도록 수정
 def analyze_commits(commits):
     """
     커밋 데이터를 기반으로 출석 정보를 갱신.
     """
     saved_dates = get_saved_dates()
-    last_committer = None
-
-    print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
+    last_committer = None  # 최근 작성자를 저장할 변수
 
     for commit in commits:
         try:
@@ -46,20 +45,16 @@ def analyze_commits(commits):
                 datetime.strptime(commit_date, "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=9)
             ).date().isoformat()
 
-            print(f"🔍 처리 중 커밋: {commit_date} by {author_name}")  # 디버그 로그 추가
-
             if commit_date in saved_dates:
-                last_committer = author_name
+                last_committer = author_name  # 가장 최근 커밋 작성자 업데이트
                 for member, info in MEMBERS.items():
                     if author_email == info["email"]:
                         info["dates"].add(commit_date)
-                        print(f"✅ 출석 추가: {member} - {commit_date}")  # 디버그 로그 추가
                         break
         except KeyError as e:
-            print(f"⚠️ 커밋 데이터 오류: {e}")
             continue
 
-    return last_committer
+    return last_committer  # 마지막 작성자 반환
 
 # README 파일 업데이트 함수
 def update_readme(last_committer):
@@ -134,19 +129,17 @@ def main():
         script_dir = os.path.dirname(os.path.abspath(__file__))
         commit_path = os.path.join(script_dir, "../commit_history.json")
         with open(commit_path, "r", encoding="utf-8") as file:
-            commits = json.load(file)[:30]
+            commits = json.load(file)[:30]  # 최근 30개의 커밋 분석
     except FileNotFoundError:
         print("commit_history.json 파일을 찾을 수 없습니다.")
         return
 
-    # GITHUB_ACTOR를 인자로 전달받음
-    last_committer = sys.argv[1] if len(sys.argv) > 1 else None
+    # 최근 커밋 작성자 추출
+    last_committer = analyze_commits(commits)
 
-    # Analyze commits
-    analyzed_committer = analyze_commits(commits)
+    # README 업데이트
+    update_readme(last_committer)
 
-    # last_committer 우선 사용
-    update_readme(last_committer or analyzed_committer)
 
 
 if __name__ == "__main__":
