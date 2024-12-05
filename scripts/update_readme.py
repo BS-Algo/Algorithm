@@ -47,6 +47,7 @@ def analyze_commits(commits):
 
     return last_committer
 
+
 # README 파일 업데이트 함수
 def update_readme(last_committer):
     """
