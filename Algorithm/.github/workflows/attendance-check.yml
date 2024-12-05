@@ -25,7 +25,7 @@ jobs:
 
       - name: Update README with attendance
         run: |
-          python3 scripts/update_readme.py
+          python3 scripts/update_readme.py "${{ github.actor }}" # GITHUB_ACTOR 전달
 
       - name: Commit and push changes
         run: |
