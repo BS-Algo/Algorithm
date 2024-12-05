@@ -196,7 +196,7 @@ def solution(a, b, flag):
 
 # 22. 코딩 기초 트레이닝 코드 처리하기
 
-# 23. 코딩 기초 트레이닝 
+# 23. 코딩 기초 트레이닝 등차수열의 특정한 항만 더하기
 
 # 24. 코딩 기초 트레이닝 주사위 게임 2
 def solution(a, b, c):
@@ -223,11 +223,6 @@ def solution(num_list):
         bit = 1
     return bit
 
-num_list = [3, 4, 5, 2, 1]
-num_list_comparison = [5, 7, 8, 3]
-print(solution(num_list))
-print(solution(num_list_comparison))
-
 def solution(num_list):
     a=1
     b=0
@@ -236,3 +231,45 @@ def solution(num_list):
         b+=x
     if a<b*b: return 1
     return 0
+
+# 26. 코딩 기초 트레이닝 이어 붙인 수
+def solution(num_list):
+    odd, even = '', ''
+    for i in range(len(num_list)):
+        if num_list[i] % 2 == 1:
+            odd += str(num_list[i])
+        else:
+            even += str(num_list[i])
+    return int(f'{int(odd) + int(even)}')
+
+# 27. 코딩 기초 트레이닝 마지막 두 원소
+def solution(num_list):
+    if num_list[-1] > num_list[-2]:
+        num_list.append(num_list[-1]-num_list[-2])
+    else:
+        num_list.append(num_list[-1]*2)
+    return num_list
+
+# 28. 코딩 기초 트레이닝 수 조작하기 1
+def solution(n, control):
+    for i in range(len(control)):
+        if control[i] == 'w':
+            n += 1
+        elif control[i] == 's':
+            n -= 1
+        elif control[i] == 'd':
+            n += 10
+        elif control[i] == 'a':
+            n -= 10
+    return n
+
+# Pythonic하게
+def solution(n, control):
+    key = dict(zip(['w','s','d','a'], [1,-1,10,-10]))
+    return n + sum([key[c] for c in control])
+
+# 문제 해결 초점
+def solution(n, control):
+    return n + 10*(control.count('d')-control.count('a')) + (control.count('w')-control.count('s'))
+
+# 29. 코딩 기초 트레이닝 수 조작하기 2
