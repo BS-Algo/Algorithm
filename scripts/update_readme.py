@@ -19,7 +19,7 @@ MEMBERS["heongyuKim"]["dates"].update(["2024-11-25", "2024-11-26", "2024-11-27"]
 MEMBERS["minjaeYoon"]["dates"].update(["2024-11-22", "2024-11-26", "2024-12-03"])
 
 # GitHub Repository 정보
-GITHUB_REPO = "owner/repo"  # 예: "octocat/Hello-World"
+GITHUB_REPO = "BS-BOJ/Algorithm"  # 예: "octocat/Hello-World"
 COMMITS_URL = f"https://api.github.com/repos/{GITHUB_REPO}/commits"
 
 # 최근 13일 날짜 리스트 생성
