@@ -26,6 +26,9 @@ jobs:
       - name: Update README with attendance
         run: |
           python3 scripts/update_readme.py "${{ github.actor }}"
+          
+      - name: Debug github.actor
+        run: echo "GitHub Actor: ${{ github.actor }}"
 
       - name: Commit and push changes
         run: |
