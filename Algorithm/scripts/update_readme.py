@@ -35,8 +35,12 @@ def analyze_commits(commits):
 
     for commit in commits:
         try:
+            # GitHub API에서 작성자 정보 가져오기
+            author_name = commit.get("author", {}).get("login", None)  # GitHub 사용자명
+            if not author_name:
+                author_name = commit["commit"]["author"]["name"]  # 커밋 작성자 이름
+
             author_email = commit["commit"]["author"]["email"]
-            author_name = commit["commit"]["author"]["name"]
             commit_date = commit["commit"]["author"]["date"]
             commit_date = (
                 datetime.strptime(commit_date, "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=9)
