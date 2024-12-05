@@ -1,3 +1,4 @@
+import requests
 import json
 from datetime import datetime, timedelta
 import os
@@ -17,10 +18,26 @@ MEMBERS["jaeyeongPark"]["dates"].update(["2024-11-25", "2024-11-26", "2024-11-28
 MEMBERS["heongyuKim"]["dates"].update(["2024-11-25", "2024-11-26", "2024-11-27"])
 MEMBERS["minjaeYoon"]["dates"].update(["2024-11-22", "2024-11-26", "2024-12-03"])
 
+# GitHub Repository 정보
+GITHUB_REPO = "owner/repo"  # 예: "octocat/Hello-World"
+COMMITS_URL = f"https://api.github.com/repos/{GITHUB_REPO}/commits"
+
 # 최근 13일 날짜 리스트 생성
 def get_saved_dates():
     today = (datetime.utcnow() + timedelta(hours=9)).date()
     return [(today - timedelta(days=i)).isoformat() for i in range(12, -1, -1)]
+
+# GitHub API를 사용하여 커밋 데이터 가져오기
+def fetch_commits():
+    """
+    GitHub API를 통해 최근 20개의 커밋 데이터를 가져옵니다.
+    """
+    response = requests.get(COMMITS_URL, params={"per_page": 20})
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"⚠️ GitHub API 요청 실패: {response.status_code}, {response.text}")
+        return []
 
 # 커밋 데이터를 분석하여 출석 정보를 갱신하는 함수
 def analyze_commits(commits):
@@ -125,16 +142,12 @@ def main():
     """
     전체 프로세스를 실행.
     """
-    try:
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        commit_path = os.path.join(script_dir, "../commit_history.json")
-        with open(commit_path, "r", encoding="utf-8") as file:
-            commits = json.load(file)[:30]
-    except FileNotFoundError:
-        print("commit_history.json 파일을 찾을 수 없습니다.")
+    commits = fetch_commits()  # GitHub API로 커밋 데이터 가져오기
+    if not commits:
+        print("⚠️ 커밋 데이터를 가져올 수 없습니다.")
         return
 
-    last_committer = analyze_commits(commits)
+    last_committer = analyze_commits(commits)  # 커밋 데이터를 분석하고 출석 갱신
     update_readme(last_committer)
 
 if __name__ == "__main__":
