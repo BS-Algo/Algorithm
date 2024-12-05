@@ -30,6 +30,8 @@ def analyze_commits(commits):
     saved_dates = get_saved_dates()
     last_committer = None
 
+    print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
+
     for commit in commits:
         try:
             author_email = commit["commit"]["author"]["email"]
@@ -39,18 +41,20 @@ def analyze_commits(commits):
                 datetime.strptime(commit_date, "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=9)
             ).date().isoformat()
 
+            print(f"🔍 처리 중 커밋: {commit_date} by {author_name}")  # 디버그 로그 추가
+
             if commit_date in saved_dates:
                 last_committer = author_name
                 for member, info in MEMBERS.items():
                     if author_email == info["email"]:
                         info["dates"].add(commit_date)
+                        print(f"✅ 출석 추가: {member} - {commit_date}")  # 디버그 로그 추가
                         break
         except KeyError as e:
             print(f"⚠️ 커밋 데이터 오류: {e}")
             continue
 
     return last_committer
-
 
 # README 파일 업데이트 함수
 def update_readme(last_committer):
