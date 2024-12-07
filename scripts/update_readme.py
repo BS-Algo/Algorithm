@@ -8,9 +8,6 @@ MEMBERS = {
     "heongyuKim": {"email": "khg6436@naver.com", "dates": set()},
     "jaeyeongPark": {"email": "pjy980526@naver.com", "dates": set()},
     "minjaeYoon": {"email": "stylishy62@gmail.com", "dates": set()},
-    "junWhang": {"email": "dmg05135@gmail.com", "dates": set()},
-    "eunseopKim": {"email": "subway9852@gmail.com", "dates": set()},
-    "jinsongLee": {"email": "annaring30@naver.com", "dates": set()},
 }
 # 박재영 팀원의 출석 정보 추가
 MEMBERS["sanggonCha"]["dates"].update(["2024-11-26", "2024-11-27", "2024-11-28"])
