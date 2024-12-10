@@ -293,3 +293,9 @@ def solution(log):
     for i in range(1,len(log)):
         res+=joystick[log[i]-log[i-1]]
     return res
+
+# 30. 코딩 기초 트레이닝 수열과 구간 쿼리 3
+def solution(arr, queries):
+    for i in range(len(queries)):
+        arr[queries[i][0]], arr[queries[i][1]] = arr[queries[i][1]], arr[queries[i][0]]
+    return arr
