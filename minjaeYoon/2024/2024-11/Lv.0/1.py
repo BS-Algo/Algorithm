@@ -301,3 +301,34 @@ def solution(arr, queries):
     return arr
 
 # 31. 코딩 기초 트레이닝 수열과 구간 쿼리 2
+def solution(arr, queries):
+    answer = []
+    for s, e, k in queries:
+        min_value = float('inf')
+        
+        for i in range(s, e+1):
+            if k < arr[i] < min_value:
+                min_value = min(min_value, arr[i])
+        
+        answer.append(-1 if min_value == float('inf') else min_value)
+    
+    return answer
+
+# 32. 코딩 기초 트레이닝 수열과 구간 쿼리 4
+def solution(arr, queries):
+    for s, e, k in queries:
+        for i in range(s, e+1):
+            if i % k == 0:
+                arr[i] += 1 
+    return arr
+
+# 33. 코딩 기초 트레이닝 배열 만들기 2
+def solution(l, r):
+    answer = []
+    for i in range(l, r+1):
+        if all(digit in '05' for digit in str(i)):
+            answer.append(i)
+    
+    return answer if answer else [-1]
+
+# 34. 코딩 기초 트레이닝 카운트 업
