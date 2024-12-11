@@ -299,3 +299,5 @@ def solution(arr, queries):
     for i in range(len(queries)):
         arr[queries[i][0]], arr[queries[i][1]] = arr[queries[i][1]], arr[queries[i][0]]
     return arr
+
+# 31. 코딩 기초 트레이닝 수열과 구간 쿼리 2
