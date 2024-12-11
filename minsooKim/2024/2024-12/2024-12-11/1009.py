@@ -19,3 +19,4 @@ for tc in range(T):
             print((a**b) % 10)
     else:
         print(10)
+        ## 이모지 테스트
