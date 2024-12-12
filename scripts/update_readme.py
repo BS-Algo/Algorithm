@@ -1,6 +1,20 @@
 import json
+import requests
 from datetime import datetime, timedelta
 import os
+
+# GitHub Personal Access Token
+token = "GitHub_Commits_Access_Token"
+
+# GitHub API URL (특정 저장소의 커밋 목록)
+owner = "BS-BOJ"  # 저장소 소유자
+repo = "Algorithm"  # 저장소 이름
+url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=100"  # 최대 100개의 커밋 가져오기
+
+# 인증 헤더
+headers = {
+    "Authorization": f"token {token}"
+}
 
 # 멤버 정보 (출석 날짜 포함)
 MEMBERS = {
@@ -20,6 +34,27 @@ MEMBERS["minjaeYoon"]["dates"].update(["2024-11-22", "2024-11-26", "2024-12-03",
 def get_saved_dates():
     today = (datetime.utcnow() + timedelta(hours=9)).date()
     return [(today - timedelta(days=i)).isoformat() for i in range(12, -1, -1)]
+
+# GitHub API에서 커밋 내역을 가져오는 함수
+def fetch_commits_from_github():
+    commits = []
+    page = 1
+    while True:
+        url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=100&page={page}"
+        headers = {"Authorization": f"token {token}"}
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            page_commits = response.json()
+            if not page_commits:
+                break  # 커밋이 없으면 종료
+            commits.extend(page_commits)
+            page += 1
+        else:
+            print(f"GitHub API 요청 실패: {response.status_code}")
+            break
+
+    return commits
 
 # 커밋 데이터를 분석하여 출석 정보를 갱신하는 함수
 def analyze_commits(commits):
@@ -124,13 +159,11 @@ def main():
     """
     전체 프로세스를 실행.
     """
-    try:
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        commit_path = os.path.join(script_dir, "../commit_history.json")
-        with open(commit_path, "r", encoding="utf-8") as file:
-            commits = json.load(file)[:100]
-    except FileNotFoundError:
-        print("commit_history.json 파일을 찾을 수 없습니다.")
+
+    commits = fetch_commits_from_github() # GitHub 에서 커밋 내역 가져오기
+
+    if not commits:
+        print("커밋 내역이 없습니다.")
         return
 
     last_committer = analyze_commits(commits)
