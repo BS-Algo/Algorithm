@@ -4,7 +4,10 @@ from datetime import datetime, timedelta
 import os
 
 # GitHub Personal Access Token
-token = "GITHUBCOMMITSACCESSTOKEN"
+token = os.environ.get("GITHUBCOMMITSACCESSTOKEN")
+if not token:
+    raise ValueError("GitHub Personal Access Token이 설정되지 않았습니다.")
+
 
 # GitHub API URL (특정 저장소의 커밋 목록)
 owner = "BS-BOJ"  # 저장소 소유자
