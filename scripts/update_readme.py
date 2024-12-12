@@ -65,21 +65,54 @@ def fetch_commits_from_github():
 
 
 # 커밋 데이터를 분석하여 출석 정보를 갱신하는 함수
+# def analyze_commits(commits):
+#     """
+#     커밋 데이터를 기반으로 출석 정보를 갱신.
+#     """
+#     saved_dates = get_saved_dates()
+#     # last_committer = None
+
+#     print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
+    
+#     for commit in commits:
+#         last_committer = commit["commit"]["author"]["name"]
+
+
+#     for commit in commits:
+#         try:
+#             author_email = commit["commit"]["author"]["email"]
+#             author_name = commit["commit"]["author"]["name"]
+#             commit_date = commit["commit"]["author"]["date"]
+#             commit_date = (
+#                 datetime.strptime(commit_date, "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=9)
+#             ).date().isoformat()
+
+#             print(f"🔍 처리 중 커밋: {commit_date} by {author_name}")  # 디버그 로그 추가
+
+#             if commit_date in saved_dates:
+#                 # last_committer = author_name
+#                 for member, info in MEMBERS.items():
+#                     if author_email == info["email"]:
+#                         info["dates"].add(commit_date)
+#                         print(f"✅ 출석 추가: {member} - {commit_date}")  # 디버그 로그 추가
+#                         break
+#         except KeyError as e:
+#             print(f"⚠️ 커밋 데이터 오류: {e}")
+#             continue
+
+#     return last_committer
+
 def analyze_commits(commits):
     """
     커밋 데이터를 기반으로 출석 정보를 갱신.
     """
     saved_dates = get_saved_dates()
-    # last_committer = None
 
     print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
-    
-    for commit in commits:
-        last_committer = commit["commit"]["author"]["name"]
-        break
 
+    latest_committer = None
 
-    for commit in commits:
+    for i, commit in enumerate(commits):
         try:
             author_email = commit["commit"]["author"]["email"]
             author_name = commit["commit"]["author"]["name"]
@@ -90,21 +123,27 @@ def analyze_commits(commits):
 
             print(f"🔍 처리 중 커밋: {commit_date} by {author_name}")  # 디버그 로그 추가
 
+            # 첫 번째 커밋에서만 last_committer 설정
+            if i == 0:
+                latest_committer = author_name
+
             if commit_date in saved_dates:
-                # last_committer = author_name
                 for member, info in MEMBERS.items():
                     if author_email == info["email"]:
                         info["dates"].add(commit_date)
                         print(f"✅ 출석 추가: {member} - {commit_date}")  # 디버그 로그 추가
                         break
+
         except KeyError as e:
             print(f"⚠️ 커밋 데이터 오류: {e}")
             continue
 
-    return last_committer
+    # 마지막으로 설정된 first_committer 리턴
+    return latest_committer
+
 
 # README 파일 업데이트 함수
-def update_readme(last_committer):
+def update_readme(latest_committer):
     """
     README.md 파일을 갱신된 출석 정보로 업데이트.
     """
@@ -132,7 +171,7 @@ def update_readme(last_committer):
     current_time = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
     header_line = f"⏲ **{current_time}** 출석현황<br>"
     committer_line = (
-        f"📝 마지막 커밋 작성자: **{last_committer}**" if last_committer else "📝 마지막 커밋 작성자: 없음"
+        f"📝 마지막 커밋 작성자: **{latest_committer}**" if latest_committer else "📝 마지막 커밋 작성자: 없음"
     )
 
     # 날짜 헤더 생성
@@ -179,8 +218,8 @@ def main():
         print("커밋 내역이 없습니다.")
         return
 
-    last_committer = analyze_commits(commits)
-    update_readme(last_committer)
+    latest_committer = analyze_commits(commits)
+    update_readme(latest_committer)
 
 if __name__ == "__main__":
     main()
