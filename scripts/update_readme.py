@@ -44,17 +44,22 @@ def fetch_commits_from_github():
         headers = {"Authorization": f"token {token}"}
         response = requests.get(url, headers=headers)
 
+        print(f"API 요청 URL: {url}")  # 디버깅: API 요청 URL 확인
+        print(f"응답 상태 코드: {response.status_code}")  # 디버깅: 응답 상태 코드 확인
+
         if response.status_code == 200:
             page_commits = response.json()
             if not page_commits:
+                print("커밋 데이터가 없습니다.")  # 디버깅: 커밋 데이터가 없을 경우
                 break  # 커밋이 없으면 종료
             commits.extend(page_commits)
             page += 1
         else:
-            print(f"GitHub API 요청 실패: {response.status_code}")
+            print(f"GitHub API 요청 실패: {response.status_code}, 메시지: {response.text}")
             break
 
     return commits
+
 
 # 커밋 데이터를 분석하여 출석 정보를 갱신하는 함수
 def analyze_commits(commits):
