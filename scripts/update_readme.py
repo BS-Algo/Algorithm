@@ -74,7 +74,9 @@ def analyze_commits(commits):
 
     print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
     
-    last_committer = commits[0].commit["commit"]["author"]["name"]
+    for commit in commits:
+        last_committer = commit["commit"]["author"]["name"]
+        break
 
 
     for commit in commits:
