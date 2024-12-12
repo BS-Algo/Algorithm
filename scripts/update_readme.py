@@ -128,7 +128,7 @@ def main():
         script_dir = os.path.dirname(os.path.abspath(__file__))
         commit_path = os.path.join(script_dir, "../commit_history.json")
         with open(commit_path, "r", encoding="utf-8") as file:
-            commits = json.load(file)[:30]
+            commits = json.load(file)[:100]
     except FileNotFoundError:
         print("commit_history.json 파일을 찾을 수 없습니다.")
         return
