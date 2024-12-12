@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import os
 
 # GitHub Personal Access Token
-token = "GitHubCommitsAccessToken"
+token = "GITHUBCOMMITSACCESSTOKEN"
 
 # GitHub API URL (특정 저장소의 커밋 목록)
 owner = "BS-BOJ"  # 저장소 소유자
