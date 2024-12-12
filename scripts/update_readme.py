@@ -70,9 +70,12 @@ def analyze_commits(commits):
     커밋 데이터를 기반으로 출석 정보를 갱신.
     """
     saved_dates = get_saved_dates()
-    last_committer = None
+    # last_committer = None
 
     print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
+    
+    last_committer = commits[0].commit["commit"]["author"]["name"]
+
 
     for commit in commits:
         try:
@@ -86,7 +89,7 @@ def analyze_commits(commits):
             print(f"🔍 처리 중 커밋: {commit_date} by {author_name}")  # 디버그 로그 추가
 
             if commit_date in saved_dates:
-                last_committer = author_name
+                # last_committer = author_name
                 for member, info in MEMBERS.items():
                     if author_email == info["email"]:
                         info["dates"].add(commit_date)
