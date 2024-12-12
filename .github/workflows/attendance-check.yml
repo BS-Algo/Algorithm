@@ -32,6 +32,8 @@ jobs:
       - name: Update README with attendance
         run: |
           python3 scripts/update_readme.py
+        env:
+          GITHUBCOMMITSACCESSTOKEN: ${{ secrets.GITHUBCOMMITSACCESSTOKEN }}  # 시크릿에서 액세스 토큰을 환경 변수로 사용
 
       - name: Commit and push changes
         run: |
