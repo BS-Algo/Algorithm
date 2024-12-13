@@ -1,12 +1,10 @@
-def solution(l, r):
+def solution(start_num, end_num):
     answer = []
-    for i in range(l, r+1):
-        if all(digit in '05' for digit in str(i)):
-            answer.append(i)
-    
-    return answer if answer else [-1]
+    for i in range(start_num, end_num+1):
+        answer.append(i)
+    return answer
 
-l = 5
-r = 555
 
-print(solution(l, r))
+start_num = 3
+end_num = 10
+print(solution(start_num, end_num))
