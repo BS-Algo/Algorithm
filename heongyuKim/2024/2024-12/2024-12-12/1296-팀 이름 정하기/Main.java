@@ -7,8 +7,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String love = "LOVE";
-
         // 연두의 영어 이름
         String yeonduName = br.readLine();
 
@@ -63,7 +61,7 @@ public class Main {
             // 값으로 내림차순 정렬
             int valueCompare = o2.getValue().compareTo(o1.getValue());
 
-            // 값이 같으면 키로 내림차순 정렬
+            // 값이 같으면 키로 오름차순 정렬
             if (valueCompare == 0) {
                 return o1.getKey().compareTo(o2.getKey());
             }
