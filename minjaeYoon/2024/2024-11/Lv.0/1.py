@@ -337,3 +337,18 @@ def solution(start_num, end_num):
     for i in range(start_num, end_num+1):
         answer.append(i)
     return answer
+
+# 35. 코딩 기초 트레이닝 콜라츠 수열 만들기
+def solution(n):
+    answer = [n]
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+            answer.append(n)
+        elif n % 2 == 1:
+            n = 3*n+1
+            answer.append(n)
+        elif n == 1:
+            answer.append(n)
+            break
+    return answer
