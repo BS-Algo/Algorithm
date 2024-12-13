@@ -12,7 +12,7 @@ if not token:
 # GitHub API URL (특정 저장소의 커밋 목록)
 owner = "BS-BOJ"  # 저장소 소유자
 repo = "Algorithm"  # 저장소 이름
-url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=100"  # 최대 100개의 커밋 가져오기
+url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=300"  # 최대 N개의 커밋 가져오기
 
 # 인증 헤더
 headers = {
