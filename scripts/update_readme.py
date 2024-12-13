@@ -28,10 +28,6 @@ MEMBERS = {
     "minsooKim": {"email": "alstn0575@naver.com", "dates": set()},
 
 }
-# 박재영 팀원의 출석 정보 추가
-MEMBERS["jaeyeongPark"]["dates"].update(["2024-11-22", "2024-11-25", "2024-11-26", "2024-11-28", "2024-11-29", "2024-12-02"])
-MEMBERS["heongyuKim"]["dates"].update(["2024-11-25", "2024-11-26", "2024-11-27"])
-MEMBERS["minjaeYoon"]["dates"].update(["2024-11-22", "2024-11-26", "2024-12-03", "2024-12-05", "2024-12-06", "2024-12-09"])
 
 # 최근 13일 날짜 리스트 생성
 def get_saved_dates():
@@ -43,7 +39,7 @@ def fetch_commits_from_github():
     commits = []
     page = 1
     while True:
-        url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=100&page={page}"
+        url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=200&page={page}"
         headers = {"Authorization": f"token {token}"}
         response = requests.get(url, headers=headers)
 
