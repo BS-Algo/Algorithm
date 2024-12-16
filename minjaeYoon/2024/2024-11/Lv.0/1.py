@@ -352,3 +352,19 @@ def solution(n):
             answer.append(n)
             break
     return answer
+
+# 36. 코딩 기초 트레이닝 배열 만들기 4
+def solution(arr):
+    i = 0
+    stk = []
+
+    while i < len(arr):
+        if not stk:
+            stk.append(arr[i])
+            i += 1
+        elif stk and stk[-1] < arr[i]:
+            stk.append(arr[i])
+            i += 1
+        elif stk and stk[-1] >= arr[i]:
+            stk.pop()
+    return stk
