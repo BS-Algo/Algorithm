@@ -368,3 +368,17 @@ def solution(arr):
         elif stk and stk[-1] >= arr[i]:
             stk.pop()
     return stk
+
+# 37. 코딩 기초 트레이닝 간단한 논리 연산
+def solution(x1, x2, x3, x4):
+    answer = True
+    A = x1 or x2
+    B = x3 or x4
+    if A and B:
+        answer
+    else:
+        answer = False
+    return answer
+	
+def solution(x1, x2, x3, x4):
+    return (x1 | x2) & (x3 | x4)
