@@ -37,6 +37,7 @@ public class Main {
 			for(int j =0; j< W; j++) {
 				System.out.print(A[i][j]+ " ");
 			}
+			
 			System.out.println();
 		}
 	}
