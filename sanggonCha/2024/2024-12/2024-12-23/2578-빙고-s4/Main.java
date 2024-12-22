@@ -94,7 +94,7 @@ public class Main {
         // 대각선 체크
         isBingo = true;
         for (int i = 0; i < 5; i++) {
-            if (bingo[4 - i][i] != 0) {
+            if (bingo[i][4 - i] != 0) {
                 isBingo = false;
                 break;
             }
