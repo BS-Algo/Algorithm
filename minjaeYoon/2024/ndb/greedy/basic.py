@@ -33,3 +33,22 @@ def bignum(arr, data):
 arr = [5, 8, 3]
 data = [2, 4, 5, 4, 6]
 print(bignum(arr, data))
+
+# 실전 문제 숫자 카드 게임
+def card(arr, num):
+    n, m = arr
+    result = 0
+    for i in range(n):
+        min_num = min(num[i])
+        result = max(result, min_num)
+    return result
+
+arr = [3, 3]
+num = [
+    [3, 1, 2],
+    [4, 1, 4],
+    [2, 2, 2]
+]
+print(card(arr, num))
+
+# 실전 문제 1이 될 때 까지

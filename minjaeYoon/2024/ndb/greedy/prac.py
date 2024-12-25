@@ -1,20 +1,15 @@
-def bignum(arr, data):
-    n, m, k = arr
-    data.sort()
-    first = data[n-1]
-    second = data[n-2]
+def card(arr, num):
+    n, m = arr
     result = 0
-    while True:
-        for i in range(k):
-            if m == 0:
-                break
-            result += first
-            m -= 1
-        if m == 0:
-            break 
-        result += second
-        m -= 1
+    for i in range(n):
+        min_num = min(num[i])
+        result = max(result, min_num)
     return result
-arr = [5, 8, 3]
-data = [2, 4, 5, 4, 6]
-print(bignum(arr, data))
+
+arr = [3, 3]
+num = [
+    [3, 1, 2],
+    [4, 1, 4],
+    [2, 2, 2]
+]
+print(card(arr, num))
