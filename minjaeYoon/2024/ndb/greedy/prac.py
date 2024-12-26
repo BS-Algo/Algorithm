@@ -1,15 +1,31 @@
-def card(arr, num):
-    n, m = arr
+def only(n, k):
     result = 0
-    for i in range(n):
-        min_num = min(num[i])
-        result = max(result, min_num)
+    while n >= k:
+        if n % k == 0:
+            n /= k
+            result += 1
+        else:
+            n -= 1
+            result += 1
     return result
 
-arr = [3, 3]
-num = [
-    [3, 1, 2],
-    [4, 1, 4],
-    [2, 2, 2]
-]
-print(card(arr, num))
+n = 25
+k = 5
+print(only(n, k))
+
+def only2(n, k):
+    result = 0
+    while n >= k:
+        while n % k != 0:
+            n -= 1
+            result += 1
+        n //= k
+        result += 1
+        
+    while n > 1:
+        n -= 1
+        result += 1
+    
+    return result
+
+print(only2(n, k))
