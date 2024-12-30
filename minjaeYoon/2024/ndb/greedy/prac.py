@@ -1,31 +1,22 @@
-def only(n, k):
-    result = 0
-    while n >= k:
-        if n % k == 0:
-            n /= k
-            result += 1
-        else:
-            n -= 1
-            result += 1
-    return result
-
-n = 25
-k = 5
-print(only(n, k))
-
-def only2(n, k):
-    result = 0
-    while n >= k:
-        while n % k != 0:
-            n -= 1
-            result += 1
-        n //= k
-        result += 1
-        
-    while n > 1:
-        n -= 1
-        result += 1
+def wasd(n, plans):
+    x, y = 1, 1
     
-    return result
+    dx = [0, 0, -1, 1]
+    dy = [-1, 1, 0, 0]
+    move_types = ['L', 'R', 'U', 'D']
+    
+    for plan in plans:
+        for i in range(len(move_types)):
+            if plan == move_types[i]:
+                nx = x + dx[i]
+                ny = y + dy[i]
+        if nx < 1 or ny < 1 or nx > n or ny > n:
+            continue
+        x, y = nx, ny
+        
+    return x, y
 
-print(only2(n, k))
+n = 5
+plans = ['R', 'R', 'R', 'U', 'D', 'D']
+
+print(wasd(n, plans))
