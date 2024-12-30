@@ -13,4 +13,3 @@ companylist = list(company.values())
 companylist.sort(reverse=True)
 for i in companylist:
     print(i)
-# 그냥 딕셔너리에서 정렬해도 된다
