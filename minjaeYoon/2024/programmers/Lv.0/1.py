@@ -383,4 +383,9 @@ def solution(x1, x2, x3, x4):
 def solution(x1, x2, x3, x4):
     return (x1 | x2) & (x3 | x4)
 
-# 38. 코딩 기초 트레이닝
+# 38. PCCE 기출 문제 2번 : 각도 합치기 (디버깅 문제)
+angle1 = int(input())
+angle2 = int(input())
+
+sum_angle = (angle1 + angle2) % 360
+print(sum_angle)
