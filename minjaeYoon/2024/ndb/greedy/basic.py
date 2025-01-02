@@ -107,3 +107,16 @@ n = 5
 plans = ['R', 'R', 'R', 'U', 'D', 'D']
 
 print(wasd(n, plans))
+
+# example 4-2 시각 (완전 탐색으로 풀기 및 이중 for 문 복습용 문제)
+def time(n):
+    cnt = 0
+    for i in range(n+1):
+        for j in range(60):
+            for k in range(60):
+                if '3' in str(i) + str(j) + str(k):
+                    cnt += 1
+    return cnt
+
+n = 5
+print(time(n))
