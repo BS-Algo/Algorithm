@@ -1,22 +1,11 @@
-def wasd(n, plans):
-    x, y = 1, 1
-    
-    dx = [0, 0, -1, 1]
-    dy = [-1, 1, 0, 0]
-    move_types = ['L', 'R', 'U', 'D']
-    
-    for plan in plans:
-        for i in range(len(move_types)):
-            if plan == move_types[i]:
-                nx = x + dx[i]
-                ny = y + dy[i]
-        if nx < 1 or ny < 1 or nx > n or ny > n:
-            continue
-        x, y = nx, ny
-        
-    return x, y
+def time(n):
+    cnt = 0
+    for i in range(n+1):
+        for j in range(60):
+            for k in range(60):
+                if '3' in str(i) + str(j) + str(k):
+                    cnt += 1
+    return cnt
 
 n = 5
-plans = ['R', 'R', 'R', 'U', 'D', 'D']
-
-print(wasd(n, plans))
+print(time(n))
