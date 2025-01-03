@@ -2,20 +2,22 @@ from collections import deque
 
 def bfs():
     queue = deque()
-    queue.append(s)
+    queue.append((s, 0))
     visited[s] = 1
 
     while queue:
-        now = queue.popleft()
+        now, cnt = queue.popleft()
 
         if now == g:
-            return visited[now] - 1
+            return cnt
 
-        else:
-            for i in (now + u, now - d):
-                if (0 < i <= f) and visited[i] == 0:
-                    visited[i] = visited[now] + 1
-                    queue.append(i)
+        if now + u <= f and visited[now + u] != 1:
+            visited[now + u] = 1
+            queue.append((now + u, cnt + 1))
+
+        if now - d > 0 and visited[now - d] != 1:
+            visited[now - d] = 1
+            queue.append((now - d, cnt + 1))
 
     return "use the stairs"
 
