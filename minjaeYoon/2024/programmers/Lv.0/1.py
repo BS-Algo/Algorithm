@@ -400,3 +400,21 @@ for i in range(len(str(number))//2):
     number //= 100
 
 print(answer)
+
+# 40. PCCE 기출 문제 4번 : 병과 분류 (빈칸 채우기 문제)
+code = input()
+last_four_words = code[-4:]
+
+if last_four_words =="_eye":
+    print("Ophthalmologyc")
+elif last_four_words == "head":
+    print("Neurosurgery")
+elif last_four_words == "infl":
+    print("Orthopedics")
+elif last_four_words == "skin":
+    print("Dermatology")
+else:
+    print("direct recommendation")
+    
+# 41. PCCE 기출 문제 5번 : 심폐소생술 (빈칸 채우기 문제)
+
