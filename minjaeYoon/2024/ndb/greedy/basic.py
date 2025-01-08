@@ -139,3 +139,134 @@ def knight(coor):
 
 coor = 'a1'
 print(knight(coor))
+
+# 실전 문제 4-3 게임 개발 (전형적인 시뮬레이션 문제)
+n, m = map(int, input().split())
+
+d = [[0] * m for _ in range(n)]
+
+x, y, direction = map(int, input().split())
+
+d[x][y] = 1
+
+arr = []
+for i in range(n):
+    arr.append(list(map(int, input().split())))
+    
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
+
+def turn_left():
+    global direction
+    direction -= 1
+    if direction == -1:
+        direction = 3
+        
+cnt = 1
+turn_log = 0
+while True:
+    turn_left()
+    nx = x + dx[direction]
+    ny = y + dy[direction]
+    
+    if d[nx][ny] == 0 and arr[nx][ny] == 0:
+        d[nx][ny] = 1
+        x, y = nx, ny
+        cnt += 1
+        turn_log = 0
+        continue
+    else:
+        turn_log += 1
+    
+    if turn_log == 4:
+        nx = x - dx[direction]
+        ny = y - dy[direction]
+        
+        if arr[nx][ny] == 0:
+            x, y = nx, ny
+        else:
+            break
+        turn_log = 0
+        
+print(cnt)
+
+# 클래스화, OOP 예시
+class RobotCleaner:
+    def __init__(self, n, m, r, c, d, room_map):
+        self.n = n  # 세로 크기
+        self.m = m  # 가로 크기
+        self.x = r  # 로봇 x 좌표
+        self.y = c  # 로봇 y 좌표
+        self.direction = d  # 방향
+        self.room = room_map  # 방 상태
+        self.cleaned = [[0] * m for _ in range(n)]  # 청소 상태
+        self.cleaned[r][c] = 1  # 시작 위치 청소
+        self.cleaned_count = 1  # 청소한 칸 수
+        
+        # 방향 벡터 (북, 동, 남, 서)
+        self.dx = [-1, 0, 1, 0]
+        self.dy = [0, 1, 0, -1]
+    
+    def turn_left(self):
+        """로봇을 왼쪽으로 회전"""
+        self.direction = (self.direction - 1) % 4
+    
+    def can_clean(self, nx, ny):
+        """청소 가능한 칸인지 확인"""
+        return (0 <= nx < self.n and 0 <= ny < self.m and 
+                self.cleaned[nx][ny] == 0 and self.room[nx][ny] == 0)
+    
+    def can_move_back(self, nx, ny):
+        """후진 가능한지 확인"""
+        return (0 <= nx < self.n and 0 <= ny < self.m and 
+                self.room[nx][ny] == 0)
+    
+    def clean(self):
+        """청소 시작"""
+        turn_count = 0
+        
+        while True:
+            # 1. 왼쪽으로 회전
+            self.turn_left()
+            nx = self.x + self.dx[self.direction]
+            ny = self.y + self.dy[self.direction]
+            
+            # 2. 청소 가능한 공간이면 전진
+            if self.can_clean(nx, ny):
+                self.cleaned[nx][ny] = 1
+                self.x, self.y = nx, ny
+                self.cleaned_count += 1
+                turn_count = 0
+                continue
+            else:
+                turn_count += 1
+            
+            # 3. 네 방향 모두 확인한 경우
+            if turn_count == 4:
+                # 후진 좌표 계산
+                nx = self.x - self.dx[self.direction]
+                ny = self.y - self.dy[self.direction]
+                
+                # 후진 가능하면 후진
+                if self.can_move_back(nx, ny):
+                    self.x, self.y = nx, ny
+                else:
+                    break
+                turn_count = 0
+        
+        return self.cleaned_count
+
+# 입력 처리
+n, m = 4, 4
+r, c, d = 1, 1, 0
+room_map = [
+    [1, 1, 1, 1],
+    [1, 0, 0, 1],
+    [1, 1, 0, 1],
+    [1, 1, 1, 1]
+]
+
+# 로봇 청소기 실행
+robot = RobotCleaner(n, m, r, c, d, room_map)
+result = robot.clean()
+print(result)  # 3
