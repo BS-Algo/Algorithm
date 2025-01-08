@@ -19,11 +19,13 @@ public class Main {
     private static boolean checkPenta(int[][] plate, int i, int j, int target) {
         // 세로
         int k = 1;
+        // 가장 왼쪽에 있는 바둑알의 가로줄 번호와, 세로줄 번호를 순서대로 출력한다
+        // 그래서 오른쪽 아래로 증가하는 방향으로 탐ㅅ핵
         while (i + k < 19 && plate[i + k][j] == target) k++;
-        if (k == 5) {
-            if (i - 1 >= 0) {
-                if (plate[i - 1][j] != target) return true; // 여섯 알 이상이 연속적으로 놓인 경우에는 이긴 것이 아니다
-            } else return true;
+        if (k == 5) { // 만약, 다섯 개가 연속한 상태라면, 혹시나 이전의 돌이 같은 돌이 아닌지 체크
+            if (i - 1 >= 0) { // 인덱스부터 검사
+                if (plate[i - 1][j] != target) return true; // 같은 돌이 아니라면 다섯 개만 연속하는 경우
+            } else return true; // 인덱스를 벗어난다면 당연히 다섯 개만 연속
         }
         // 가로
         k = 1;
