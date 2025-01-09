@@ -270,3 +270,38 @@ room_map = [
 robot = RobotCleaner(n, m, r, c, d, room_map)
 result = robot.clean()
 print(result)  # 3
+
+#-------------------------------------------------------------
+# DFS/BFS, stack / deque / queue, 재귀 함수
+# 재귀 복습
+def recursive_function():
+    print('재귀')
+    recursive_function()
+
+recursive_function()
+
+def re_recursive_function(i):
+    if i == 100:
+        return
+    print(i, '번째 재귀', i + 1, '번째 재귀')
+    re_recursive_function(i + 1)
+    print(i, '종료')
+
+re_recursive_function(1)
+
+# 팩토리얼 복습
+def factorial_iterative(n):
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+
+def factorial_recursive(m):
+    if n <= 1:
+        return 1
+    return n * factorial_recursive(m-1)
+
+print('반복', factorial_iterative(5))
+print('재귀', factorial_recursive(5))
+
+        
