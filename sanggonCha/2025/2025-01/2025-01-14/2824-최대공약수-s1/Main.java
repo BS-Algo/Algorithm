@@ -5,7 +5,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-
         // N 입력 받기
         int N = Integer.parseInt(br.readLine());
         String[] numsN = br.readLine().split(" ");
