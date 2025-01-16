@@ -505,3 +505,93 @@ print(arr)
 
 # 퀵 정렬 (py)
 arr = [7, 5, 9, 0, 3, 1, 6, 2, 4, 8]
+
+def quick_sort_py(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    pivot = arr[0]
+    tail = arr[1:]
+    
+    left_side = [x for x in tail if x <= pivot]
+    right_side = [y for y in tail if y > pivot]
+    
+    return quick_sort_py(left_side) + [pivot] + quick_sort_py(right_side)
+
+print(quick_sort_py(arr))
+
+# 계수 정렬
+arr = [7, 5, 9, 0, 3, 1, 6, 2, 4, 8]
+
+cnt = [0] * (max(arr) + 1)
+
+for i in range(len(arr)):
+    cnt[arr[i]] += 1
+    
+for i in range(len(cnt)):
+    for j in range(cnt[i]):
+        print(i, end =' ')
+        
+# 정렬 라이브러리
+arr = [7, 5, 9, 0, 3, 1, 6, 2, 4, 8]
+
+result = sorted(arr)
+print(result)
+
+arr.sort()
+print(arr)
+
+arr = [('바나나', 2), ('사과', 5), ('당근', 3)]
+
+def sorting(arr):
+    return data[1]
+
+result = sorted(arr, key=sorting)
+print(result)
+
+# 실전 문제 6-2 위에서 아래로
+n = int(input())
+
+arr = []
+
+for i in range(n):
+    arr.append(int(input()))
+    
+arr = sorted(arr, reverse=True)
+
+for i in arr:
+    print(i, end=' ')
+    
+# 실전 문제 6-3 성적이 낮은 순서로 출력하기
+
+n = int(input())
+
+arr = []
+
+for i in range(n):
+    input_data = input().split()
+    
+    arr.append(input_data[0], int(input_data[1]))
+    
+arr = sorted(arr, key=lambda student: student[1])
+
+for student in arr:
+    print(student[0], end=' ')
+    
+# 실전 문제 6-4 두 배열의 원소 교체
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+
+a.sort()
+b.sort(reverse=True)
+
+for i in range(k):
+    if a[i] < b[i]:
+        a[i], b[i] = b[i], a[i]
+    else:
+        break
+    
+print(sum(a))
+
+# 이진 탐색
