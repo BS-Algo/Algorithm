@@ -13,6 +13,12 @@ public class Main {
         // 대기순서 K 받기
         int K = Integer.parseInt(br.readLine());
 
+        // 만약 관객에게 좌석을 배정할 수 없는 경우에는 0을 출력
+        if (K > col * row) {
+            System.out.println(0);
+            return;
+        }
+
         // 받은 가로와 세로를 통해서 숫자 배열을 만들기
         int[][] seats = new int[row][col];
 
@@ -73,8 +79,6 @@ public class Main {
             currentNum++;
 
         }
-
-        System.out.println(0);
 
     }
 }
