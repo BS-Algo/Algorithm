@@ -1,7 +1,6 @@
 s = int(input())
 a = int(input())
 b = int(input())
-
 res = 250
 if s <= a:
     print(res)
