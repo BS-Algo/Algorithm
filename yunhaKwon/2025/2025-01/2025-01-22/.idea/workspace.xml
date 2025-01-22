@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b0633bf-def8-455c-8d54-94d8ce0bd6e6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../../minsooKim/2025/2025-01/2025-01-22/19637.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../2025-01-01/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../2025-01-01/.idea/2025-01-01.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../2025-01-01/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
@@ -77,7 +79,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "Merging main"
   }
 }]]></component>
   <component name="RunManager">
