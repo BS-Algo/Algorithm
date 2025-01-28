@@ -8,7 +8,7 @@ def search_start(a):
             start = mid + 1
         else:
             end = mid - 1
-    return end 
+    return start 
 
 def search_end(b):
     start = 0
@@ -29,7 +29,7 @@ for _ in range(M):
     a, b = map(int, input().split())
     real_start = search_start(a)
     real_end = search_end(b)
-    print( real_end - real_start - 1)
+    print( real_end - real_start)
 
         
 
