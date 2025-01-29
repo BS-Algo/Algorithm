@@ -11,23 +11,25 @@ class Info {
 }
 
 public class Main {
-    static int N, minScore = Integer.MAX_VALUE, candidateCount;
+    static int N, from, to, minScore = Integer.MAX_VALUE, candidateCount;
     static int[] scores;
     static int[][] friends;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
 
+        // N 입력 받기
+        N = Integer.parseInt(br.readLine());
         friends = new int[N + 1][N + 1];
         scores = new int[N + 1];
 
+        // 회원 번호 입력 받기
         while (true) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            if (a == -1) break;
-            friends[a][b] = friends[b][a] = 1; // 양방향 연결
+            from = Integer.parseInt(st.nextToken());
+            to = Integer.parseInt(st.nextToken());
+            if (from == -1) break;
+            friends[from][to] = friends[to][from] = 1; // 양방향 연결
         }
 
         findScores();
@@ -44,7 +46,7 @@ public class Main {
     private static int bfs(int start) {
         Queue<Info> queue = new LinkedList<>();
         int[] depth = new int[N + 1];
-        Arrays.fill(depth, -1); // 방문 여부 초기화
+        Arrays.fill(depth, -1); // -1로 초기화
 
         queue.add(new Info(start, 0));
         depth[start] = 0;
@@ -57,9 +59,9 @@ public class Main {
 
             for (int next = 1; next <= N; next++) {
                 if (friends[node][next] == 1 && depth[next] == -1) {
-                    depth[next] = d + 1;
+                    depth[next] = d + 1; // 거리 기록
                     maxDepth = Math.max(maxDepth, depth[next]);
-                    queue.add(new Info(next, d + 1));
+                    queue.add(new Info(next, d + 1)); // 다음 방문 대상 추가
                 }
             }
         }
@@ -67,10 +69,11 @@ public class Main {
         return maxDepth;
     }
 
+
     private static void printResult() {
         List<Integer> candidates = new ArrayList<>();
 
-        for (int i = 1; i <= N; i++) {
+        for (int i = 1; i < N + 1; i++) {
             if (scores[i] == minScore) {
                 candidates.add(i);
             }
