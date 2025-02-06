@@ -17,8 +17,10 @@ public class Main {
             xy[i][1] = Integer.parseInt(st.nextToken());
         }
 
+        // 정렬
         Arrays.sort(xy, Comparator.comparingInt(a -> a[0]));
 
+        // 순회회
         int ans = 0;
         int[] before = {xy[0][0], xy[0][1]};
         for (int i = 1; i < N; i++) {
@@ -34,6 +36,7 @@ public class Main {
             }
         }
 
+        // 출력력
         System.out.println(ans + before[1] - before[0]);
     }
 }
