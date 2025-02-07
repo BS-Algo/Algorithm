@@ -1033,3 +1033,40 @@ print()
 
 for i in range(1, v+1):
     print(parent[i])
+    
+# 경로 압축 기법
+# -> 시간 복잡도 개선
+def find_parent2(parent, x):
+    if parent[x] != x:
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
+
+# 서로소 집합 활용 사이클 판별
+def union_parent2(parent, a, b):
+    a = find_parent2(parent, a)
+    b = find_parent2(parent, b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
+
+v, e = map(int, input().split())
+parent = [0] * (v+1)
+
+for i in range(1, v+1):
+    parent[i] = i
+    
+cycle = False
+
+for i in range(e):
+    a, b = map(int, input().split())
+    if find_parent2(parent, a) == find_parent2(parent, b):
+        cycle = True
+        break
+    else:
+        union_parent2(parent, a, b)
+        
+if cycle:
+    print("O")
+else:
+    print("X")
