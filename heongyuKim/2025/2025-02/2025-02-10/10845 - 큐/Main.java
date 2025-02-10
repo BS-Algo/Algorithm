@@ -43,18 +43,10 @@ class Main {
                     System.out.println(isEmpty);
                     break;
                 case "front":
-                    if (queue.isEmpty()) {
-                        System.out.println(-1);
-                    } else {
-                        System.out.println(queue.peek());
-                    }
+                    System.out.println(queue.isEmpty() ? -1 : queue.peek());
                     break;
                 case "back":
-                    if (queue.isEmpty()) {
-                        System.out.println(-1);
-                    } else {
-                        System.out.println(last);
-                    }
+                    System.out.println(queue.isEmpty() ? -1 : last);
                     break;
             }
         }
