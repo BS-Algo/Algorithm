@@ -2,17 +2,20 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+    private static int N, M;
+    private static String[] converted;
+    private static int[][] space;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // N, M 입력 받기
         StringTokenizer st = new StringTokenizer(br.readLine());
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
 
-        int M = Integer.parseInt(st.nextToken()); // 우주의 개수
-        int N = Integer.parseInt(st.nextToken()); // 행성의 개수
-
-        Map<String, Integer> patternCount = new HashMap<>(); // 패턴별 등장 횟수 저장
-        int[][] space = new int[M][N];
-
-        // 데이터 입력
+        // 행성 입력 받기
+        space = new int[M][N]; // M개의 우주와 N개의 행성
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
@@ -20,42 +23,45 @@ public class Main {
             }
         }
 
-        // 좌표 압축 및 패턴 저장
+        // 행성 변환
+        converted = new String[M]; // 변환한 행성을 저장할 배열
         for (int i = 0; i < M; i++) {
-            int[] ranked = getRankPattern(space[i]);
-            String patternKey = Arrays.toString(ranked); // 배열을 문자열로 변환하여 저장
-
-            patternCount.put(patternKey, patternCount.getOrDefault(patternKey, 0) + 1);
+            convert(i, space[i]);
         }
 
-        // 균등한 우주 쌍 개수 계산
+        // 우주 쌍 찾기
         int ans = 0;
-        for (int count : patternCount.values()) {
-            ans += (count * (count - 1)) / 2; // 같은 패턴끼리 조합하여 쌍을 만든다.
-        }
-
-        System.out.println(ans);
-    }
-
-    // 좌표 압축 (랭크 변환)
-    private static int[] getRankPattern(int[] arr) {
-        int N = arr.length;
-        int[] sorted = arr.clone();
-        Arrays.sort(sorted); // 정렬하여 순위 변환 기준 배열 생성
-
-        Map<Integer, Integer> rankMap = new HashMap<>();
-        int rank = 0;
-        for (int i = 0; i < N; i++) {
-            if (!rankMap.containsKey(sorted[i])) {
-                rankMap.put(sorted[i], rank++); // 중복 방지하여 랭크 부여
+        for (int s1 = 0; s1 < M - 1; s1++) {
+            for (int s2 = s1 + 1; s2 < M; s2++) {
+                if (converted[s1].equals(converted[s2])) ans++;
             }
         }
 
-        int[] ranked = new int[N];
+        // 출력
+        System.out.println(ans);
+    }
+
+    private static void convert(int spaceNum, int[] planet) {
+        int[] sorted = planet.clone();
+
+        Arrays.sort(sorted);
+
+        Map<Integer, Integer> rankMap = new HashMap<>();
+
+        // 해쉬맵에 저장
         for (int i = 0; i < N; i++) {
-            ranked[i] = rankMap.get(arr[i]); // 원래 배열을 순위 값으로 변환
+            if (!rankMap.containsKey(planet[i])) { // 같은 크기의 행성은 같은 크기로 처리
+                rankMap.put(sorted[i], rankMap.size());
+            }
         }
 
-        return ranked;
+        // 해쉬맵을 참고하여 랭크로 변환
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            sb.append(rankMap.get(planet[i]));
+        }
+
+        // 변환이 끝난 문자열을 저장
+        converted[spaceNum] = sb.toString();
     }
 }
