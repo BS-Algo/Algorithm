@@ -1,0 +1,2 @@
+-- 정렬할 때 정렬 기준이 어려 개이면 ,로 여러 개 설정할 수 있음.
+SELECT DR_NAME, DR_ID, MCDP_CD, DATE_FORMAT(HIRE_YMD, '%Y-%m-%d') AS HIRE_YMD FROM DOCTOR WHERE MCDP_CD IN ('CS', 'GS') ORDER BY HIRE_YMD DESC, DR_NAME ASC;
