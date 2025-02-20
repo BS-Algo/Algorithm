@@ -39,3 +39,32 @@ c = 1
 d = 2
 
 print(solution(a, b, c, d))
+
+# [PCCE 기출문제] 3번 / 나이 계산
+
+year = int(input())
+age_type = input()
+
+if age_type == 'Korea':
+    answer = 2030 - year + 1
+
+elif age_type == "Year":
+    answer = 2030 - year
+    
+print(answer)
+
+# [PCCE 기출문제] 4번 / 저축
+start = int(input())
+before = int(input())
+after = int(input())
+
+money = start
+month = 1
+while money < 70:
+    money += before
+    month += 1
+while 70 <= money < 100:
+    money += after
+    month += 1
+
+print(month)
