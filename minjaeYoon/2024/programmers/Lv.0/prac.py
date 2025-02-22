@@ -1,9 +1,12 @@
-number = int(input())
+def solution(cpr):
+    answer = []
+    basic_order = ["check", "call", "pressure", "respiration", "repeat"]
+    for action in basic_order:
+        for i in range(len(basic_order)):
+            if action == basic_order[i]:
+                answer.append(cpr.index(action)+1)
+    return answer
 
-answer = 0
+cpr = ["call", "respiration", "repeat", "check", "pressure"]
 
-for i in range(len(str(number))//2):
-    answer += number % 100
-    number //= 100
-
-print(answer)
+print(solution(cpr))

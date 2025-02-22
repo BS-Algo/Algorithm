@@ -41,7 +41,8 @@ public class Main {
         Arrays.sort(partialB);
 
         // 경우의 수 세기
-        int cnt = 0, lA = 0, rB = M - 1;
+        long cnt = 0;
+        int lA = 0, rB = M - 1;
         while (lA < N && rB >= 0) {
             if (partialA[lA] + partialB[rB] > T) {
                 rB--;
@@ -59,7 +60,8 @@ public class Main {
                 while (rB >= 0 && valueB == partialB[rB]) {
                     rB--;
                 }
-                cnt += (lA - idxA) * (idxB - rB);
+
+                cnt += (long) (lA - idxA) * (idxB - rB);
             }
         }
 
