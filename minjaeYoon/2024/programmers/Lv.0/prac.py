@@ -1,12 +1,15 @@
-def solution(cpr):
-    answer = []
-    basic_order = ["check", "call", "pressure", "respiration", "repeat"]
-    for action in basic_order:
-        for i in range(len(basic_order)):
-            if action == basic_order[i]:
-                answer.append(cpr.index(action)+1)
-    return answer
+def solution(storage, usage, change):
+    total_usage = 0
+    for i in range(len(change)):
+        usage += usage * change[i]/100
+        total_usage += usage
+        if total_usage > storage:
+            return i
+    
+    return -1
 
-cpr = ["call", "respiration", "repeat", "check", "pressure"]
+storage = 5141
+usage = 500
+change = [10, -10, 10, -10, 10, -10, 10, -10, 10, -10]
 
-print(solution(cpr))
+print(solution(storage, usage, change))

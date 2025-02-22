@@ -74,12 +74,30 @@ print(month)
 def solution(cpr):
     answer = []
     basic_order = ["check", "call", "pressure", "respiration", "repeat"]
-    for action in basic_order:
+    for action in cpr:
         for i in range(len(basic_order)):
             if action == basic_order[i]:
-                answer.append(cpr.index(action)+1)
+                answer.append(basic_order.index(action)+1)
     return answer
 
 cpr = ["call", "respiration", "repeat", "check", "pressure"]
 
 print(solution(cpr))
+
+# [PCCE 기출문제] 6번 / 물 부족
+
+def solution(storage, usage, change):
+    total_usage = 0
+    for i in range(len(change)):
+        usage += usage * change[i]/100
+        total_usage += usage
+        if total_usage > storage:
+            return i
+    
+    return -1
+
+storage = 5141
+usage = 500
+change = [10, -10, 10, -10, 10, -10, 10, -10, 10, -10]
+
+print(solution(storage, usage, change))
