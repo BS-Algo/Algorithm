@@ -121,3 +121,23 @@ def solution(route):
 route = "NSSNEWWN"
 
 print(solution(route))
+
+# [PCCE 기출문제] 6번 / 가채점
+
+def solution(numbers, our_score, score_list):
+    answer = []
+    for i in range(len(numbers)):
+        if our_score[i] == score_list[numbers[i]-1]:
+            # .index 사용 생각했는데, 문제 제대로 읽기 (제일 앞이 0이 아닌 1)
+            answer.append("Same")
+        else:
+            answer.append("Different")
+    
+    return answer
+
+numbers = [3, 4]
+our_score = [85, 93]
+score_list = [85, 92, 38, 93, 48, 85, 92, 56]
+
+print(solution(numbers, our_score, score_list))
+

@@ -1,15 +1,15 @@
-def solution(storage, usage, change):
-    total_usage = 0
-    for i in range(len(change)):
-        usage += usage * change[i]/100
-        total_usage += usage
-        if total_usage > storage:
-            return i
+def solution(numbers, our_score, score_list):
+    answer = []
+    for i in range(len(numbers)):
+        if our_score[i] == score_list[numbers[i]-1]:
+            answer.append("Same")
+        else:
+            answer.append("Different")
     
-    return -1
+    return answer
 
-storage = 5141
-usage = 500
-change = [10, -10, 10, -10, 10, -10, 10, -10, 10, -10]
+numbers = [3, 4]
+our_score = [85, 93]
+score_list = [85, 92, 38, 93, 48, 85, 92, 56]
 
-print(solution(storage, usage, change))
+print(solution(numbers, our_score, score_list))
