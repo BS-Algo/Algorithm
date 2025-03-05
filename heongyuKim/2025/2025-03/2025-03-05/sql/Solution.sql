@@ -1,0 +1,9 @@
+-- 서울에 위치한 식당 목록 출력하기
+-- REST_INFO : 식당 ID, 식당 이름, 음식 종류, 조회수, 즐겨찾기수, 주차장 유무, 주소, 전화번호
+-- REST_REVIEW : 리뷰 ID, 식당 ID, 회원 ID, 점수, 리뷰 텍스트, 리뷰 작성일
+SELECT A.REST_ID, A.REST_NAME, A.FOOD_TYPE, A.FAVORITES, A.ADDRESS, ROUND(AVG(B.REVIEW_SCORE), 2) AS SCORE
+FROM REST_INFO A INNER JOIN REST_REVIEW B ON A.REST_ID = B.REST_ID
+WHERE A.ADDRESS LIKE '서울%'
+GROUP BY A.REST_ID
+ORDER BY 6 DESC, 4 DESC;
+
