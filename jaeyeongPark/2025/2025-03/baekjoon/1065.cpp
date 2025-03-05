@@ -14,3 +14,12 @@ bool isHan(int num) {
 
 int main() {
     int N, count = 0;
+    cin >> N;
+
+    for (int i = 1; i <= N; i++) {
+        if (isHan(i)) count++;
+    }
+
+    cout << count << "\n";
+    return 0;
+}
