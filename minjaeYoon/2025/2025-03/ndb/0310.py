@@ -41,3 +41,16 @@ def simulate():
                 px, py = q.pop(0)
                 data[px][py] = 0
             if data[nx][ny] == 1:
+                data[nx][ny] = 2
+                q.append((nx, ny))
+        else:
+            time += 1
+            break
+        x, y = nx, ny
+        time += 1
+        if index < 1 and time == info[index][0]:
+            direction = turn(direction, info[index][1])
+            index += 1
+    return time
+
+print(simulate())
