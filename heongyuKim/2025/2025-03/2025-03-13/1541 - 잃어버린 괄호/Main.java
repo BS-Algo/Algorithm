@@ -16,9 +16,6 @@ class Main {
 
         // -를 제외
         String[] plusNums = form.split("[-]");
-
-        // 덧셈을 처리한 결과를 담을 배열
-        int[] addNums = new int[plusNums.length];
         
         // 더하기부터 처리하기
         for (int i = 0; i < plusNums.length; i++) {
@@ -29,13 +26,11 @@ class Main {
                 sum += Integer.parseInt(nums[j]);
             }
 
-            addNums[i] = sum;
-        }
-
-        // 뺄셈 처리
-        result = addNums[0]; // 첫번째 수를 먼저 결과에 할당하여 뺄셈을 계산하기
-        for (int i = 1; i < addNums.length; i++) {
-            result -= addNums[i];
+            if (i == 0) {
+                result = sum; 
+            } else {
+                result -= sum;
+            }
         }
 
         System.out.println(result);
