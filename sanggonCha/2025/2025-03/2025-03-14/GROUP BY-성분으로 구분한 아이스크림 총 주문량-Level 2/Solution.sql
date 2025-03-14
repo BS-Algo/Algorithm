@@ -9,4 +9,4 @@ ORDER BY
     CASE
    		WHEN ANIMAL_TYPE = 'Cat' THEN 1
         ELSE 2
-    END
+    END;
