@@ -1,0 +1,5 @@
+-- 첫번째 원소를 출력하고 싶으면 LIMIT 1로 설정하기
+SELECT NAME
+FROM ANIMAL_INS
+ORDER BY DATETIME
+LIMIT 1;
