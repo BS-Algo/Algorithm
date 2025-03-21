@@ -28,7 +28,7 @@ MEMBERS = {
     "minsooKim": {"email": "alstn0575@naver.com", "dates": set()},
     # "eunseopKim": {"email": "subway9852@gmail.com", "dates": set()},
     "yunhaKwon": {"email": "ellen4421@naver.com", "dates": set()},
-    "hogyengKim": {"email": "ssafy1123992@gmail.com", "dates": set()},
+    "hogyeongKim": {"email": "ssafy1123992@gmail.com", "dates": set()},
 
 }
 
