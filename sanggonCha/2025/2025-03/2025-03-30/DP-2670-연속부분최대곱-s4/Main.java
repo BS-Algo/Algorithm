@@ -1,25 +1,33 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        // 입력
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        double[] arr = new double[N];
+
+        // N, M 입력 받기
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        Map<String, String> map = new HashMap<>();
+
+        // 사이트 주소와 비밀번호 입력 받기
         for (int i = 0; i < N; i++) {
-            arr[i] = Double.parseDouble(br.readLine());
+            st = new StringTokenizer(br.readLine());
+            String site = st.nextToken();
+            String password = st.nextToken();
+            map.put(site, password);
         }
 
-        // DP
-        double max = arr[0];
-        double curr = arr[0];
-
-        for (int i = 1; i < N; i++) {
-            curr = Math.max(arr[i], curr * arr[i]); // 끊고 새로 or 계속 곱하기
-            max = Math.max(max, curr);
+        // 찾을 사이트 입력 받기
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < M; i++) {
+            String site = br.readLine();
+            sb.append(map.get(site)).append('\n');
         }
 
         // 출력
-        System.out.printf("%.3f\n", max); // 소수점 3째자리까지 출력
+        System.out.println(sb);
     }
 }
