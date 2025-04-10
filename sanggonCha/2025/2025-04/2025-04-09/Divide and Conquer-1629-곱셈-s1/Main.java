@@ -20,7 +20,7 @@ public class Main {
     // 분할 정복
     private static long pow(int B) {
         // 재귀 종료 조건
-        if (B == 1) return A;
+        if (B == 1) return A % C;
 
         long half = pow(B / 2) % C;
         long result = (half * half) % C;
