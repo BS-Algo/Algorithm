@@ -11,4 +11,6 @@ finished = [True, False, True, False]
 
 v = (todo_list, finished)
 
+## 정처기 파이썬 문제 복습
+
 print(solution(*v))
