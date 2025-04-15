@@ -1,98 +1,121 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
-    static int N, M;
-    static int[][] map, group;
-    static int[] groupSize;
-    static int[] dx = {0, 0, 1, -1};
-    static int[] dy = {1, -1, 0, 0};
+class Main {
+    static int N, M, groupNumber = 0;
+    static int[] di = {0, 0, 1, -1}, dj = {1, -1, 0, 0};
+    static int[][] map;
+    static HashMap<Integer, Integer> groupCount = new HashMap<>();// 그룹별 0의 개수를 카운트
+    static HashMap<Integer, Integer> whichGroup = new HashMap<>();// 해당 좌표가 어떤 그룹에 속하는지를 기억
+
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
+        // N, M 입력 받기
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+
+        // 맵 입력 받기
         map = new int[N][M];
-        group = new int[N][M];
-        int groupId = 1;
-        List<Integer> groupSizes = new ArrayList<>();
-        groupSizes.add(0); // index 0 dummy
-
-        // 맵 입력
         for (int i = 0; i < N; i++) {
-            String row = br.readLine();
+            String line = br.readLine();
             for (int j = 0; j < M; j++) {
-                map[i][j] = row.charAt(j) - '0';
+                map[i][j] = line.charAt(j) - '0';
             }
         }
 
-        // 0번 그룹부터 BFS로 묶기
+        // 구간 카운트
+        count();
+
+        // 배열 재표현
+        representation();
+
+        // 출력
+        result();
+    }
+
+    /**
+     * 구간 별로 인접한 0의 개수를 카운트하는 함수(카운트한 결과는 HashMap에 저장)
+     **/
+    private static void count() {
+        boolean[][] visited = new boolean[N][M];
+
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                if (map[i][j] == 0 && group[i][j] == 0) {
-                    int size = bfs(i, j, groupId);
-                    groupSizes.add(size);
-                    groupId++;
-                }
-            }
-        }
+                if (map[i][j] == 0 && !visited[i][j]) {
+                    groupNumber++;
+                    int count = 1;
+                    visited[i][j] = true;
 
-        // 출력용 StringBuilder
-        StringBuilder sb = new StringBuilder();
+                    Queue<int[]> q = new LinkedList<>();
+                    q.offer(new int[]{i, j});
+                    whichGroup.put(i * M + j, groupNumber);
 
-        // 벽이면 인접한 그룹 크기 더해서 출력
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                if (map[i][j] == 1) {
-                    Set<Integer> nearGroups = new HashSet<>();
-                    int count = 1; // 현재 벽 포함
+                    while (!q.isEmpty()) {
+                        int[] cur = q.poll();
 
-                    for (int d = 0; d < 4; d++) {
-                        int ni = i + dx[d];
-                        int nj = j + dy[d];
-                        if (ni >= 0 && nj >= 0 && ni < N && nj < M) {
-                            int g = group[ni][nj];
-                            if (g > 0 && !nearGroups.contains(g)) {
-                                nearGroups.add(g);
-                                count += groupSizes.get(g);
+                        for (int k = 0; k < 4; k++) {
+                            int ni = cur[0] + di[k];
+                            int nj = cur[1] + dj[k];
+                            if (ni >= 0 && ni < N && nj >= 0 && nj < M && map[ni][nj] == 0 && !visited[ni][nj]) {
+                                count++;
+                                visited[ni][nj] = true;
+                                q.offer(new int[]{ni, nj});
+                                whichGroup.put(ni * M + nj, groupNumber);
                             }
                         }
                     }
-                    sb.append(count % 10);
-                } else {
-                    sb.append(0);
+                    groupCount.put(groupNumber, count); // 그룹별 카운트한 결과를 추가
                 }
             }
-            sb.append("\n");
         }
-
-        System.out.print(sb);
     }
 
-    // BFS로 그룹을 나누고 크기를 리턴
-    static int bfs(int i, int j, int id) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{i, j});
-        group[i][j] = id;
-        int count = 1;
+    /**
+     * 그룹과 그룹의 카운트 수를 확인하여 배열을 재표현
+     **/
+    private static void representation() {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if (map[i][j] == 1) {
+                    // 같은 그룹을 중복해서 세는 것을 방지하기 위한 배열
+                    Set<Integer> used = new HashSet<>();
 
-        while (!queue.isEmpty()) {
-            int[] now = queue.poll();
-            for (int d = 0; d < 4; d++) {
-                int ni = now[0] + dx[d];
-                int nj = now[1] + dy[d];
-                if (ni >= 0 && nj >= 0 && ni < N && nj < M) {
-                    if (map[ni][nj] == 0 && group[ni][nj] == 0) {
-                        group[ni][nj] = id;
-                        count++;
-                        queue.offer(new int[]{ni, nj});
+                    int sum = 1;
+
+                    for (int k = 0; k < 4; k++) {
+
+                        int ni = i + di[k];
+                        int nj = j + dj[k];
+
+                        if (ni >= 0 && ni < N && nj >= 0 && nj < M && map[ni][nj] == 0) {
+                            if (whichGroup.get(ni * M + nj) != null) {
+                                int groupNumber = whichGroup.get(ni * M + nj);
+                                used.add(groupNumber);
+                            }
+                        }
                     }
+                    for (int groupNumber : used) {
+                        sum += groupCount.get(groupNumber);
+                    }
+
+                    map[i][j] = sum % 10;
                 }
             }
         }
+    }
 
-        return count;
+    private static void result() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                sb.append(map[i][j]);
+            }
+            sb.append('\n');
+        }
+
+        System.out.println(sb);
     }
 }
