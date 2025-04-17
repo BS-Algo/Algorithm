@@ -1,3 +1,1 @@
-def solution(arr, queries):
-    answer = []
-    return answer
+# 조건에 맞게 수열 변환하기 1
