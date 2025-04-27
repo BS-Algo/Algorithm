@@ -37,25 +37,23 @@ public class Main {
 
         for (int kitNum = 0; kitNum < N; kitNum++) {
             if (!visited[kitNum]) {
-                visited[kitNum] = true;
 
                 // 증량 및 손실
                 int plus = exerciseKit.get(kitNum);
-                weight += (plus - K);
+                int nextWeight = weight + (plus - K);
 
                 // 손실 조건
-                if (weight < 500) {
-                    visited[kitNum] = false;
-                    weight -= (plus - K);
+                if (nextWeight < 500) {
                     continue;
                 }
+                
 
                 // 다음 운동
-                exercise(weight, day + 1);
+                visited[kitNum] = true;
+                exercise(nextWeight, day + 1);
 
                 // 복구
                 visited[kitNum] = false;
-                weight -= (plus - K);
             }
         }
     }
