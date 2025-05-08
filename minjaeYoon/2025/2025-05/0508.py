@@ -15,12 +15,18 @@ print(solution(arr, n))
 
 # 뒤에서 5등까지
 def solution(num_list):
-    for i in range(len(num_list)-1):
-        # for j in range(1, len(num_list)):
-        if num_list[i] > num_list[i+1]:
-            num_list[i], num_list[i+1] = num_list[i+1], num_list[i]
+    for i in range(len(num_list)):
+        swap = False
+        
+        for j in range(0, len(num_list)-i-1):
+            if num_list[j] > num_list[j+1]:
+                num_list[j], num_list[j+1] = num_list[j+1], num_list[j]
+                swap = True
+        
+        if not swap:
+            break
                 
-    return num_list
+    return num_list[:5]
 
 num_list = [12, 4, 15, 46, 38, 1, 14]	
 
