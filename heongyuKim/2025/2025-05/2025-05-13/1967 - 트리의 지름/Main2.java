@@ -29,7 +29,7 @@ class Main {
             int s = Integer.parseInt(link.nextToken());
             int e = Integer.parseInt(link.nextToken());
             int weight = Integer.parseInt(link.nextToken());
-
+            
             graph.get(s).add(new int[] {e, weight});
             graph.get(e).add(new int[] {s, weight});
         }
