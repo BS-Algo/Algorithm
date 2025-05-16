@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-// 최소 시간과 최소 시간에 해당하는 경우의 수를 같이 구하는 문제여서 
+// 최소 시간과 최소 시간에 해당하는 경우의 수를 같이 구하는 문제여서 까다로운 문제였다. 복습이 필요할 듯하다.
 class Main {
     static int N;
     static int K;
