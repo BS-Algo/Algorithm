@@ -2,7 +2,6 @@ import sys
 n = int(input())
 
 solutions = list(map(int, input().split()))
-
 mn_solution = sys.maxsize
 result = []
 left, right = 0, n-1
