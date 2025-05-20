@@ -22,7 +22,6 @@ result = []
 while dq:
     # 가장 먼저 들어간 학생을 정답 리스트에 저장
     cur_student = dq.popleft()
-    print(cur_student)
     result.append(cur_student)
     
     # 현재 학생과 연결되어 있는 학생들의 차수를 1 감소하고, 차수가 0인 학생들을 다시 queue에 삽입
