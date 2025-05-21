@@ -49,7 +49,6 @@ public class Main {
         }
 
         System.out.println(total);
-
     }
 
     private static void dfs(int node, int goal) {
