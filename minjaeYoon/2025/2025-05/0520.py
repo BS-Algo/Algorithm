@@ -6,7 +6,7 @@ def solution(A, B):
     n = len(A)
     
     for i in range(1, n+1):
-        shift = A[-i:] + A[:-1]
+        shift = A[-i:] + A[:-i]
         if shift == B:
             return i
 
@@ -16,3 +16,6 @@ A = "hello"
 B = "ohell"	
 
 print(solution(A, B))
+
+# 신박한 풀이
+solution=lambda a,b:(b*2).find(a)
