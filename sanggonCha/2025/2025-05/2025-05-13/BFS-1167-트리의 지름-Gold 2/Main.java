@@ -22,17 +22,25 @@ class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         // 입력
+        // N 입력
         N = Integer.parseInt(br.readLine()); // 정점의 개수
+        
+        // tree 생성
         tree = new ArrayList[N + 1];
         for (int i = 1; i <= N; i++) {
             tree[i] = new ArrayList<>();
         }
+
+        // 간선 입력
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
+     
             int from = Integer.parseInt(st.nextToken());
+     
             while (true) {
                 int to = Integer.parseInt(st.nextToken());
-                if (to == -1) break;
+                
+                if (to == -1) break; // -1을 입력 받으면 종료
 
                 int dis = Integer.parseInt(st.nextToken());
 
@@ -40,27 +48,9 @@ class Main {
             }
         }
 
+        // -----------------------------------------------
+
         // 로직
-        calculateDistance();
-    }
-
-    private static void dfs(int now, int dis) {
-        if (dis > maxDis) {
-            maxDis = dis;
-            maxNode = now;
-        }
-
-        for (Node node : tree[now]) {
-            int to = node.to;
-            if (!visited[to]) {
-                visited[to] = true;
-                dfs(to, dis + node.dis);
-            }
-        }
-    }
-
-    private static void calculateDistance() {
-
         // 1. 가장 먼 노드를 찾기
         int start = 1, dis = 0;
         visited = new boolean[N + 1];
@@ -74,5 +64,22 @@ class Main {
         dfs(maxNode, dis);
 
         System.out.println(maxDis);
+    }
+
+    private static void dfs(int now, int dis) {
+        if (dis > maxDis) {
+            maxDis = dis; // 최대 거리 갱신
+            maxNode = now; // 최대 거리 노드 갱신
+        }
+
+        // 다음 방문 대상 탐색
+        for (Node node : tree[now]) {
+            int to = node.to;
+
+            if (!visited[to]) { // 방문하지 않았다면
+                visited[to] = true; // 방문 체크
+                dfs(to, dis + node.dis); // 방문
+            }
+        }
     }
 }
