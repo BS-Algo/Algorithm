@@ -28,7 +28,7 @@ int main() {
 	//익은 토마토 위치를 큐에 저장하기
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
-			cin >> box[i][j];
+			cin >> box[i][j];`
 			if (box[i][j] == 1) {
 				q.push({ i,j });
 			}
