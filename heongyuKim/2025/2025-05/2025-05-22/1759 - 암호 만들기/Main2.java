@@ -69,7 +69,5 @@ public class Main2 {
             return true;
         }
         return false;
-
     }
-
 }
