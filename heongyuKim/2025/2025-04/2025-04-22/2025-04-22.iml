@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/1389 - 케빈 베이컨의 6단계 법칙" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1926 - 그림" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2583 - 영역 구하기" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/7562 - 나이트의 이동" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
