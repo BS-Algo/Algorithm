@@ -176,6 +176,7 @@ def update_readme(latest_committer):
         tier = info.get("tier")
         if tier is not None:
             tier_img = f'<img src="https://static.solved.ac/tier_small/{tier}.svg" width="20" style="vertical-align: middle;" /> '
+            print("tier_img ok")
 
         display_name = f"[{member}]({info['link']})" if info.get("link") else member
         name_with_tier = f"{tier_img}{display_name}"
@@ -230,6 +231,6 @@ def main():
     for name, info in MEMBERS.items():
         print(f"{name}: rating={info.get('rating')}, tier={info.get('tier')}")
 
-        
+
 if __name__ == "__main__":
     main()
