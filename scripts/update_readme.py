@@ -174,11 +174,14 @@ def update_readme(latest_committer):
         # 티어 이미지 생성
         tier_img = ""
         tier = info.get("tier")
+        rating = info.get("rating")
+
         if tier is not None:
             tier_img = f'<img src="https://static.solved.ac/tier_small/{tier}.svg" width="20" style="vertical-align: middle;" /> '
+            tier_img += f"({rating}) "
             print("tier_img ok")
         else:
-            print("tier_img no ok..")
+            print("tier_img not ok..")
 
         display_name = f"[{member}]({info['link']})" if info.get("link") else member
         name_with_tier = f"{tier_img}{display_name}"
@@ -226,7 +229,7 @@ def main():
             MEMBERS[name]["rating"] = None
             MEMBERS[name]["tier"] = None
 
-            
+
     latest_committer = analyze_commits(commits)
     update_readme(latest_committer)
 
