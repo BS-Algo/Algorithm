@@ -1,16 +1,16 @@
 <!-- Attendance Section -->
 # 📅Attendance Check
 
-⏲ **2025-05-28 06:59:48** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
+⏲ **2025-05-28 07:02:49** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
 |   | Fri | **Sat** | **Sun** | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [sanggonCha](https://solved.ac/profile/yg9618) | ⬜ | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 |
-| [heongyuKim](https://solved.ac/profile/khg6436) | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
-| [jaeyeongPark](https://solved.ac/profile/pjy980526) | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> [sanggonCha](https://solved.ac/profile/yg9618) | ⬜ | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 |
+| <img src="https://static.solved.ac/tier_small/14.svg" width="20" style="vertical-align: middle;" /> [heongyuKim](https://solved.ac/profile/khg6436) | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
+| <img src="https://static.solved.ac/tier_small/12.svg" width="20" style="vertical-align: middle;" /> [jaeyeongPark](https://solved.ac/profile/pjy980526) | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
 | minjaeYoon | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ |
-| [minsooKim](https://solved.ac/profile/kei03016) | ⬜ | 🟩 | ⬜ | 🟩 | 🟩 | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
-| [yunhaKwon](https://solved.ac/profile/ellen4421) | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| [hogyeongKim](https://solved.ac/profile/rlaghtl2) | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> [minsooKim](https://solved.ac/profile/kei03016) | ⬜ | 🟩 | ⬜ | 🟩 | 🟩 | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
+| <img src="https://static.solved.ac/tier_small/14.svg" width="20" style="vertical-align: middle;" /> [yunhaKwon](https://solved.ac/profile/ellen4421) | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> [hogyeongKim](https://solved.ac/profile/rlaghtl2) | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ |
 
 <!-- Rules Section -->
 # 🏳‍🌈Rule
