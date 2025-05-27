@@ -229,6 +229,7 @@ def main():
     # 결과 출력
     for name, info in MEMBERS.items():
         print(f"{name}: rating={info.get('rating')}, tier={info.get('tier')}")
+
         
 if __name__ == "__main__":
     main()
