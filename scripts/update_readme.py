@@ -48,10 +48,10 @@ def get_user_data_from_solved_ac(handle):
         return None
 
 
-# 최근 10일 날짜 리스트 생성
+# 날짜 리스트 생성
 def get_saved_dates():
     today = (datetime.utcnow() + timedelta(hours=9)).date()
-    return [(today - timedelta(days=i)).isoformat() for i in range(10, 0, -1)]
+    return [(today - timedelta(days=i)).isoformat() for i in range(12, 0, -1)]
 
 
 # GitHub API에서 커밋 내역을 가져오는 함수
