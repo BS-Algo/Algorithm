@@ -51,7 +51,7 @@ def get_user_data_from_solved_ac(handle):
 # 날짜 리스트 생성
 def get_saved_dates():
     today = (datetime.utcnow() + timedelta(hours=9)).date()
-    return [(today - timedelta(days=i)).isoformat() for i in range(12, 0, -1)]
+    return [(today - timedelta(days=i)).isoformat() for i in range(10, 0, -1)]
 
 
 # GitHub API에서 커밋 내역을 가져오는 함수
@@ -157,7 +157,7 @@ def update_readme(latest_committer):
     day_row = "| tier | rating | name | " + " | ".join(
         [f"**{day}**" if day in ["Sat", "Sun"] else day for day in days]
     ) + " |\n"
-    separator_row = "|" + " :---: |" * (len(saved_dates) + 1) + "\n"
+    separator_row = "|" + " :---: |" * (len(saved_dates) + 3) + "\n"
 
     # 출석 데이터 생성
     attendance_content = ["<!-- Attendance Section -->\n", "# 📅Attendance Check\n\n"]
