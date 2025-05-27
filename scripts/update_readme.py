@@ -157,7 +157,7 @@ def update_readme(latest_committer):
     day_row = "|   | " + " | ".join(
         [f"**{day}**" if day in ["Sat", "Sun"] else day for day in days]
     ) + " |\n"
-    separator_row = "|" + " --- |" * (len(saved_dates) + 1) + "\n"
+    separator_row = "|" + " :---: |" * (len(saved_dates) + 1) + "\n"
 
     # 출석 데이터 생성
     attendance_content = ["<!-- Attendance Section -->\n", "# 📅Attendance Check\n\n"]
