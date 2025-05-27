@@ -38,10 +38,14 @@ def get_rating_from_solved_ac(handle):
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
+        print(response)
         return data.get("rating", None)
     except Exception as e:
         print(f"[ERROR] {handle} 점수 조회 실패: {e}")
         return None
+
+# 티어 이미지 가져오기 함수
+# def get_tier_image_url(handle):
 
 # 최근 13일 날짜 리스트 생성
 def get_saved_dates():
