@@ -32,25 +32,27 @@ MEMBERS = {
 }
 
 # 점수 가져오기 함수
-def get_rating_from_solved_ac(handle):
+def get_user_data_from_solved_ac(handle):
     url = f"https://solved.ac/api/v3/user/show?handle={handle}"
     try:
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
         print(data)
-        return data.get("rating", None)
+        return {
+            "rating": data.get("rating", None),
+            "tier": data.get("tier", None)
+        }
     except Exception as e:
         print(f"[ERROR] {handle} 점수 조회 실패: {e}")
         return None
 
-# 티어 이미지 가져오기 함수
-# def get_tier_image_url(handle):
 
 # 최근 13일 날짜 리스트 생성
 def get_saved_dates():
     today = (datetime.utcnow() + timedelta(hours=9)).date()
     return [(today - timedelta(days=i)).isoformat() for i in range(12, -1, -1)]
+
 
 # GitHub API에서 커밋 내역을 가져오는 함수
 def fetch_commits_from_github():
@@ -77,44 +79,6 @@ def fetch_commits_from_github():
 
     return commits
 
-
-# 커밋 데이터를 분석하여 출석 정보를 갱신하는 함수
-# def analyze_commits(commits):
-#     """
-#     커밋 데이터를 기반으로 출석 정보를 갱신.
-#     """
-#     saved_dates = get_saved_dates()
-#     # last_committer = None
-
-#     print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
-    
-#     for commit in commits:
-#         last_committer = commit["commit"]["author"]["name"]
-
-
-#     for commit in commits:
-#         try:
-#             author_email = commit["commit"]["author"]["email"]
-#             author_name = commit["commit"]["author"]["name"]
-#             commit_date = commit["commit"]["author"]["date"]
-#             commit_date = (
-#                 datetime.strptime(commit_date, "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=9)
-#             ).date().isoformat()
-
-#             print(f"🔍 처리 중 커밋: {commit_date} by {author_name}")  # 디버그 로그 추가
-
-#             if commit_date in saved_dates:
-#                 # last_committer = author_name
-#                 for member, info in MEMBERS.items():
-#                     if author_email == info["email"]:
-#                         info["dates"].add(commit_date)
-#                         print(f"✅ 출석 추가: {member} - {commit_date}")  # 디버그 로그 추가
-#                         break
-#         except KeyError as e:
-#             print(f"⚠️ 커밋 데이터 오류: {e}")
-#             continue
-
-#     return last_committer
 
 def analyze_commits(commits):
     """
@@ -206,8 +170,18 @@ def update_readme(latest_committer):
         row = [
             "🟩" if date in info["dates"] else "⬜" for date in saved_dates
         ]
+
+        # 티어 이미지 생성
+        tier_img = ""
+        tier = info.get("tier")
+        if tier is not None:
+            tier_img = f'<img src="https://static.solved.ac/tier_small/{tier}.svg" width="20" style="vertical-align: middle;" /> '
+
         display_name = f"[{member}]({info['link']})" if info.get("link") else member
-        attendance_content.append(f"| {display_name} | " + " | ".join(row) + " |\n")
+        name_with_tier = f"{tier_img}{display_name}"
+
+        # attendance_content.append(f"| {display_name} | " + " | ".join(row) + " |\n")
+        attendance_content.append(f"| {name_with_tier} | " + " | ".join(row) + " |\n")
 
     # 업데이트된 README 저장
     new_lines = (
@@ -241,14 +215,20 @@ def main():
         link = info.get("link")
         if link:
             handle = link.split("/")[-1] # 프로필 링크에서 ID 추출
-            rating = get_rating_from_solved_ac(handle)
-            MEMBERS[name]["rating"] = rating
+            user_data = get_user_data_from_solved_ac(handle)
+            if user_data:
+                MEMBERS[name]["rating"] = user_data["rating"]
+                MEMBERS[name]["tier"] = user_data["tier"]
+            else:
+                MEMBERS[name]["rating"] = None
+                MEMBERS[name]["tier"] = None
         else:
             MEMBERS[name]["rating"] = None
+            MEMBERS[name]["tier"] = None
 
     # 결과 출력
     for name, info in MEMBERS.items():
-        print(f"{name}: {info.get('rating')}")
-
+        print(f"{name}: rating={info.get('rating')}, tier={info.get('tier')}")
+        
 if __name__ == "__main__":
     main()
