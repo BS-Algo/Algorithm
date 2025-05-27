@@ -38,7 +38,7 @@ def get_rating_from_solved_ac(handle):
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
-        print(response)
+        print(data)
         return data.get("rating", None)
     except Exception as e:
         print(f"[ERROR] {handle} 점수 조회 실패: {e}")
