@@ -34,6 +34,3 @@
 
 ### 적용 예시
 ![alt text](images/image-1.png)
-
-
-<img src="https://static.solved.ac/tier_small/14.svg" width="20" style="vertical-align: middle;" />

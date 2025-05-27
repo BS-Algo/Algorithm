@@ -178,7 +178,7 @@ def update_readme(latest_committer):
 
         if tier is not None:
             tier_img = f'<img src="https://static.solved.ac/tier_small/{tier}.svg" width="20" style="vertical-align: middle;" /> '
-            tier_img += f"({rating}) "
+            tier_img += f"{rating} "
             print("tier_img ok")
         else:
             print("tier_img not ok..")
