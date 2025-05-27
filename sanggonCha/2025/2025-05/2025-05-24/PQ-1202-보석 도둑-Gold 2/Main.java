@@ -7,15 +7,15 @@ public class Main {
 
         // 입력
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken()); // 보석의 개수
+        int K = Integer.parseInt(st.nextToken()); // 가방의 개수
 
         // 보석 입력 받기
         int[][] jewelry = new int[N][2];
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            jewelry[i][0] = Integer.parseInt(st.nextToken()); // 무게
-            jewelry[i][1] = Integer.parseInt(st.nextToken()); // 가격
+            jewelry[i][0] = Integer.parseInt(st.nextToken()); // 보석의 무게
+            jewelry[i][1] = Integer.parseInt(st.nextToken()); // 보석의 가격
         }
 
         // 가방 입력 받기
@@ -36,8 +36,8 @@ public class Main {
         long ans = 0;
         int idx = 0;
 
-        for (int i = 0; i < K; i++) {
-            int bagWeight = bag[i];
+        for (int i = 0; i < K; i++) { // 모든 가방을 검사
+            int bagWeight = bag[i]; // 현재 가방의 최대 무게
 
             // 현재 가방에 담을 수 있는 보석을 모두 pq에 추가
             while(idx < N && jewelry[idx][0] <= bagWeight) {

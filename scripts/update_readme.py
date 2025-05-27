@@ -29,8 +29,19 @@ MEMBERS = {
     # "eunseopKim": {"email": "subway9852@gmail.com", "dates": set()},
     "yunhaKwon": {"email": "ellen4421@naver.com", "dates": set(),"link": "https://solved.ac/profile/ellen4421"},
     "hogyeongKim": {"email": "ssafy1123992@gmail.com", "dates": set(), "link": "https://solved.ac/profile/rlaghtl2"},
-
 }
+
+# 점수 가져오기 함수
+def get_rating_from_solved_ac(handle):
+    url = f"https://solved.ac/api/v3/user/show?handle={handle}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        return data.get("rating", None)
+    except Exception as e:
+        print(f"[ERROR] {handle} 점수 조회 실패: {e}")
+        return None
 
 # 최근 13일 날짜 리스트 생성
 def get_saved_dates():
@@ -220,6 +231,20 @@ def main():
 
     latest_committer = analyze_commits(commits)
     update_readme(latest_committer)
+
+    # 🎖solved.ac 점수 업데이트
+    for name, info in MEMBERS.items():
+        link = info.get("link")
+        if link:
+            handle = link.split("/")[-1] # 프로필 링크에서 ID 추출
+            rating = get_rating_from_solved_ac(handle)
+            MEMBERS[name]["rating"] = rating
+        else:
+            MEMBERS[name]["rating"] = None
+
+    # 결과 출력
+    for name, info in MEMBERS.items():
+        print(f"{name}: {info.get('rating')}")
 
 if __name__ == "__main__":
     main()
