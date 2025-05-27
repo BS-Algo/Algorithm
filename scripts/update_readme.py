@@ -154,7 +154,7 @@ def update_readme(latest_committer):
 
     # 날짜 헤더 생성
     days = [datetime.fromisoformat(date).strftime("%a") for date in saved_dates]
-    day_row = "|   | " + " | ".join(
+    day_row = "| tier | rating | name | " + " | ".join(
         [f"**{day}**" if day in ["Sat", "Sun"] else day for day in days]
     ) + " |\n"
     separator_row = "|" + " :---: |" * (len(saved_dates) + 1) + "\n"
@@ -178,13 +178,13 @@ def update_readme(latest_committer):
 
         if tier is not None:
             tier_img = f'<img src="https://static.solved.ac/tier_small/{tier}.svg" width="20" style="vertical-align: middle;" /> '
-            tier_img += f"{rating} "
+            tier_img += f"| {rating} "
             print("tier_img ok")
         else:
             print("tier_img not ok..")
 
         display_name = f"[{member}]({info['link']})" if info.get("link") else member
-        name_with_tier = f"{tier_img}{display_name}"
+        name_with_tier = f"{tier_img} | {display_name}"
 
         # attendance_content.append(f"| {display_name} | " + " | ".join(row) + " |\n")
         attendance_content.append(f"| {name_with_tier} | " + " | ".join(row) + " |\n")
