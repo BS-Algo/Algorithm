@@ -210,9 +210,6 @@ def main():
         print("커밋 내역이 없습니다.")
         return
 
-    latest_committer = analyze_commits(commits)
-    update_readme(latest_committer)
-
     # 🎖solved.ac 점수 업데이트
     for name, info in MEMBERS.items():
         link = info.get("link")
@@ -228,6 +225,11 @@ def main():
         else:
             MEMBERS[name]["rating"] = None
             MEMBERS[name]["tier"] = None
+
+            
+    latest_committer = analyze_commits(commits)
+    update_readme(latest_committer)
+
 
     # 결과 출력
     for name, info in MEMBERS.items():
