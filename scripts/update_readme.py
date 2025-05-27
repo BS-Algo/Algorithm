@@ -223,11 +223,11 @@ def main():
                 MEMBERS[name]["rating"] = user_data["rating"]
                 MEMBERS[name]["tier"] = user_data["tier"]
             else:
-                MEMBERS[name]["rating"] = None
-                MEMBERS[name]["tier"] = None
+                MEMBERS[name]["rating"] = "????"
+                MEMBERS[name]["tier"] = 0
         else:
-            MEMBERS[name]["rating"] = None
-            MEMBERS[name]["tier"] = None
+            MEMBERS[name]["rating"] = "????"
+            MEMBERS[name]["tier"] = 0
 
 
     latest_committer = analyze_commits(commits)
