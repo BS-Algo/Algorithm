@@ -24,7 +24,7 @@ MEMBERS = {
     "sanggonCha": {"email": "yg9618@naver.com", "dates": set(), "link": "https://solved.ac/profile/yg9618"},
     "heongyuKim": {"email": "khg6436@naver.com", "dates": set(), "link": "https://solved.ac/profile/khg6436"},
     "jaeyeongPark": {"email": "pjy980526@naver.com", "dates": set(), "link": "https://solved.ac/profile/pjy980526"},
-    "minjaeYoon": {"email": "stylishy62@gmail.com", "dates": set(), "link": "none"},
+    "minjaeYoon": {"email": "stylishy62@gmail.com", "dates": set(), "link": " "},
     "minsooKim": {"email": "alstn0575@naver.com", "dates": set(),"link": "https://solved.ac/profile/kei03016"},
     # "eunseopKim": {"email": "subway9852@gmail.com", "dates": set()},
     "yunhaKwon": {"email": "ellen4421@naver.com", "dates": set(),"link": "https://solved.ac/profile/ellen4421"},
