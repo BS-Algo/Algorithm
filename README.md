@@ -1,7 +1,7 @@
 <!-- Attendance Section -->
 # 📅Attendance Check
 
-⏲ **2025-05-28 21:27:21** 출석현황<br>📝 마지막 커밋 작성자: **김호경**
+⏲ **2025-05-28 21:49:28** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
 | tier | rating | name | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1532  | [sanggonCha](https://solved.ac/profile/yg9618) | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 |
