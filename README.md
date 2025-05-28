@@ -1,12 +1,12 @@
 <!-- Attendance Section -->
 # 📅Attendance Check
 
-⏲ **2025-05-28 21:51:18** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
+⏲ **2025-05-28 21:56:37** 출석현황<br>📝 마지막 커밋 작성자: **pjy980526@naver.com**
 | tier | rating | name | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1532  | [sanggonCha](https://solved.ac/profile/yg9618) | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | 🟩 |
 | <img src="https://static.solved.ac/tier_small/14.svg" width="20" style="vertical-align: middle;" /> | 1382  | [heongyuKim](https://solved.ac/profile/khg6436) | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
-| <img src="https://static.solved.ac/tier_small/12.svg" width="20" style="vertical-align: middle;" /> | 959  | [jaeyeongPark](https://solved.ac/profile/pjy980526) | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
+| <img src="https://static.solved.ac/tier_small/12.svg" width="20" style="vertical-align: middle;" /> | 959  | [jaeyeongPark](https://solved.ac/profile/pjy980526) | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 |
 | <img src="https://static.solved.ac/tier_small/0.svg" width="20" style="vertical-align: middle;" /> | ????  | [minjaeYoon]( ) | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ |
 | <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1407  | [minsooKim](https://solved.ac/profile/kei03016) | 🟩 | 🟩 | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
 | <img src="https://static.solved.ac/tier_small/14.svg" width="20" style="vertical-align: middle;" /> | 1396  | [yunhaKwon](https://solved.ac/profile/ellen4421) | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
