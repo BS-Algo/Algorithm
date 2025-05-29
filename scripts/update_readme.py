@@ -24,18 +24,35 @@ MEMBERS = {
     "sanggonCha": {"email": "yg9618@naver.com", "dates": set(), "link": "https://solved.ac/profile/yg9618"},
     "heongyuKim": {"email": "khg6436@naver.com", "dates": set(), "link": "https://solved.ac/profile/khg6436"},
     "jaeyeongPark": {"email": "pjy980526@naver.com", "dates": set(), "link": "https://solved.ac/profile/pjy980526"},
-    "minjaeYoon": {"email": "stylishy62@gmail.com", "dates": set(), "link": ""},
+    "minjaeYoon": {"email": "stylishy62@gmail.com", "dates": set(), "link": " "},
     "minsooKim": {"email": "alstn0575@naver.com", "dates": set(),"link": "https://solved.ac/profile/kei03016"},
     # "eunseopKim": {"email": "subway9852@gmail.com", "dates": set()},
     "yunhaKwon": {"email": "ellen4421@naver.com", "dates": set(),"link": "https://solved.ac/profile/ellen4421"},
     "hogyeongKim": {"email": "ssafy1123992@gmail.com", "dates": set(), "link": "https://solved.ac/profile/rlaghtl2"},
-
 }
 
-# 최근 13일 날짜 리스트 생성
+# 점수 가져오기 함수
+def get_user_data_from_solved_ac(handle):
+    url = f"https://solved.ac/api/v3/user/show?handle={handle}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        print(data)
+        return {
+            "rating": data.get("rating", None),
+            "tier": data.get("tier", None)
+        }
+    except Exception as e:
+        print(f"[ERROR] {handle} 점수 조회 실패: {e}")
+        return None
+
+
+# 날짜 리스트 생성
 def get_saved_dates():
     today = (datetime.utcnow() + timedelta(hours=9)).date()
-    return [(today - timedelta(days=i)).isoformat() for i in range(12, -1, -1)]
+    return [(today - timedelta(days=i)).isoformat() for i in range(9, -1, -1)]
+
 
 # GitHub API에서 커밋 내역을 가져오는 함수
 def fetch_commits_from_github():
@@ -62,44 +79,6 @@ def fetch_commits_from_github():
 
     return commits
 
-
-# 커밋 데이터를 분석하여 출석 정보를 갱신하는 함수
-# def analyze_commits(commits):
-#     """
-#     커밋 데이터를 기반으로 출석 정보를 갱신.
-#     """
-#     saved_dates = get_saved_dates()
-#     # last_committer = None
-
-#     print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
-    
-#     for commit in commits:
-#         last_committer = commit["commit"]["author"]["name"]
-
-
-#     for commit in commits:
-#         try:
-#             author_email = commit["commit"]["author"]["email"]
-#             author_name = commit["commit"]["author"]["name"]
-#             commit_date = commit["commit"]["author"]["date"]
-#             commit_date = (
-#                 datetime.strptime(commit_date, "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=9)
-#             ).date().isoformat()
-
-#             print(f"🔍 처리 중 커밋: {commit_date} by {author_name}")  # 디버그 로그 추가
-
-#             if commit_date in saved_dates:
-#                 # last_committer = author_name
-#                 for member, info in MEMBERS.items():
-#                     if author_email == info["email"]:
-#                         info["dates"].add(commit_date)
-#                         print(f"✅ 출석 추가: {member} - {commit_date}")  # 디버그 로그 추가
-#                         break
-#         except KeyError as e:
-#             print(f"⚠️ 커밋 데이터 오류: {e}")
-#             continue
-
-#     return last_committer
 
 def analyze_commits(commits):
     """
@@ -175,10 +154,10 @@ def update_readme(latest_committer):
 
     # 날짜 헤더 생성
     days = [datetime.fromisoformat(date).strftime("%a") for date in saved_dates]
-    day_row = "|   | " + " | ".join(
+    day_row = "| tier | rating | name | " + " | ".join(
         [f"**{day}**" if day in ["Sat", "Sun"] else day for day in days]
     ) + " |\n"
-    separator_row = "|" + " --- |" * (len(saved_dates) + 1) + "\n"
+    separator_row = "|" + " :---: |" * (len(saved_dates) + 3) + "\n"
 
     # 출석 데이터 생성
     attendance_content = ["<!-- Attendance Section -->\n", "# 📅Attendance Check\n\n"]
@@ -191,8 +170,24 @@ def update_readme(latest_committer):
         row = [
             "🟩" if date in info["dates"] else "⬜" for date in saved_dates
         ]
+
+        # 티어 이미지 생성
+        tier_img = ""
+        tier = info.get("tier")
+        rating = info.get("rating")
+
+        if tier is not None:
+            tier_img = f'<img src="https://static.solved.ac/tier_small/{tier}.svg" width="20" style="vertical-align: middle;" /> '
+            tier_img += f"| {rating} "
+            print("tier_img ok")
+        else:
+            print("tier_img not ok..")
+
         display_name = f"[{member}]({info['link']})" if info.get("link") else member
-        attendance_content.append(f"| {display_name} | " + " | ".join(row) + " |\n")
+        name_with_tier = f"{tier_img} | {display_name}"
+
+        # attendance_content.append(f"| {display_name} | " + " | ".join(row) + " |\n")
+        attendance_content.append(f"| {name_with_tier} | " + " | ".join(row) + " |\n")
 
     # 업데이트된 README 저장
     new_lines = (
@@ -218,8 +213,31 @@ def main():
         print("커밋 내역이 없습니다.")
         return
 
+    # 🎖solved.ac 점수 업데이트
+    for name, info in MEMBERS.items():
+        link = info.get("link")
+        if link:
+            handle = link.split("/")[-1] # 프로필 링크에서 ID 추출
+            user_data = get_user_data_from_solved_ac(handle)
+            if user_data:
+                MEMBERS[name]["rating"] = user_data["rating"]
+                MEMBERS[name]["tier"] = user_data["tier"]
+            else:
+                MEMBERS[name]["rating"] = "????"
+                MEMBERS[name]["tier"] = 0
+        else:
+            MEMBERS[name]["rating"] = "????"
+            MEMBERS[name]["tier"] = 0
+
+
     latest_committer = analyze_commits(commits)
     update_readme(latest_committer)
+
+
+    # 결과 출력
+    for name, info in MEMBERS.items():
+        print(f"{name}: rating={info.get('rating')}, tier={info.get('tier')}")
+
 
 if __name__ == "__main__":
     main()
