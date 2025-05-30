@@ -20,13 +20,17 @@
     ![alt text](images/image-2.png)
 
 
-# 세팅
+# ⚙ 세팅
 1. 커밋 `name` 설정: `git config --global user.name "yourname"`
+
     ![alt text](images/image-3.png)
+
     ![alt text](images/image-5.png)
 
 2. 커밋 `email` 설정: ` git config --global user.email "your.email@example.com"`
+
     ![alt text](images/image-4.png)
+
     설정한 메일을 기준으로 `Commit` 분석
 
 ## 🌏gitmoji 사용 방법
