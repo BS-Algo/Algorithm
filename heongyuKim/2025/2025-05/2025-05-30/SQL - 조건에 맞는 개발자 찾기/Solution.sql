@@ -1,0 +1,10 @@
+-- Python이나 C#에 해당하는 코드를 추출
+-- 그거에 맞는 개발자와 연결
+SELECT ID, EMAIL, FIRST_NAME, LAST_NAME
+FROM DEVELOPERS
+WHERE (SKILL_CODE & (
+    SELECT SUM(CODE)
+    FROM SKILLCODES
+    WHERE NAME IN ('Python', 'C#')
+))
+ORDER BY ID;
