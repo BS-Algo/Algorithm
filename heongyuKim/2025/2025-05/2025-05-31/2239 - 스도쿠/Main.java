@@ -41,7 +41,6 @@ public class Main {
                 }
                 answer.append("\n");
             }
-
             return;
         }
 
