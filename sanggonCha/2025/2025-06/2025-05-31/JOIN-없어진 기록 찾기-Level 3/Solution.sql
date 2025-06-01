@@ -1,0 +1,17 @@
+SELECT
+    ANIMAL_ID,
+    NAME
+FROM
+    ANIMAL_OUTS
+WHERE
+    ANIMAL_ID IN (
+        SELECT
+            O.ANIMAL_ID
+        FROM
+            ANIMAL_INS I
+            RIGHT OUTER JOIN ANIMAL_OUTS O ON I.ANIMAL_ID = O.ANIMAL_ID
+        WHERE
+            INTAKE_CONDITION IS NULL
+    )
+ORDER BY
+    ANIMAL_ID
