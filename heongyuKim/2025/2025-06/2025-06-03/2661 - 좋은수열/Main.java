@@ -27,7 +27,7 @@ public class Main {
 
     private static void dfs(int depth, String cur) {
         // 가지치기
-        if (checkGood(cur)) return;
+        if (!checkGood(cur)) return;
 
         if (depth == N) {
             isSolved = true;
@@ -49,9 +49,9 @@ public class Main {
             String last = cur.substring(len - i); // 마지막
             String beforeLast = cur.substring(len - 2 * i, len - i); // 마지막 전
 
-            if (last.equals(beforeLast)) return true;
+            if (last.equals(beforeLast)) return false;
         }
 
-        return false;
+        return true;
     }
 }
