@@ -1,19 +1,21 @@
 # 등수 매기기
 def solution(score):
     answer = []
-    ranks = []
+    avg_list = []
     
     for num in score:
         a, b = num
         avg = (a+b) / 2
-        answer.append(int(avg))
+        avg_list.append(int(avg))
     
-    sorted_answer = sorted(answer, reverse=True)
+    unique_scores = sorted(set(avg_list), reverse=True)
+    rank_dict = {score: idx + 1 for idx, score in enumerate(unique_scores)}
     
-    ranks = [sorted_answer.index(s) + 1 for s in answer ]
+    for avg in avg_list:
+        answer.append(rank_dict[avg])
     
-    return ranks
+    return answer
 
-score = [[80, 70], [90, 50], [40, 70], [50, 80]]
+score = [[80, 70], [70, 80], [30, 50], [90, 100], [100, 90], [100, 100], [10, 30]]
 
 print(solution(score))
