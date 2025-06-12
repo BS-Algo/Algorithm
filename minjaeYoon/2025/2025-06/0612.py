@@ -7,12 +7,11 @@ def solution(n):
             fc *= i
         return fc
 
-    # i! <= n 을 만족하는 가장 큰 i 찾기
     def find(n):
         i = 1
         while fac(i) <= n:
             i += 1
-        return i - 1  # 조건을 만족하는 마지막 i
+        return i - 1
     
     return find(n)
 
