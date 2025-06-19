@@ -10,17 +10,19 @@ def find_bomb():
     for char in base_string:
         stack.append(char)
         check = False
-        if len(stack) >= m:
+        while len(stack) >= m and stack[-1] == match_string[-1]:
             check = True
-            for i in range(1, m+1):
-                if stack[-i] != match_string[-i]:
+            for i in range(m):
+                if stack[-(m-i)] != match_string[i]:
                     check = False
                     break
-        if check:
-            for _ in range(m):
-                stack.pop()
-    
-    return stack
+            if check:
+                for _ in range(m):
+                    stack.pop()
+            else:
+                break
+        
+    return stack if stack else 'FRULA'
         
 result = find_bomb()
 print(''.join(result))
