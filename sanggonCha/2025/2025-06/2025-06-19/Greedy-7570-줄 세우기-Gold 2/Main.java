@@ -25,12 +25,12 @@ public class Main {
         // 가장 긴 증가하는 "연속된" 부분 수열의 길이 찾기
         for (int num = 1; num < N; num++) { // 시작점 고정
             // num과 num+1이 연속으로 배치되어 있는지 확인
-            if (position[num] < position[num + 1]) { // num보다 1 큰 값의 인덱스가 더 크다면
+            if (position[num] < position[num + 1]) { // num보다 1 큰 값의 인덱스가 더 크다면, 뒤에 있다는 의미 -> 연속
                 currentLen++; // 길이 증가
             } else {
                 currentLen = 1; // 길이 초기화
             }
-            maxLen = Math.max(maxLen, currentLen);
+            maxLen = Math.max(maxLen, currentLen); // 최대 길이 갱신
         }
 
         // Greedy하게 답을 찾아서 출력
