@@ -19,7 +19,7 @@ def solution(age):
     return 2022-age+1
 
 # 개미 군단
-# dp 로 풀기
+# dp 로 풀기 
 def solution(hp):
     dp = [float('inf')] * (hp+1)
     dp[0] = 0
