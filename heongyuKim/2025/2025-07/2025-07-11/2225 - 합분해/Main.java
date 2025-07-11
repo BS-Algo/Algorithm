@@ -4,12 +4,12 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+
 public class Main {
     static int N;
     static int K;
 
-    static int[] arr;
-    static int[] dp;
+    static int[][] dp;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -17,24 +17,23 @@ public class Main {
         N = Integer.parseInt(info.nextToken());
         K = Integer.parseInt(info.nextToken());
 
-        arr = new int[N];
+        dp = new int[K + 1][N + 1];
 
-        for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
+        // 숫자 0개로는 어떤 수도 만들 수 없음.
+        // 1개로는 모든 수를 만들때 1의 경우의 수로 만들 수 있음.
+        Arrays.fill(dp[1], 1);
+
+        for (int i = 1; i <= K; i++) {
+            dp[i][0] = 1;
         }
 
-        dp = new int[K + 1];
-        Arrays.fill(dp, Integer.MAX_VALUE);
-        dp[0] = 0;
-
-        for (int i = 0; i < N; i++) {
-            for (int j = arr[i]; j <= K; j++) {
-                if (dp[j - arr[i]] != Integer.MAX_VALUE) {
-                    dp[j] = Math.min(dp[j], dp[j - arr[i]] + 1);
-                }
+        // 점화식
+        for (int i = 2; i <= K; i++) {
+            for (int j = 1; j <= N; j++) {
+                dp[i][j]= (dp[i - 1][j] + dp[i][j - 1]) % 1000000000;
             }
         }
 
-        System.out.println(dp[K] == Integer.MAX_VALUE ? -1 : dp[K]);
+        System.out.println(dp[K][N]);
     }
 }
