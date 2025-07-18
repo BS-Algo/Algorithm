@@ -25,10 +25,10 @@ MEMBERS = {
     "heongyuKim": {"email": "khg6436@naver.com", "dates": set(), "link": "https://solved.ac/profile/khg6436"},
     "jaeyeongPark": {"email": "pjy980526@naver.com", "dates": set(), "link": "https://solved.ac/profile/pjy980526"},
     "minjaeYoon": {"email": "stylishy62@gmail.com", "dates": set(), "link": " "},
-    "minsooKim": {"email": "alstn0575@naver.com", "dates": set(),"link": "https://solved.ac/profile/kei03016"},
+    # "minsooKim": {"email": "alstn0575@naver.com", "dates": set(),"link": "https://solved.ac/profile/kei03016"},
     # "eunseopKim": {"email": "subway9852@gmail.com", "dates": set()},
-    "yunhaKwon": {"email": "ellen4421@naver.com", "dates": set(),"link": "https://solved.ac/profile/ellen4421"},
-    "hogyeongKim": {"email": "ssafy1123992@gmail.com", "dates": set(), "link": "https://solved.ac/profile/rlaghtl2"},
+    # "yunhaKwon": {"email": "ellen4421@naver.com", "dates": set(),"link": "https://solved.ac/profile/ellen4421"},
+    # "hogyeongKim": {"email": "ssafy1123992@gmail.com", "dates": set(), "link": "https://solved.ac/profile/rlaghtl2"},
 }
 
 # 점수 가져오기 함수
