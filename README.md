@@ -1,7 +1,7 @@
 <!-- Attendance Section -->
 # 📅Attendance Check
 
-⏲ **2025-07-18 14:31:14** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
+⏲ **2025-07-18 17:39:48** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
 | tier | rating | name | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed | Thu | Fri |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1566  | [sanggonCha](https://solved.ac/profile/yg9618) | 🟩 | ⬜ | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 |
@@ -10,7 +10,7 @@
 | <img src="https://static.solved.ac/tier_small/0.svg" width="20" style="vertical-align: middle;" /> | ????  | [minjaeYoon]( ) | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ |
 | <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1434  | [minsooKim](https://solved.ac/profile/kei03016) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1418  | [yunhaKwon](https://solved.ac/profile/ellen4421) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1422  | [hogyeongKim](https://solved.ac/profile/rlaghtl2) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1429  | [hogyeongKim](https://solved.ac/profile/rlaghtl2) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
 <!-- Rules Section -->
 # 🏳‍🌈 Rule
