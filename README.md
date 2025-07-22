@@ -1,13 +1,13 @@
 <!-- Attendance Section -->
 # 📅Attendance Check
 
-⏲ **2025-07-21 23:42:13** 출석현황<br>📝 마지막 커밋 작성자: **GloryMJ**
-| tier | rating | name | **Sat** | **Sun** | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon |
+⏲ **2025-07-22 17:10:06** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
+| tier | rating | name | **Sun** | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1566  | [sanggonCha](https://solved.ac/profile/yg9618) | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 |
-| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1433  | [heongyuKim](https://solved.ac/profile/khg6436) | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| <img src="https://static.solved.ac/tier_small/11.svg" width="20" style="vertical-align: middle;" /> | 949  | [jaeyeongPark](https://solved.ac/profile/pjy980526) | ⬜ | ⬜ | 🟩 | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| <img src="https://static.solved.ac/tier_small/0.svg" width="20" style="vertical-align: middle;" /> | ????  | [minjaeYoon]( ) | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1566  | [sanggonCha](https://solved.ac/profile/yg9618) | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1433  | [heongyuKim](https://solved.ac/profile/khg6436) | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| <img src="https://static.solved.ac/tier_small/11.svg" width="20" style="vertical-align: middle;" /> | 949  | [jaeyeongPark](https://solved.ac/profile/pjy980526) | ⬜ | 🟩 | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| <img src="https://static.solved.ac/tier_small/0.svg" width="20" style="vertical-align: middle;" /> | ????  | [minjaeYoon]( ) | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | ⬜ |
 
 <!-- Rules Section -->
 # 🏳‍🌈 Rule
