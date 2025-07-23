@@ -28,7 +28,7 @@ MEMBERS = {
     # "minsooKim": {"email": "alstn0575@naver.com", "dates": set(),"link": "https://solved.ac/profile/kei03016"},
     # "eunseopKim": {"email": "subway9852@gmail.com", "dates": set()},
     # "yunhaKwon": {"email": "ellen4421@naver.com", "dates": set(),"link": "https://solved.ac/profile/ellen4421"},
-    # "hogyeongKim": {"email": "ssafy1123992@gmail.com", "dates": set(), "link": "https://solved.ac/profile/rlaghtl2"},
+    "hogyeongKim": {"email": "ssafy1123992@gmail.com", "dates": set(), "link": "https://solved.ac/profile/rlaghtl2"},
 }
 
 # 점수 가져오기 함수
