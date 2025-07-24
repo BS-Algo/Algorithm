@@ -1,14 +1,14 @@
 <!-- Attendance Section -->
 # 📅Attendance Check
 
-⏲ **2025-07-23 21:40:33** 출석현황<br>📝 마지막 커밋 작성자: **박재영**
-| tier | rating | name | Mon | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed |
+⏲ **2025-07-24 13:50:22** 출석현황<br>📝 마지막 커밋 작성자: **김호경**
+| tier | rating | name | Tue | Wed | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed | Thu |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1569  | [sanggonCha](https://solved.ac/profile/yg9618) | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 |
-| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1433  | [heongyuKim](https://solved.ac/profile/khg6436) | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| <img src="https://static.solved.ac/tier_small/12.svg" width="20" style="vertical-align: middle;" /> | 954  | [jaeyeongPark](https://solved.ac/profile/pjy980526) | 🟩 | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 |
-| <img src="https://static.solved.ac/tier_small/0.svg" width="20" style="vertical-align: middle;" /> | ????  | [minjaeYoon]( ) | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ |
-| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1437  | [hogyeongKim](https://solved.ac/profile/rlaghtl2) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1569  | [sanggonCha](https://solved.ac/profile/yg9618) | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ | 🟩 | 🟩 | 🟩 | ⬜ |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1433  | [heongyuKim](https://solved.ac/profile/khg6436) | 🟩 | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| <img src="https://static.solved.ac/tier_small/12.svg" width="20" style="vertical-align: middle;" /> | 954  | [jaeyeongPark](https://solved.ac/profile/pjy980526) | ⬜ | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | ⬜ |
+| <img src="https://static.solved.ac/tier_small/0.svg" width="20" style="vertical-align: middle;" /> | ????  | [minjaeYoon]( ) | 🟩 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 | 🟩 | ⬜ | ⬜ |
+| <img src="https://static.solved.ac/tier_small/15.svg" width="20" style="vertical-align: middle;" /> | 1437  | [hogyeongKim](https://solved.ac/profile/rlaghtl2) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 |
 
 <!-- Rules Section -->
 # 🏳‍🌈 Rule
