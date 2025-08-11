@@ -1,160 +1,122 @@
-def build_failure_function(pattern):
-    """
-    로직 1: PI 배열 생성
-    패턴 자체를 분석해서 실패 함수 계산
-    """
-    m = len(pattern)
-    pi = [0] * m
-    j = 0
-    
-    print(f"=== 로직 1: PI 배열 생성 (패턴: {pattern}) ===")
-    
-    for i in range(1, m):
-        print(f"i={i}, pattern[{i}]='{pattern[i]}', j={j}")
-        
-        # 핵심: 불일치 시 이동
-        while j > 0 and pattern[i] != pattern[j]:
-            print(f"  불일치: '{pattern[i]}' != '{pattern[j]}' → j를 {j} → {pi[j-1]}로 이동")
-            j = pi[j - 1]
-        
-        # 일치 시 진행
-        if pattern[i] == pattern[j]:
-            j += 1
-            print(f"  일치: '{pattern[i]}' == '{pattern[j-1]}' → j를 {j}로 증가")
-        
-        pi[i] = j
-        print(f"  pi[{i}] = {j}")
-        print(f"  현재 PI: {pi}")
-        print()
-    
-    print(f"최종 PI 배열: {pi}")
-    return pi
+# N은 4의 배수
+from collections import deque
+import sys
+input = sys.stdin.readline
+dt = ((1, 0), (0, 1))
 
-def kmp_search(text, pattern):
-    """
-    로직 2: 실제 검색
-    PI 배열을 활용해서 텍스트에서 패턴 찾기
-    """
-    print(f"\n=== 로직 2: 실제 검색 (텍스트: {text}) ===")
-    
-    # 로직 1 사용해서 PI 배열 얻기
-    pi = build_failure_function(pattern)
-    
-    n = len(text)
-    m = len(pattern)
-    j = 0
-    matches = []
-    
-    print(f"PI 배열 활용한 검색 시작!")
-    print()
-    
+cnt = 0
+n, k = map(int, input().split())
+fish = list(map(int, input().split()))
+fish = [[fish[i]] for i in range(n)]
+# 1. 물고기가 가장 적은 어항에 1마리 추가(N개 어항이 똑같이 적다면 N개에 모두 추가)
+def add_fish_to_min():
+    min_fish = min(f[0] for f in fish)
     for i in range(n):
-        print(f"i={i}, text[{i}]='{text[i]}', j={j}")
-        
-        # 핵심: 불일치 시 이동 (로직 1과 동일한 패턴!)
-        while j > 0 and text[i] != pattern[j]:
-            print(f"  불일치: '{text[i]}' != '{pattern[j]}' → j를 {j} → {pi[j-1]}로 이동")
-            j = pi[j - 1]
-        
-        # 일치 시 진행
-        if text[i] == pattern[j]:
-            j += 1
-            print(f"  일치: '{text[i]}' == '{pattern[j-1]}' → j를 {j}로 증가")
-        
-        # 패턴 완전 일치
-        if j == m:
-            match_pos = i - m + 1
-            matches.append(match_pos)
-            print(f"  🎉 패턴 발견! 위치: {match_pos}")
-            j = pi[j - 1]  # 다음 검색을 위해
-        
-        print()
-    
-    return matches
+        if fish[i][0] == min_fish:
+            fish[i][0] += 1 
 
-def compare_two_logics():
-    """두 로직의 유사성과 차이점 비교"""
-    
-    print("=== 두 로직의 비교 ===")
-    print()
-    
-    print("🔧 로직 1 (PI 배열 생성):")
-    print("   대상: 패턴 vs 패턴 자기 자신")
-    print("   목적: 패턴 내부의 반복 구조 파악")
-    print("   결과: PI 배열")
-    print()
-    
-    print("🔍 로직 2 (실제 검색):")
-    print("   대상: 텍스트 vs 패턴")  
-    print("   목적: 텍스트에서 패턴 찾기")
-    print("   결과: 매칭 위치들")
-    print()
-    
-    print("🤝 공통점:")
-    print("   1. while j > 0 and 불일치: j = pi[j-1]")
-    print("   2. 일치하면 j += 1")
-    print("   3. 동일한 핵심 로직!")
-    print()
-    
-    print("🔄 차이점:")
-    print("   로직 1: pattern[i] vs pattern[j]")
-    print("   로직 2: text[i] vs pattern[j]")
 
-def complete_example():
-    """완전한 예제로 두 로직 실행"""
+# 2. 2개 이상 쌓여있는 어항은 따로 떼어내어 시계방향으로 90도 회전, 이후 이전의 높이를 길이로 하여
+#    1개인 어항 위에 적재
+def stack_and_fold():
+    global fish
+    # 첫번째 어항의 경우 예외로 쌓음
+    new_fish = [[fish[1][0]], fish[0][0]]
+    new_fish.extend(fish[2:])
+    fish = new_fish
     
-    text = "ABABDABABCABAB"
-    pattern = "ABABCABAB"
-    
-    print("=== 완전한 KMP 실행 예제 ===")
-    print(f"텍스트: {text}")
-    print(f"패턴: {pattern}")
-    print()
-    
-    # 전체 실행
-    matches = kmp_search(text, pattern)
-    
-    print("="*50)
-    print("🎯 최종 결과:")
-    if matches:
-        print(f"패턴이 발견된 위치들: {matches}")
-        for pos in matches:
-            print(f"  위치 {pos}: {text[pos:pos+len(pattern)]}")
-    else:
-        print("패턴을 찾을 수 없습니다.")
+    # 적재해야하는 어항의 길이가 쌓아야 하는 어항의 수보다 작을 때까지 반복
+    while len(fish[0]) < len(fish):
+        # 2개 이상 쌓여있는 어항을 찾아 인덱스를 지정
+        height = len(fish[0])
+        width = height + 1
+        
+        if width > len(fish):
+            break
 
-def show_algorithm_structure():
-    """알고리즘 전체 구조 보여주기"""
-    
-    print("=== KMP 알고리즘 전체 구조 ===")
-    print()
-    
-    print("def kmp_algorithm(text, pattern):")
-    print("    # 단계 1: PI 배열 생성 (로직 1)")
-    print("    pi = build_failure_function(pattern)")
-    print("    ")
-    print("    # 단계 2: 실제 검색 (로직 2)")
-    print("    j = 0")
-    print("    for i in range(len(text)):")
-    print("        while j > 0 and text[i] != pattern[j]:")
-    print("            j = pi[j-1]  # PI 배열 활용!")
-    print("        ")
-    print("        if text[i] == pattern[j]:")
-    print("            j += 1")
-    print("        ")
-    print("        if j == len(pattern):")
-    print("            print('매칭 발견!')")
-    print("            j = pi[j-1]")
-    print()
-    
-    print("✅ 핵심 포인트:")
-    print("1. 로직 1과 로직 2는 **독립적**")
-    print("2. 로직 1의 결과(PI 배열)를 로직 2에서 활용")
-    print("3. 둘 다 동일한 패턴의 while 루프 사용")
+        top = [fish[i][:] for i in range(width)]
+        bottom = fish[width:]
 
-if __name__ == "__main__":
-    complete_example()
-    print("\n" + "="*60 + "\n")
-    compare_two_logics()
-    print("\n" + "="*60 + "\n")
-    show_algorithm_structure()
+        # 시계방향으로 90도 회전
+        rotated = list(zip(*top))
+        for row in rotated:
+            row = list(row)
+            row.reverse()
+        
+        # 쌓아야 하는 어항 위에 적재
+        for i in range(len(fish)):
+            if len(fish[i]) < height:
+                fish[i].extend(rotated[i])
+
+
+
+# 3. 어항을 쌓을 수 없게 되면, 인접한 두 어항의 차를 d라고 했을 때, d//5 > 0인 경우 d 만큼
+#    적은 물고기를 가진 어항에 물고기를 보내야 한다. 이는 모든 칸에서 동시에 일어난다.
+def adjust_fish():
+    global fish
+    change = []
+
+    for i in range(len(fish)):
+        for j in range(len(fish[i])):
+            for dx, dy in dt:
+                nx, ny = i + dx, j + dy
+                if 0 <= nx < x and 0 <= ny < len(fish[nx]) and fish[i][j] > fish[nx][ny]:
+                    d = fish[i][j] - fish[nx][ny]
+                    d //= 5
+                    if d > 0:
+                        change.append((nx, ny, d))
+                        change.append((i, j, -d))
+    
+    for x, y, d in change:
+        fish[x][y] += d
+
+
+# 4. 가장 왼쪽 어항들부터 아래에서 위로 펼쳐서 일렬로 만든다.
+
+# 5. 가운데를 중심으로 왼쪽 N//2개를 180도 회전시켜 오른쪽 위에 쌓는다. 이 작업은 두번 수행한다.
+def fold_half():
+    global fish
+    # 첫 번째 접기
+    n2 = n //2 
+    left, right  = [fish[i][:] for i in range(n2)], [fish[i][:] for i in range(n2, n)]
+    left.reverse()
+    new_fish = []
+    for i in range(n2):
+        new_fish.append(left[i], right[i])
+    fish = new_fish
+
+    # 두 번째 접기
+    n4 = n2 // 2
+    left, right = fish[:n4], fish[n4:n2]
+    # 왼쪽 어항들을 180도 회전
+    left.reverse()
+    new_fish = []
+    for i in range(n4):
+        new_fish.append(left[i*2], left[i*2+1], right[i*2+1], right[i*2])
+    fish = new_fish
+
+# 6. 가장 왼쪽 어항부터 아래에서 위로 펼쳐서 일렬로 만든다.
+def flatten():
+    global fish
+    new_fish = []
+    for i in range(len(fish)):
+        new_fish.extend(fish[i])
+    fish = [[new_fish[i]] for i in range(n)]
+
+# 7. 가장 물고기 수가 많은 어항과 가장 적은 어항의 차이가 K이하가 되려면 어항을 몇 번 정리해야 하는가?
+def get_difference():
+    global fish
+    new_fish = [f[0] for f in fish]
+    return max(new_fish) - min(new_fish) <= k
+
+while not get_difference():
+    cnt += 1
+    add_fish_to_min()
+    stack_and_fold()
+    adjust_fish()
+    flatten()
+    fold_half()
+    adjust_fish()
+    flatten()
+
+print(cnt)
