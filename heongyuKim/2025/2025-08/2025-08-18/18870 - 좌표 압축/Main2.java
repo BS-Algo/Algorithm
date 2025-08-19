@@ -28,7 +28,7 @@ public class Main2 {
             nums[i] = num;
             sorted[i] = num;
         }
-
+        
         // 정렬
         Arrays.sort(sorted);
 
