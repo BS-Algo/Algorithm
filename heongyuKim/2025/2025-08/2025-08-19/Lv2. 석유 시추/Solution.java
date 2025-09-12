@@ -1,5 +1,6 @@
 import java.util.*;
 
+// 무작정 bfs를 돌리는 것이 아닌 bfs 탐색을 최소화 하면서 열마다 시추할 수 있는 석유의 양을 기록하는 것이 관건.
 class Solution {
     static boolean[][] visited;
 
@@ -7,6 +8,7 @@ class Solution {
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
 
+    // map 대신 일반 int[]에 기록해도 무방함.
     static HashMap<Integer, Integer> map = new HashMap<>();
     public int solution(int[][] land) {
         int answer = 0;
@@ -65,7 +67,7 @@ class Solution {
                 }
             }
         }
-
+        
         for (int col : set) {
             map.put(col, map.getOrDefault(col, 0) + gas);
         }
