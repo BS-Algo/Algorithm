@@ -1,28 +1,22 @@
-#답:
-#1. 데이터 불러오기
-df = pd.read_csv("users.csv")
-#df.isnull().sum()
 
-#2. 데이터셋 앞에서부터 75% 데이터만 선택하기
-df_75 = df.head(int(len(df) * 0.75)).copy()
-#df_75 = df.iloc[0:int(len(df) * 0.75), : ].copy()
+# 답:
+#1. 데이터 로드
+import  pandas  as  pd
+df = pd.read_csv("customers.csv")
 
+#2. 평균값와 표준편차*2 구하기
+df_mean = df['purchase_amount'].mean()
+df_std = df['purchase_amount'].std() * 2
 
-#3. 'feature' 컬럼의 결측치 처리전 표준편차 값 구하기 (표본)
-before_df_std = df_75['feature'].std(ddof=1)
+#3. 이상치 구하기
+upper_bound = df_mean + df_std
+lower_bound = df_mean - df_std
 
-#4. 'feature' 컬럼의 최빈값을 구합니다.
-df_75_mode = df_75['feature'].mode().values[0]
-# df_75_mode
+df_outlier = df.loc[(df['purchase_amount'] > upper_bound) | (df['purchase_amount'] < lower_bound), 'purchase_amount']
 
-#5. 'feature' 컬럼의 결측치를 최빈값으로 채웁니다.
-df_75['feature'] = df_75['feature'].fillna(df_75_mode)
+#4. 이상치들의 합 계산하기
+df_outlier_sum = df_outlier.sum()
+df_outlier_sum
 
-#6. 'feature' 컬럼의 결측치 처리후 표준편차 값 구하기
-after_df_std = df_75['feature'].std()
-
-#7. 두 표준편차의 차이의 절대값 계산하기
-std_diff = abs(before_df_std - after_df_std)
-
-#8. 결과 출력하기
-print(std_diff)
+#5. 결과 출력하기
+print(df_outlier_sum)
