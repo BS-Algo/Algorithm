@@ -1,4 +1,3 @@
-
 # 답:
 #1. 데이터 로드
 import  pandas  as  pd
