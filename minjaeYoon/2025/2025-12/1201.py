@@ -19,6 +19,6 @@ def solution(s):
                 answer += n_to_w[tmp]
                 tmp = ''
     
-    return answer
+    return int(answer)
 
 print(solution("one4seveneight"))
