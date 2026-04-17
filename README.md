@@ -45,3 +45,7 @@
 
 ### 적용 예시
 ![alt text](images/image-1.png)
+
+# 😮 GitHub Action 으로 출석부 자동 반영!
+
+![alt text](image.png)
