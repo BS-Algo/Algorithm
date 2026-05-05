@@ -12,7 +12,8 @@ if not token:
 # GitHub API URL (특정 저장소의 커밋 목록)
 owner = "BS-Algo"  # 저장소 소유자
 repo = "Algorithm"  # 저장소 이름
-url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=100"  # 최대 100개의 커밋 가져오기
+# 최대 100개의 커밋 가져오기
+url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=100"
 
 # 인증 헤더
 headers = {
@@ -32,23 +33,51 @@ MEMBERS = {
 }
 
 # 점수 가져오기 함수
+# def get_user_data_from_solved_ac(handle):
+#     url = f"https://solved.ac/api/v3/user/show?handle={handle}"
+#     try:
+#         response = requests.get(url)
+#         response.raise_for_status()
+#         data = response.json()
+#         print(data)
+#         return {
+#             "rating": data.get("rating", None),
+#             "tier": data.get("tier", None)
+#         }
+#     except Exception as e:
+#         print(f"[ERROR] {handle} 점수 조회 실패: {e}")
+#         return None
+
+
 def get_user_data_from_solved_ac(handle):
     url = f"https://solved.ac/api/v3/user/show?handle={handle}"
+
+    headers = {
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "application/json"
+    }
+
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers, timeout=5)
+
+        print("status:", response.status_code)
+        print("text:", response.text)
+
         response.raise_for_status()
         data = response.json()
-        print(data)
+
         return {
-            "rating": data.get("rating", None),
-            "tier": data.get("tier", None)
+            "rating": data.get("rating"),
+            "tier": data.get("tier")
         }
+
     except Exception as e:
         print(f"[ERROR] {handle} 점수 조회 실패: {e}")
         return None
 
-
 # 날짜 리스트 생성
+
+
 def get_saved_dates():
     today = (datetime.utcnow() + timedelta(hours=9)).date()
     return [(today - timedelta(days=i)).isoformat() for i in range(9, -1, -1)]
@@ -74,7 +103,8 @@ def fetch_commits_from_github():
             commits.extend(page_commits)
             page += 1
         else:
-            print(f"GitHub API 요청 실패: {response.status_code}, 메시지: {response.text}")
+            print(
+                f"GitHub API 요청 실패: {response.status_code}, 메시지: {response.text}")
             break
 
     return commits
@@ -96,7 +126,8 @@ def analyze_commits(commits):
             author_name = commit["commit"]["author"]["name"]
             commit_date = commit["commit"]["author"]["date"]
             commit_date = (
-                datetime.strptime(commit_date, "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=9)
+                datetime.strptime(
+                    commit_date, "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=9)
             ).date().isoformat()
 
             print(f"🔍 처리 중 커밋: {commit_date} by {author_name}")  # 디버그 로그 추가
@@ -109,7 +140,8 @@ def analyze_commits(commits):
                 for member, info in MEMBERS.items():
                     if author_email == info["email"]:
                         info["dates"].add(commit_date)
-                        print(f"✅ 출석 추가: {member} - {commit_date}")  # 디버그 로그 추가
+                        # 디버그 로그 추가
+                        print(f"✅ 출석 추가: {member} - {commit_date}")
                         break
 
         except KeyError as e:
@@ -146,21 +178,24 @@ def update_readme(latest_committer):
         raise ValueError("README.md 파일 형식 오류")
 
     # 현재 시간 (KST) 계산
-    current_time = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
+    current_time = (datetime.utcnow() + timedelta(hours=9)
+                    ).strftime("%Y-%m-%d %H:%M:%S")
     header_line = f"⏲ **{current_time}** 출석현황<br>"
     committer_line = (
         f"📝 마지막 커밋 작성자: **{latest_committer}**" if latest_committer else "📝 마지막 커밋 작성자: 없음"
     )
 
     # 날짜 헤더 생성
-    days = [datetime.fromisoformat(date).strftime("%a") for date in saved_dates]
+    days = [datetime.fromisoformat(date).strftime("%a")
+            for date in saved_dates]
     day_row = "| tier | rating | name | " + " | ".join(
         [f"**{day}**" if day in ["Sat", "Sun"] else day for day in days]
     ) + " |\n"
     separator_row = "|" + " :---: |" * (len(saved_dates) + 3) + "\n"
 
     # 출석 데이터 생성
-    attendance_content = ["<!-- Attendance Section -->\n", "# 📅Attendance Check\n\n"]
+    attendance_content = [
+        "<!-- Attendance Section -->\n", "# 📅Attendance Check\n\n"]
     attendance_content.append(header_line)
     attendance_content.append(committer_line + "\n")
     attendance_content.append(day_row)
@@ -183,11 +218,13 @@ def update_readme(latest_committer):
         else:
             print("tier_img not ok..")
 
-        display_name = f"[{member}]({info['link']})" if info.get("link") else member
+        display_name = f"[{member}]({info['link']})" if info.get(
+            "link") else member
         name_with_tier = f"{tier_img} | {display_name}"
 
         # attendance_content.append(f"| {display_name} | " + " | ".join(row) + " |\n")
-        attendance_content.append(f"| {name_with_tier} | " + " | ".join(row) + " |\n")
+        attendance_content.append(
+            f"| {name_with_tier} | " + " | ".join(row) + " |\n")
 
     # 업데이트된 README 저장
     new_lines = (
@@ -202,12 +239,14 @@ def update_readme(latest_committer):
     print("README.md 파일이 성공적으로 업데이트되었습니다.")
 
 # 메인 함수
+
+
 def main():
     """
     전체 프로세스를 실행.
     """
 
-    commits = fetch_commits_from_github() # GitHub 에서 커밋 내역 가져오기
+    commits = fetch_commits_from_github()  # GitHub 에서 커밋 내역 가져오기
 
     if not commits:
         print("커밋 내역이 없습니다.")
@@ -217,7 +256,7 @@ def main():
     for name, info in MEMBERS.items():
         link = info.get("link")
         if link:
-            handle = link.split("/")[-1] # 프로필 링크에서 ID 추출
+            handle = link.split("/")[-1]  # 프로필 링크에서 ID 추출
             user_data = get_user_data_from_solved_ac(handle)
             if user_data:
                 MEMBERS[name]["rating"] = user_data["rating"]
@@ -229,10 +268,8 @@ def main():
             MEMBERS[name]["rating"] = "????"
             MEMBERS[name]["tier"] = 0
 
-
     latest_committer = analyze_commits(commits)
     update_readme(latest_committer)
-
 
     # 결과 출력
     for name, info in MEMBERS.items():
