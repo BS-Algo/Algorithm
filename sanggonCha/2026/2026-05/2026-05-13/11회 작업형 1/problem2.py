@@ -2,24 +2,25 @@
 # 코드는 수정 가능하며, 최종 결과만 print 하세요.
 import pandas as pd
 
-# 데이터 읽기
-df = pd.read_csv("data_usage.csv")
-df.head(30)
+# 1. 데이터 읽기
+df = pd.read_csv("data_q1_2.csv")
+df.head(20)
 
-# 1. 가스 사용량(Gas_Usage) 컬럼의 모든 값에 대해 제곱근(Square Root) 값을 계산하여
-#    새로운 변수로 정의한다.
-df['sqrt_Gas_Usage'] = df['Gas_Usage'] ** 0.5
-df
+# 2. 결측치가 가장 많은 컬럼 찾기
+target_col = df.isnull().sum().idxmax()
+target_col
 
-# 2. 2020년 데이터만을 필터링한다.
-a = df.loc[df['Year'] == 2020 , :]
-a
+# 3. 중앙값(Median) 계산 (결측치 제외하고 계산됨)
+m = df[target_col].median()
 
-# 3. 필터링된 데이터에 대해 1번 과정에서 생성한 제곱근 가스 사용량의 평균(Mean) 을 계산하시오.
-m = a['sqrt_Gas_Usage'].mean()
-m
+# 4. 결측치 대치 (fillna)
+df[target_col] = df[target_col].fillna(m)
+# df.isnull().sum()
 
-# 4. 최종 결과값은 소수점 셋째 자리에서 반올림하여 소수점 둘째 자리까지
-#    출력하시오. (예: 12.345 -> 12.35)
-ans = round(m, 2)
+# 5. 평균(Mean) 계산
+b = df[target_col].mean()
+b
+
+# 6. 결과 출력 (소수점 둘째 자리 반올림)
+ans = round(b, 2)
 print(ans)
