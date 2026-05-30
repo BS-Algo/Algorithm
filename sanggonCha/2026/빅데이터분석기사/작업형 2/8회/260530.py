@@ -47,7 +47,7 @@ import pandas as pd
 submission = pd.DataFrame( { 'pred' : pred } )
 submission.to_csv('result.csv', index=False)
 
-# 5. MEA로 교차 검증
+# 5. MAE로 교차 검증
 from sklearn.metrics import mean_absolute_error
 
 y_train_pred = model.predict(x)
