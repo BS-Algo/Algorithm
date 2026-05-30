@@ -9,9 +9,10 @@ q1 = df['pm10'].quantile(0.25)
 q3 = df['pm10'].quantile(0.75)
 iqr = q3 - q1
 
-# # 상한과 하한을 계산하고, 이상치로 간주되는 값을 도출하세요.
+# # 상한과 하한을 계산하기
 upper_bound = q3 + 1.5 * iqr
 lower_bound = q1 - 1.5 * iqr
 
+# 이상치로 간주되는 값을 도출하기
 outlier = df.loc[(df['pm10'] < lower_bound) | (df['pm10'] > upper_bound) , : ]
-outlier
+print(len(outlier))
