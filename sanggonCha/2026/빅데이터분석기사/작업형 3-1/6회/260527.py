@@ -7,9 +7,8 @@ df = pd.DataFrame({
 
 a = df.loc[df['진통제']==4, '진통제'].count() / len(df) # 진통제 건수 / 전체 건수
 
-print(a)
-
 # 답:
+print(a)
 
 import pandas as pd
 

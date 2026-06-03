@@ -1,32 +1,16 @@
-# 답:
-
-hotel_train
-hotel_test # 이 데이터에서 TotalBill 컬럼값을 예측(숫자 예측이므로 RandomForestRegressor로 회귀모델을 사용)
-# 1.독립변수와 종속변수 분리
-x = hotel_train.iloc[ : , : -1] # 독립변수: TotalBill을 제외
-y = hotel_train.iloc[ : , -1] # 종속변수: TotalBill
-
-# 2.모델 학습
-from sklearn.ensemble import RandomForestRegressor
-
-model = RandomForestRegressor()
-# 특별한 말이 없으면, 정규화(transform)를 수행하지 않음
-model.fit(x, y) # 이게 모델 훈련
-
-# 3.예측 수행
-pred = model.predict(hotel_test)
-pred # 예측된 TotalBill 값들
-
-# 4.결과 저장
 import pandas as pd
 
-submission = pd.DataFrame({ 'pred': pred})
-submission.to_csv('sanggon.csv')
+# 데이터 불러오기
+df = pd.read_csv("sales_data.csv")
+df
+# pivot_table을 사용하여 매장코드별, 고객유형별 총매출액 합계 계산
+df2 = df.pivot_table(values='총매출액', index='매장코드', columns='고객유형', aggfunc='sum', fill_value='') # 값, 행, 열, 함수, 결측치
 
-######## 정답은 위에까지가 끝 ########
+# 고객유형 간 매출 차이 계산 및 절대값
+# df2['diff'] = df2.iloc[ : , 1] - df2.iloc[ : , 2]
+df2[0] = abs(df2.loc[ : , 1] - df2.loc[ : , 2])
 
-# 5.MAE 계산 (훈련 데이터로 교차 검증)
-from sklearn.metrics import mean_absolute_error
-
-train_pred = model.predict(x)
-mean_absolute_error(train_pred, y) # 예측한 데이터, 정답 데이터
+# 차액 절대값이 가장 큰 매장코드 찾기
+# a = df2.loc[ df2[0] == df2[0].max() ,  ].index[0]
+a = df2[0].idxmax() # 둘다 가능
+print(a)
