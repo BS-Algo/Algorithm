@@ -80,7 +80,7 @@ def get_user_data_from_solved_ac(handle):
 
 def get_saved_dates():
     today = (datetime.utcnow() + timedelta(hours=9)).date()
-    return [(today - timedelta(days=i)).isoformat() for i in range(9, -1, -1)]
+    return [(today - timedelta(days=i)).isoformat() for i in range(8, -1, -1)]
 
 
 # GitHub API에서 커밋 내역을 가져오는 함수
@@ -116,6 +116,9 @@ def analyze_commits(commits):
     """
     saved_dates = get_saved_dates()
 
+    for info in MEMBERS.values():   # 추가: 카운트 초기화
+        info["total"] = 0
+
     print(f"⚙️ 저장된 날짜: {saved_dates}")  # 디버그 로그 추가
 
     latest_committer = None
@@ -139,9 +142,10 @@ def analyze_commits(commits):
             if commit_date in saved_dates:
                 for member, info in MEMBERS.items():
                     if author_email == info["email"]:
-                        info["dates"].add(commit_date)
-                        # 디버그 로그 추가
-                        print(f"✅ 출석 추가: {member} - {commit_date}")
+                        info["total"] += 1                  # 날짜 상관없이 +1
+                        if commit_date in saved_dates:      # 최근 9일이면 출석 체크
+                            info["dates"].add(commit_date)
+                            print(f"✅ 출석 추가: {member} - {commit_date}")
                         break
 
         except KeyError as e:
@@ -186,12 +190,12 @@ def update_readme(latest_committer):
     )
 
     # 날짜 헤더 생성
-    days = [datetime.fromisoformat(date).strftime("%a")
-            for date in saved_dates]
-    day_row = "| tier | rating | name | " + " | ".join(
+    days = [datetime.fromisoformat(date).strftime("%a") for date in saved_dates]
+    
+    day_row = "| tier | rating | name | total | " + " | ".join(
         [f"**{day}**" if day in ["Sat", "Sun"] else day for day in days]
     ) + " |\n"
-    separator_row = "|" + " :---: |" * (len(saved_dates) + 3) + "\n"
+    separator_row = "|" + " :---: |" * (len(saved_dates) + 4) + "\n"
 
     # 출석 데이터 생성
     attendance_content = [
@@ -222,9 +226,7 @@ def update_readme(latest_committer):
             "link") else member
         name_with_tier = f"{tier_img} | {display_name}"
 
-        # attendance_content.append(f"| {display_name} | " + " | ".join(row) + " |\n")
-        attendance_content.append(
-            f"| {name_with_tier} | " + " | ".join(row) + " |\n")
+        attendance_content.append(f"| {name_with_tier} | {info.get('total', 0)} | " + " | ".join(row) + " |\n")
 
     # 업데이트된 README 저장
     new_lines = (
