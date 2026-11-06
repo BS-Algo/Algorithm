@@ -26,6 +26,14 @@ MEMBERS = {
         "emails": ["yg9618@naver.com", "102268323+CHASANGGON@users.noreply.github.com"],
         "handle": "yg9618", "tier": 16, "rating": 1600,
     },
+    "minsooKim": {
+        "emails": ["alstn0575@naver.com"],
+        "handle": "kei03016", "tier": 15, "rating": 1440,
+    },
+    "yunhaKwon": {
+        "emails": ["ellen4421@naver.com"],
+        "handle": "ellen4421", "tier": 15, "rating": 1421,
+    },
     "heongyuKim": {
         "emails": ["khg6436@naver.com"],
         "handle": "khg6436", "tier": 15, "rating": 1439,
@@ -38,17 +46,9 @@ MEMBERS = {
         "emails": ["stylishy62@gmail.com", "156272655+GloryMJ@users.noreply.github.com"],
         "handle": "", "tier": 0, "rating": "????",
     },
-    "minsooKim": {
-        "emails": ["alstn0575@naver.com", "alstn0575@users.noreply.github.com"], 
-        "handle": "kei03016", "tier": 0, "rating": "????"
-    },
     "eunseopKim": {
         "emails": ["subway9852@gmail.com", "subway9852@users.noreply.github.com"], 
         "handle": "", "tier": 0, "rating": "????"
-    },
-    "yunhaKwon": {
-        "emails": ["ellen4421@naver.com", "ellen4421@users.noreply.github.com"], 
-        "handle": "ellen4421", "tier": 0, "rating": "????"
     },
     "hogyeongKim": {
         "emails": ["ssafy1123992@gmail.com", "kids9010@naver.com"],
