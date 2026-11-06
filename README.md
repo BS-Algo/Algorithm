@@ -1,10 +1,10 @@
 <!-- Attendance Section -->
 # 📅Attendance Check
 
-⏲ **2026-11-06 18:10:18** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
+⏲ **2026-11-06 18:14:29** 출석현황<br>📝 마지막 커밋 작성자: **sanggonCha**
 | tier | rating | name | total | Thu | Fri | **Sat** | **Sun** | Mon | Tue | Wed | Thu | Fri |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| <img src="https://img.shields.io/badge/P5-27E2A4?style=flat-square" alt="P5" /> | 1600 | [sanggonCha](https://solved.ac/profile/yg9618) | 741 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 |
+| <img src="https://img.shields.io/badge/P5-27E2A4?style=flat-square" alt="P5" /> | 1600 | [sanggonCha](https://solved.ac/profile/yg9618) | 742 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟩 |
 | <img src="https://img.shields.io/badge/G1-EC9A00?style=flat-square" alt="G1" /> | 1439 | [heongyuKim](https://solved.ac/profile/khg6436) | 260 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | <img src="https://img.shields.io/badge/G4-EC9A00?style=flat-square" alt="G4" /> | 1045 | [jaeyeongPark](https://solved.ac/profile/pjy980526) | 170 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | - | ???? | minjaeYoon | 246 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
