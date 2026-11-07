@@ -1,4 +1,4 @@
-# 선형 회귀 모델
+# 선형 회귀
 
 from statsmodels.formula.api import ols
 import pandas as pd
