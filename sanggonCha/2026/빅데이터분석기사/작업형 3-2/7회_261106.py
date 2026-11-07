@@ -24,7 +24,7 @@ df2
 # Sales를 종속 변수로, 나머지 변수들을 독립 변수로 설정하여 선형 회귀 모델 생성
 model = ols('Sales ~ Cost + Profit + GrowthRate + EmployeeCount', data=df2)
 data = model.fit()
-
+    
 # 결정계수를 구하세요.반올림하여 소수 셋째자리까지 계산)
 print(round(data.rsquared, 3))
 
