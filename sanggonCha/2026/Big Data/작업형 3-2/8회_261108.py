@@ -9,9 +9,18 @@
 from statsmodels.formula.api import ols
 model = ols('Score ~ StudyHours + Attendance + Participation', data=df)
 result = model.fit()
+ans = round(result.params[result.pvalues.idxmin()], 3)
+# print(ans)
+
+x = df[['StudyHours', 'Attendance', 'Participation']]
+y = df['Score']
+
+
+import statsmodels.api as sm
+X = sm.add_constant(x)
+result = sm.OLS(y, X).fit()
 ans1 = round(result.params[result.pvalues.idxmin()], 3)
 print(ans1)
-
 # 문제2-2.
 
 # 문제2-1에 적합한 모델의 결정 계수(R-squared) 값을 구하세요. (반올림하여 소수 둘째 자리까지 계산)
