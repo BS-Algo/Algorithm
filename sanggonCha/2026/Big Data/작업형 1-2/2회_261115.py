@@ -1,3 +1,5 @@
+# 결측치 - fillna() / 표준편차 - std() / 절대값 - abs()
+
 #답:
 #1. 데이터 불러오기
 df = pd.read_csv("users.csv")
