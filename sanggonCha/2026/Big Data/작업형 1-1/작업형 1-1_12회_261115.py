@@ -57,3 +57,37 @@ c = df['students'] >= 30
 
 ans = len(df.loc[a & b & c, : ])
 print(ans)
+
+# 출력을 원하실 경우 print() 함수를 사용하세요.
+# 코드는 수정 가능하며, 최종 결과만 print 하세요.
+import pandas as pd
+
+# 데이터 읽기
+df = pd.read_csv("exam_score.csv")
+
+# 0. 작업형 1-3과 똑같이 결측치를 반별 중앙값으로 채운다. (채운 데이터를 그대로 사용)
+m= df.groupby('class')['score'].transform('median')
+df['score']= df['score'].fillna(m)
+df.isnull().sum()
+df.head(10)
+
+# 작업형 1-4 (배점 5점)
+# 📌 시나리오
+# exam_score.csv 에서 작업형 1-3과 같이 결측치를 채운 데이터 를 그대로 사용하여 A반과 B반의 합동분산 을 구하시오.
+# 합동분산 : 두 집단의 분산을 인원이 많은쪽에 무게를 더 주어 하나로 합친값. 두 집단의 평균의 차이가 진짜인지 판단할 때 기준 잣대로 쓴다.
+ 
+
+# 📌 풀이 조건과 주의사항
+# 1. 반별로 교육생 수  n  과 점수의 표본분산  s2  을 구한다.
+# - 표본분산: 평균과의 차이를 제곱해 모두 더한 뒤  (n−1)  로 나눈 값
+a_var = df.loc[df['class'] == 'A', 'score'].var()
+b_var = df.loc[df['class'] == 'B', 'score'].var()
+
+a_len = len(df.loc[df['class'] == 'A', 'score'])
+b_len = len(df.loc[df['class'] == 'B', 'score'])
+
+# 2. A반과 B반의 값을 아래 식에 대입한다. C반은 사용하지 않는다.
+# ((분산1)*(자유도1 + 1) + (분산2)*(자유도2 + 1)) 
+# / (자유도1 + 자유도2 - 2)
+ans = round(((a_var) * (a_len + 1) + (b_var) * (b_len + 1)) / (a_len + b_len - 2), 2)
+print(ans)
