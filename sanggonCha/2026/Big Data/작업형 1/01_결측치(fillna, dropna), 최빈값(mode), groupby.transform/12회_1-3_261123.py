@@ -3,37 +3,27 @@
 import pandas as pd
 
 # 데이터 읽기
-df = pd.read_csv("exam_score.csv")
-df.head(10)
+# (years 컬럼에 'TF-신사업' 같은 문자와 숫자가 섞여 있으므로 모두 문자열로 읽는다)
+df = pd.read_csv("hr_export.csv", dtype=str)
+df.head()
 
-# 작업형 1-3 (배점 5점)
+# 작업형 1-5 (배점 5점)
 # 📌 시나리오
-# exam_score.csv 에서 아래 순서대로 계산하여 전체 교육생의 평균 점수 를 구하시오.
- 
-
-# 📌 풀이 조건과 주의사항
-# 1. score의 결측치를 그 교육생이 속한 반(class)의 중앙값(Median) 으로 채운다.
-# (예: B반 교육생의 점수가 비어 있으면, B반에서 점수가 있는 교육생들의 중앙값으로 채운다.)
-# 2. 결측치를 채운 데이터에서 240명 전체의 score 평균(Mean) 을 구한다.
-# - 답안 형식: 소수 셋째 자리에서 반올림하여 둘째 자리까지 (예: 71.456 -> 71.46)
-# df.isnull().sum()
-m = df.groupby('class')['score'].transform('median')
-df['score'] = df['score'].fillna(m)
-# df.isnull().sum()
-score_mean = round(df['score'].mean(), 2)
-print(score_mean)
-
-# 작업형 1-4 (배점 5점)
-# 📌 시나리오
-# exam_score.csv 에서 작업형 1-3과 같이 결측치를 채운 데이터 를 그대로 사용하여 A반과 B반의 합동분산 을 구하시오.
-dfA = df.loc[df['class'] == 'A', 'score']
-lenA = len(dfA)
-varA = dfA.var()
-
-dfB = df.loc[df['class'] == 'B', 'score']
-lenB = len(dfB)
-varB = dfB.var()
-
-# 합동 분산
-ans = round((((lenA - 1) * varA) + ((lenB - 1) * varB)) / (lenA + lenB - 2), 2)
+# hr_export.csv 의 데이터를 올바른 형태(emp_id, dept, sub_dept, years, grade)로 복원한 뒤, 전체 직원의 평균 근속연수 를 구하시오.
+c = df['memo'].notna()
+df.loc[c, :]
+df['겸직'] = None
+df.loc[c, '겸직'] = df.loc[c, 'years']
+df.loc[c, 'years'] = df.loc[c, 'grade']
+df.loc[c, 'grade'] = df.loc[c, 'memo']
+df.drop(columns='memo')
+ans = round(df['years'].astype(int).mean(), 2)
 print(ans)
+
+# hr_export.csv 를 작업형 1-5와 같이 복원한 데이터 에서 부서(dept)별 겸직자 비율(%) 을 구하고, 그 비율이 가장 높은 부서의 비율 을 구하시오.
+df2 = df.groupby('dept')['emp_id'].count()
+df3 = df.loc[df['겸직'].notna(), : ]
+df4 = df3.groupby('dept')['emp_id'].count()
+df5 = df4 / df2
+ans2 = round(df5.max() * 100, 2)
+print(ans2)
