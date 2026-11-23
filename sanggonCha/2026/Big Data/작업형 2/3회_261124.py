@@ -1,0 +1,63 @@
+# 정답:
+
+# 1. 데이터 불러오기
+X_train = pd.read_csv('train_data.csv')
+y_train = pd.read_csv('y_train.csv')
+X_test = pd.read_csv('test_data.csv')
+
+# 2.'index' 컬럼 제거
+
+# 3. 문자형 컬럼을 숫자로 변환합니다.
+
+# 4. 데이터를 정규화합니다.
+
+# 5. 모델 생성
+
+# 6. 모델 훈련
+
+# 7. 모델 예측
+
+# 8. 정답 제출
+# pd.DataFrame({'index': X_test['index'], 'label': pred}).to_csv('003000.csv', index=False)
+
+# 9. 모델 평가
+
+
+# 문제:
+# 문제: 특정 여행객 데이터셋을 바탕으로, 여행보험 상품 가입 여부를 예측하는 분류 모델을 구축하세요.
+# 모델은 주어진 훈련 데이터를 사용하여 학습하고, 테스트 데이터를 사용하여 예측을 수행합니다.
+
+# index 변수는 모델 학습에 포함되지 않도록 주의해야 합니다.
+
+# 1. 데이터 불러오기
+X_train = pd.read_csv('train_data.csv')
+y_train = pd.read_csv('y_train.csv')
+X_test = pd.read_csv('test_data.csv')
+
+# 2. 불필요 컬럼 제거
+x_train2 = X_train.drop(columns='index')
+x_test2 = X_test.drop(columns='index')
+
+# 3. 문자형 컬럼 숫자형으로 변경
+x_train3 = pd.get_dummies(x_train2)
+x_test3 = pd.get_dummies(x_test2)
+
+# 3. 정규화
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+scaler.fit(x_train3)
+x_train4 = scaler.transform(x_train3)
+x_test4 = scaler.transform(x_test3)
+
+# 4. 모델 생성
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier()
+
+# 5. 모델 학습
+model.fit(x_train4, y_train)
+
+# 6. 예측
+pred = model.predict(x_test4)
+
+# 7. 제출
+pd.DataFrame({'index': X_test['index'], 'label': pred}).to_csv('수험번호.csv', index=False)
