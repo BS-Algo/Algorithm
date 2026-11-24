@@ -5,24 +5,6 @@ X_train = pd.read_csv('train_data.csv')
 y_train = pd.read_csv('y_train.csv')
 X_test = pd.read_csv('test_data.csv')
 
-# 2.'index' 컬럼 제거
-
-# 3. 문자형 컬럼을 숫자로 변환합니다.
-
-# 4. 데이터를 정규화합니다.
-
-# 5. 모델 생성
-
-# 6. 모델 훈련
-
-# 7. 모델 예측
-
-# 8. 정답 제출
-# pd.DataFrame({'index': X_test['index'], 'label': pred}).to_csv('003000.csv', index=False)
-
-# 9. 모델 평가
-
-
 # 문제:
 # 문제: 특정 여행객 데이터셋을 바탕으로, 여행보험 상품 가입 여부를 예측하는 분류 모델을 구축하세요.
 # 모델은 주어진 훈련 데이터를 사용하여 학습하고, 테스트 데이터를 사용하여 예측을 수행합니다.
