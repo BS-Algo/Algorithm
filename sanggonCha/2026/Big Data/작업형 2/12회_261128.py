@@ -16,16 +16,20 @@ train.head(10)
 train2 = train.drop(columns='id')
 test2 = test.drop(columns='id')
 
-x = train2.iloc[:, :-1]
-y = train2.iloc[:, -1]
+x2 = train2.iloc[:, :-1]
+y2 = train2.iloc[:, -1]
 
 import pandas as pd
 
-x3 = pd.get_dummies(x)
-test3 = pd.get_dummies(test2)
+# x3 = pd.get_dummies(x)
+# test3 = pd.get_dummies(test2)
+df_all = pd.concat([x2, test2])
+df_after_dum = pd.get_dummies(df_all)
+x3 = df_after_dum.iloc[:len(x2) , :]
+test3 = df_after_dum.iloc[len(x2): , :]
 
 from sklearn.ensemble import RandomForestRegressor
 model = RandomForestRegressor(random_state=42)
-model.fit(x3, y)
-pred = model.predict(test3)
+model.fit(x3, np.log1p(y2))
+pred = np.expm1(model.predict(test3))
 pd.DataFrame({'id': test['id'], 'pred': pred}).to_csv('수험번호.csv', index=False)
